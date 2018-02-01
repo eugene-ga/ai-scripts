@@ -8,4 +8,4 @@ Generates raster copies for vector files.
 ## prepare-for-stock.js
 [download](https://https://raw.githubusercontent.com/shvendala/ai-scripts/master/scripts/prepare-for-stock.js)   
 Prepares vector files for publication to microstock sites (e.g. shutterstock, istock, etc...).   
-![screenshot](https://https://raw.githubusercontent.com/shvendala/ai-scripts/master/assets/prepare-for-stock.js)   
+![screenshot](https://https://raw.githubusercontent.com/shvendala/ai-scripts/master/assets/prepare-for-stock.jpg)   
