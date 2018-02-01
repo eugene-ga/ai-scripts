@@ -26,7 +26,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         return __webpack_require__.d(getter, "a", getter), getter;
     }, __webpack_require__.o = function(object, property) {
         return Object.prototype.hasOwnProperty.call(object, property);
-    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 8);
+    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 7);
 }([ function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -45,7 +45,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(23), Component = function() {
+    var write_1 = __webpack_require__(14), Component = function() {
         function Component(type) {
             this.type = type;
         }
@@ -174,114 +174,22 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     }(__webpack_require__(0).Component);
     exports.StaticText = StaticText;
 }, function(module, exports, __webpack_require__) {
-    (function(process) {
-        function normalizeArray(parts, allowAboveRoot) {
-            for (var up = 0, i = parts.length - 1; i >= 0; i--) {
-                var last = parts[i];
-                "." === last ? parts.splice(i, 1) : ".." === last ? (parts.splice(i, 1), up++) : up && (parts.splice(i, 1), 
-                up--);
-            }
-            if (allowAboveRoot) for (;up--; up) parts.unshift("..");
-            return parts;
-        }
-        var splitPathRe = /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/, splitPath = function(filename) {
-            return splitPathRe.exec(filename).slice(1);
-        };
-        function filter(xs, f) {
-            if (xs.filter) return xs.filter(f);
-            for (var res = [], i = 0; i < xs.length; i++) f(xs[i], i, xs) && res.push(xs[i]);
-            return res;
-        }
-        exports.resolve = function() {
-            for (var resolvedPath = "", resolvedAbsolute = !1, i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
-                var path = i >= 0 ? arguments[i] : process.cwd();
-                if ("string" != typeof path) throw new TypeError("Arguments to path.resolve must be strings");
-                path && (resolvedPath = path + "/" + resolvedPath, resolvedAbsolute = "/" === path.charAt(0));
-            }
-            return resolvedPath = normalizeArray(filter(resolvedPath.split("/"), function(p) {
-                return !!p;
-            }), !resolvedAbsolute).join("/"), (resolvedAbsolute ? "/" : "") + resolvedPath || ".";
-        }, exports.normalize = function(path) {
-            var isAbsolute = exports.isAbsolute(path), trailingSlash = "/" === substr(path, -1);
-            return (path = normalizeArray(filter(path.split("/"), function(p) {
-                return !!p;
-            }), !isAbsolute).join("/")) || isAbsolute || (path = "."), path && trailingSlash && (path += "/"), 
-            (isAbsolute ? "/" : "") + path;
-        }, exports.isAbsolute = function(path) {
-            return "/" === path.charAt(0);
-        }, exports.join = function() {
-            var paths = Array.prototype.slice.call(arguments, 0);
-            return exports.normalize(filter(paths, function(p, index) {
-                if ("string" != typeof p) throw new TypeError("Arguments to path.join must be strings");
-                return p;
-            }).join("/"));
-        }, exports.relative = function(from, to) {
-            function trim(arr) {
-                for (var start = 0; start < arr.length && "" === arr[start]; start++) ;
-                for (var end = arr.length - 1; end >= 0 && "" === arr[end]; end--) ;
-                return start > end ? [] : arr.slice(start, end - start + 1);
-            }
-            from = exports.resolve(from).substr(1), to = exports.resolve(to).substr(1);
-            for (var fromParts = trim(from.split("/")), toParts = trim(to.split("/")), length = Math.min(fromParts.length, toParts.length), samePartsLength = length, i = 0; i < length; i++) if (fromParts[i] !== toParts[i]) {
-                samePartsLength = i;
-                break;
-            }
-            var outputParts = [];
-            for (i = samePartsLength; i < fromParts.length; i++) outputParts.push("..");
-            return (outputParts = outputParts.concat(toParts.slice(samePartsLength))).join("/");
-        }, exports.sep = "/", exports.delimiter = ":", exports.dirname = function(path) {
-            var result = splitPath(path), root = result[0], dir = result[1];
-            return root || dir ? (dir && (dir = dir.substr(0, dir.length - 1)), root + dir) : ".";
-        }, exports.basename = function(path, ext) {
-            var f = splitPath(path)[2];
-            return ext && f.substr(-1 * ext.length) === ext && (f = f.substr(0, f.length - ext.length)), 
-            f;
-        }, exports.extname = function(path) {
-            return splitPath(path)[3];
-        };
-        var substr = "b" === "ab".substr(-1) ? function(str, start, len) {
-            return str.substr(start, len);
-        } : function(str, start, len) {
-            return start < 0 && (start = str.length + start), str.substr(start, len);
-        };
-    }).call(exports, __webpack_require__(17));
-}, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
-    }, function(d, b) {
-        function __() {
-            this.constructor = d;
-        }
-        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
-        new __());
-    }), __assign = this && this.__assign || Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-        return t;
-    };
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var Panel = function(_super) {
-        function Panel(opts) {
-            var _this = _super.call(this, "panel") || this;
-            return _this.opts = opts, _this.opts = __assign({
-                orientation: "row"
-            }, opts || {}), _this;
+    var toFile_1 = __webpack_require__(2);
+    function openFile(file) {
+        try {
+            return app.open(toFile_1.default(file));
+        } catch (e) {
+            throw new Error("Can't open file: " + file + ". Error: " + e);
         }
-        return __extends(Panel, _super), Panel.prototype.mountChild = function(component) {
-            return (component = _super.prototype.mountChild.call(this, component)).inner = this.inner.add(component.type), 
-            component;
-        }, Panel.prototype.init = function() {
-            _super.prototype.init.call(this), this.inner.orientation = this.opts.orientation, 
-            this.inner.alignment = [ ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP ];
-        }, Panel;
-    }(__webpack_require__(0).CompositeComponent);
-    exports.Panel = Panel;
+    }
+    exports.default = openFile, exports.reopenCurrentFile = function() {
+        var currentFile = app.activeDocument.path + "/" + app.activeDocument.name;
+        app.activeDocument.close(SaveOptions.DONOTSAVECHANGES), openFile(currentFile);
+    };
 }, function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -318,7 +226,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     }(__webpack_require__(0).Component);
     exports.Button = Button;
 }, function(module, exports, __webpack_require__) {
-    module.exports = __webpack_require__(9);
+    module.exports = __webpack_require__(8);
 }, function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -337,315 +245,80 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var closePaths_1 = __webpack_require__(10), shutterEps_1 = __webpack_require__(11), menu_1 = __webpack_require__(14), openFile_1 = __webpack_require__(15), path_1 = __webpack_require__(16), toFile_1 = __webpack_require__(2), withAction_1 = __webpack_require__(18), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(21), FieldComponent_1 = __webpack_require__(24), FileProcessor_1 = __webpack_require__(25), RadioButtonPanel_1 = __webpack_require__(32), cleanupAction = __webpack_require__(34), expandObjectAction = __webpack_require__(35), strings = translation_1.tranEnRu({
-        prepareForStock: [ "Prepare For Stock", "Подготовить для стоков" ],
-        closeAllPath: [ "Close all paths", "Закрыть все пути" ],
-        cleanupPath: [ "Cleanup Path", "Почистить пути" ],
-        unlockAll: [ "Unlock all", "Разблокировать все" ],
-        expandText: [ "Expand text", "Expand text" ],
-        convertToRgb: [ "Convert to RGB", "Convert to RGB" ],
-        deleteUnusedPanelItems: [ "Delete unused panel items", "Удалить неиспользуемые элементы" ],
-        saving: [ "Saving", "Saving" ],
-        closing: [ "Closing", "Closing" ],
-        opening: [ "Opening", "Opening" ],
-        format: [ "Format", "Формат" ],
-        actions: [ "Actions", "Действия" ]
-    }), steps = {
-        unlockAll: function() {
-            menu_1.callMenu("unlockAll");
-        },
-        expandText: function() {
-            menu_1.callMenu("Text Objects menu item"), app.doScript("expand-object", "__expandObject");
-        },
-        closeAllPath: function() {
-            closePaths_1.closePaths();
-        },
-        cleanupPath: function() {
-            menu_1.callMenu("Stray Points menu item"), menu_1.callMenu("Cut");
-        },
-        convertToRgb: function() {
-            menu_1.callMenu("selectall"), menu_1.callMenu("Colors9");
-        },
-        deleteUnusedPanelItems: function() {
-            app.doScript("cleanup", "__cleanup");
-        }
-    }, PrepareForStockProcessor = function(_super) {
-        function PrepareForStockProcessor() {
+    var ai_1 = __webpack_require__(9), copyFile_1 = __webpack_require__(10), openFile_1 = __webpack_require__(5), toArray_1 = __webpack_require__(11), toFile_1 = __webpack_require__(2), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(12), FieldComponent_1 = __webpack_require__(16), FileProcessor_1 = __webpack_require__(17), strings = translation_1.tranEnRu({
+        applyStyle: [ "Apply Style", "Применить стиль" ],
+        styles: [ "Styles", "Стили" ],
+        noOpenedDocument: [ "Document with styles should be opened", "Документ со стилями должен быть открыт" ],
+        noStylesInDocument: [ "Current document does not contain any styles", "Текущий документ не содержит стилей" ]
+    }), ApplyStyleProcessor = function(_super) {
+        function ApplyStyleProcessor() {
             return _super.call(this, {
-                title: strings.prepareForStock
+                title: strings.applyStyle
             }) || this;
         }
-        return __extends(PrepareForStockProcessor, _super), PrepareForStockProcessor.prototype.onInit = function() {
-            this.fieldFormat = this.dlg.add(new FieldComponent_1.FieldComponent(strings.format, new RadioButtonPanel_1.RadioButtonPanel([ "eps 8", "eps 10" ], "eps 10")));
-            var items = Object.keys(steps).map(function(k) {
-                return {
-                    key: k,
-                    text: strings[k]
-                };
+        return __extends(ApplyStyleProcessor, _super), ApplyStyleProcessor.prototype.onInit = function() {
+            if (!app.activeDocument) throw new Error(strings.noOpenedDocument);
+            var styles = toArray_1.default(app.activeDocument.graphicStyles).map(function(s) {
+                return s.name;
+            }).filter(function(n) {
+                return "[Default]" !== n;
             });
-            this.fieldActions = this.dlg.add(new FieldComponent_1.FieldComponent(strings.actions, new CheckBoxPanel_1.CheckBoxPanel(items, items.map(function(i) {
-                return i.key;
-            }), {
+            if (!styles.length) throw new Error(strings.noStylesInDocument);
+            this.templateFile = app.activeDocument.path + "/" + app.activeDocument.name, this.fieldStyles = this.dlg.add(new FieldComponent_1.FieldComponent(strings.styles, new CheckBoxPanel_1.CheckBoxPanel(styles, styles, {
                 orientation: "column"
             })));
-        }, PrepareForStockProcessor.prototype.onProcess = function(file) {
-            var destDir = this.srcSelect.getValue().destDir, name = path_1.parse(file).name, finalFile = path_1.join(destDir, name + ".eps");
-            if (!toFile_1.default(finalFile).exists) {
-                var actions = this.fieldActions.ctrl.getValue(), epsV = this.fieldFormat.ctrl.getValue();
-                this.setStatus(strings.opening), openFile_1.default(file);
-                for (var _i = 0, _a = Object.keys(steps); _i < _a.length; _i++) {
-                    var step = _a[_i];
-                    if (actions.indexOf(step) >= 0) try {
-                        this.setStatus(strings[step]), steps[step]();
-                    } catch (e) {
-                        alert("[" + strings[step] + "] failed. " + e.message);
-                    }
+        }, ApplyStyleProcessor.prototype.onProcess = function(file) {
+            copyFile_1.copyFile(file);
+            for (var styles = this.fieldStyles.ctrl.getValue(), destDir = this.srcSelect.getValue().destDir, _i = 0, styles_1 = styles; _i < styles_1.length; _i++) {
+                var styleName = styles_1[_i], finalFilePath = this.getFinalPath(file, destDir, styleName);
+                if (!toFile_1.default(finalFilePath).exists) {
+                    app.executeMenuCommand("pasteInPlace"), app.activeDocument.fitArtboardToSelectedArt(app.activeDocument.artboards.getActiveArtboardIndex());
+                    for (var style = app.activeDocument.graphicStyles.getByName(styleName), selectedItems = app.selection, itemsCount = selectedItems.length, i = 0; i < itemsCount; i++) style.applyTo(selectedItems[i]);
+                    ai_1.default(finalFilePath), app.activeDocument.close(SaveOptions.DONOTSAVECHANGES), 
+                    openFile_1.default(this.templateFile);
                 }
-                this.setStatus(strings.saving), shutterEps_1.default(finalFile, {
-                    compatibility: "eps 8" === epsV ? Compatibility.ILLUSTRATOR8 : Compatibility.ILLUSTRATOR10
-                }), this.setStatus(strings.closing), app.activeDocument.close();
             }
-        }, PrepareForStockProcessor.prototype.processFiles = function(files) {
-            var _this = this, requiredActions = [], selectedSteps = this.fieldActions.ctrl.getValue();
-            selectedSteps.indexOf("deleteUnusedPanelItems") >= 0 && requiredActions.push({
-                name: "__cleanup",
-                content: cleanupAction
-            }), selectedSteps.indexOf("expandText") >= 0 && requiredActions.push({
-                name: "__expandObject",
-                content: expandObjectAction
-            }), withAction_1.withActions(requiredActions, function() {
-                _super.prototype.processFiles.call(_this, files);
-            });
-        }, PrepareForStockProcessor;
+        }, ApplyStyleProcessor.prototype.getFinalPath = function(aiEpsPath, outputFolder, styleName) {
+            return outputFolder + "/" + aiEpsPath.match(/[^\/]*$/g)[0].match(/^[^\.]*/g) + "__" + styleName + ".ai";
+        }, ApplyStyleProcessor;
     }(FileProcessor_1.FileProcessor);
-    exports.PrepareForStockProcessor = PrepareForStockProcessor;
-    new PrepareForStockProcessor();
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    }), exports.closePaths = function() {
-        for (var pathItems = app.activeDocument.pathItems, i = pathItems.length; i--; ) try {
-            var pathItem = pathItems[i];
-            pathItem.closed || (pathItem.pathPoints.length < 3 ? pathItem.remove() : pathItem.closed = !0);
-        } catch (e) {}
-    };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    var __assign = this && this.__assign || Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-        return t;
-    };
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    });
-    var toFile_1 = __webpack_require__(2), clean_1 = __webpack_require__(12), validateShutter_1 = __webpack_require__(13);
-    exports.default = function(file, opts) {
-        validateShutter_1.default(), opts = __assign({
-            compatibility: Compatibility.ILLUSTRATOR10,
-            saveMultipleArtboards: !1
-        }, opts), clean_1.default();
-        var saveOpts = new EPSSaveOptions();
-        saveOpts.preview = EPSPreview.None, saveOpts.cmykPostScript = !1, saveOpts.compatibility = opts.compatibility, 
-        saveOpts.embedAllFonts = !1, saveOpts.embedLinkedFiles = !1, saveOpts.includeDocumentThumbnails = !1, 
-        saveOpts.postScript = EPSPostScriptLevelEnum.LEVEL3, saveOpts.saveMultipleArtboards = opts.saveMultipleArtboards, 
-        app.activeDocument.saveAs(toFile_1.default(file), saveOpts);
-    };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    }), exports.default = function() {
-        for (var i = 0; i < app.activeDocument.layers.length; i++) {
-            var layer = app.activeDocument.layers[i];
-            "Guides For Artboard" === layer.name && layer.remove();
-        }
-    };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    }), exports.default = function() {
-        if (app.activeDocument.rasterItems.length) throw new Error("File contains raster items.");
-    };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    }), exports.callMenu = function(menuCommand) {
-        try {
-            app.executeMenuCommand(menuCommand);
-        } catch (e) {
-            if (1200 !== e.number) throw e;
-        }
-    };
+    exports.ApplyStyleProcessor = ApplyStyleProcessor;
+    new ApplyStyleProcessor();
 }, function(module, exports, __webpack_require__) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
     var toFile_1 = __webpack_require__(2);
-    function openFile(file) {
-        try {
-            return app.open(toFile_1.default(file));
-        } catch (e) {
-            throw new Error("Can't open file: " + file + ". Error: " + e);
-        }
-    }
-    exports.default = openFile, exports.reopenCurrentFile = function() {
-        var currentFile = app.activeDocument.path + "/" + app.activeDocument.name;
-        app.activeDocument.close(SaveOptions.DONOTSAVECHANGES), openFile(currentFile);
+    exports.default = function(file) {
+        var saveOpts = new IllustratorSaveOptions();
+        saveOpts.embedLinkedFiles = !1, saveOpts.saveMultipleArtboards = !1, app.activeDocument.saveAs(toFile_1.default(file), saveOpts);
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var path = __webpack_require__(5);
-    exports.parse = function(filePath) {
-        var basename = path.basename(filePath), ext = path.extname(filePath), dir = path.dirname(filePath);
-        return {
-            name: basename.slice(0, -ext.length),
-            dir: dir,
-            ext: ext,
-            basename: basename
-        };
-    };
-    var path_1 = __webpack_require__(5);
-    exports.join = path_1.join, exports.basename = path_1.basename, exports.dirname = path_1.dirname, 
-    exports.extname = path_1.extname;
-}, function(module, exports) {
-    var cachedSetTimeout, cachedClearTimeout, process = module.exports = {};
-    function defaultSetTimout() {
-        throw new Error("setTimeout has not been defined");
-    }
-    function defaultClearTimeout() {
-        throw new Error("clearTimeout has not been defined");
-    }
-    function runTimeout(fun) {
-        if (cachedSetTimeout === setTimeout) return setTimeout(fun, 0);
-        if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) return cachedSetTimeout = setTimeout, 
-        setTimeout(fun, 0);
-        try {
-            return cachedSetTimeout(fun, 0);
-        } catch (e) {
-            try {
-                return cachedSetTimeout.call(null, fun, 0);
-            } catch (e) {
-                return cachedSetTimeout.call(this, fun, 0);
-            }
-        }
-    }
-    !function() {
-        try {
-            cachedSetTimeout = "function" == typeof setTimeout ? setTimeout : defaultSetTimout;
-        } catch (e) {
-            cachedSetTimeout = defaultSetTimout;
-        }
-        try {
-            cachedClearTimeout = "function" == typeof clearTimeout ? clearTimeout : defaultClearTimeout;
-        } catch (e) {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    }();
-    var currentQueue, queue = [], draining = !1, queueIndex = -1;
-    function cleanUpNextTick() {
-        draining && currentQueue && (draining = !1, currentQueue.length ? queue = currentQueue.concat(queue) : queueIndex = -1, 
-        queue.length && drainQueue());
-    }
-    function drainQueue() {
-        if (!draining) {
-            var timeout = runTimeout(cleanUpNextTick);
-            draining = !0;
-            for (var len = queue.length; len; ) {
-                for (currentQueue = queue, queue = []; ++queueIndex < len; ) currentQueue && currentQueue[queueIndex].run();
-                queueIndex = -1, len = queue.length;
-            }
-            currentQueue = null, draining = !1, function(marker) {
-                if (cachedClearTimeout === clearTimeout) return clearTimeout(marker);
-                if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) return cachedClearTimeout = clearTimeout, 
-                clearTimeout(marker);
-                try {
-                    cachedClearTimeout(marker);
-                } catch (e) {
-                    try {
-                        return cachedClearTimeout.call(null, marker);
-                    } catch (e) {
-                        return cachedClearTimeout.call(this, marker);
-                    }
-                }
-            }(timeout);
-        }
-    }
-    function Item(fun, array) {
-        this.fun = fun, this.array = array;
-    }
-    function noop() {}
-    process.nextTick = function(fun) {
-        var args = new Array(arguments.length - 1);
-        if (arguments.length > 1) for (var i = 1; i < arguments.length; i++) args[i - 1] = arguments[i];
-        queue.push(new Item(fun, args)), 1 !== queue.length || draining || runTimeout(drainQueue);
-    }, Item.prototype.run = function() {
-        this.fun.apply(null, this.array);
-    }, process.title = "browser", process.browser = !0, process.env = {}, process.argv = [], 
-    process.version = "", process.versions = {}, process.on = noop, process.addListener = noop, 
-    process.once = noop, process.off = noop, process.removeListener = noop, process.removeAllListeners = noop, 
-    process.emit = noop, process.prependListener = noop, process.prependOnceListener = noop, 
-    process.listeners = function(name) {
-        return [];
-    }, process.binding = function(name) {
-        throw new Error("process.binding is not supported");
-    }, process.cwd = function() {
-        return "/";
-    }, process.chdir = function(dir) {
-        throw new Error("process.chdir is not supported");
-    }, process.umask = function() {
-        return 0;
+    var openFile_1 = __webpack_require__(5);
+    exports.copyFile = function(file) {
+        openFile_1.default(file), app.executeMenuCommand("selectall"), app.executeMenuCommand("copy"), 
+        app.activeDocument.close(SaveOptions.DONOTSAVECHANGES);
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
         value: !0
-    });
-    var disposeAction_1 = __webpack_require__(19), ensureAction_1 = __webpack_require__(20);
-    function withActions(sets, fn) {
+    }), exports.default = function(obj) {
+        var result = [];
+        if (!obj) return result;
         try {
-            for (var _i = 0, sets_1 = sets; _i < sets_1.length; _i++) {
-                var set = sets_1[_i];
-                ensureAction_1.default(set.content);
-            }
-            fn();
-        } finally {
-            for (var _a = 0, sets_2 = sets; _a < sets_2.length; _a++) {
-                set = sets_2[_a];
-                disposeAction_1.default(set.name);
-            }
+            for (var length_1 = obj.length, i = 0; i < length_1; i++) try {
+                result.push(obj[i]);
+            } catch (e) {}
+        } catch (e) {
+            return result;
         }
-    }
-    exports.withActions = withActions, exports.default = function(setName, actionContent, fn) {
-        withActions([ {
-            name: setName,
-            content: actionContent
-        } ], fn);
-    };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    }), exports.default = function(actionSetName) {
-        try {
-            app.unloadAction(actionSetName, "");
-        } catch (e) {}
-    };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    }), exports.default = function(actionContent) {
-        var scriptDir = new File($.fileName).path, actionFile = new File(scriptDir + "/temp.aia");
-        actionFile.open("w", void 0, void 0), actionFile.encoding = "UTF-8", actionFile.lineFeed = "Unix", 
-        actionFile.writeln(actionContent), actionFile.close(), app.loadAction(actionFile), 
-        actionFile.remove();
+        return result;
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -665,7 +338,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var CheckBox_1 = __webpack_require__(22), CheckBoxPanel = function(_super) {
+    var CheckBox_1 = __webpack_require__(13), CheckBoxPanel = function(_super) {
         function CheckBoxPanel(items, selectedItems, opts) {
             var _this = _super.call(this, opts) || this;
             return _this.items = items, _this.selectedItems = selectedItems, _this.checks = [], 
@@ -689,7 +362,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                 check.setValue(val.indexOf(check.item.key) >= 0);
             }
         }, CheckBoxPanel;
-    }(__webpack_require__(6).Panel);
+    }(__webpack_require__(15).Panel);
     exports.CheckBoxPanel = CheckBoxPanel;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -755,6 +428,43 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         }
         extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
         new __());
+    }), __assign = this && this.__assign || Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+        return t;
+    };
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var Panel = function(_super) {
+        function Panel(opts) {
+            var _this = _super.call(this, "panel") || this;
+            return _this.opts = opts, _this.opts = __assign({
+                orientation: "row"
+            }, opts || {}), _this;
+        }
+        return __extends(Panel, _super), Panel.prototype.mountChild = function(component) {
+            return (component = _super.prototype.mountChild.call(this, component)).inner = this.inner.add(component.type), 
+            component;
+        }, Panel.prototype.init = function() {
+            _super.prototype.init.call(this), this.inner.orientation = this.opts.orientation, 
+            this.inner.alignment = [ ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP ];
+        }, Panel;
+    }(__webpack_require__(0).CompositeComponent);
+    exports.Panel = Panel;
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
+        __proto__: []
+    } instanceof Array && function(d, b) {
+        d.__proto__ = b;
+    } || function(d, b) {
+        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    }, function(d, b) {
+        function __() {
+            this.constructor = d;
+        }
+        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
+        new __());
     });
     Object.defineProperty(exports, "__esModule", {
         value: !0
@@ -779,7 +489,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(7), Group_1 = __webpack_require__(3), Dialog_1 = __webpack_require__(26), Progressbar_1 = __webpack_require__(27), DirectorySelectInOut_1 = __webpack_require__(28), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(6), Group_1 = __webpack_require__(3), Dialog_1 = __webpack_require__(18), Progressbar_1 = __webpack_require__(19), DirectorySelectInOut_1 = __webpack_require__(20), strings = translation_1.tranEnRu({
         cancel: [ "Cancel", "Отмена" ],
         canceling: [ "Canceling", "Отменяю" ],
         start: [ "Start", "Запустить" ],
@@ -926,7 +636,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(29), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(21), strings = translation_1.tranEnRu({
         sourceDirectory: [ "Source directory:", "Откуда:" ],
         destinationDirectory: [ "Destination directory:", "Куда:" ]
     }), DirectorySelectInOut = function(_super) {
@@ -976,7 +686,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             var newPath = Folder.selectDialog(this.label);
             return newPath ? newPath.toString() : "";
         }, DirectorySelect;
-    }(__webpack_require__(30).SelectDialog);
+    }(__webpack_require__(22).SelectDialog);
     exports.DirectorySelect = DirectorySelect;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -996,7 +706,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(7), EditText_1 = __webpack_require__(31), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(6), EditText_1 = __webpack_require__(23), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
         choose: [ "Choose...", "Выбрать..." ]
     }), SelectDialog = function(_super) {
         function SelectDialog(label, basePath) {
@@ -1055,84 +765,4 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         }, EditText;
     }(__webpack_require__(0).Component);
     exports.EditText = EditText;
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
-    }, function(d, b) {
-        function __() {
-            this.constructor = d;
-        }
-        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
-        new __());
-    });
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    });
-    var Panel_1 = __webpack_require__(6), RadioButton_1 = __webpack_require__(33), RadioButtonPanel = function(_super) {
-        function RadioButtonPanel(texts, selectedText) {
-            var _this = _super.call(this) || this;
-            return _this.texts = texts, _this.selectedText = selectedText, _this.radios = [], 
-            _this;
-        }
-        return __extends(RadioButtonPanel, _super), RadioButtonPanel.prototype.init = function() {
-            _super.prototype.init.call(this);
-            for (var _i = 0, _a = this.texts; _i < _a.length; _i++) {
-                var text = _a[_i];
-                this.radios.push(this.add(new RadioButton_1.RadioButton(text, text === this.selectedText)));
-            }
-        }, RadioButtonPanel.prototype.getValue = function() {
-            for (var _i = 0, _a = this.radios; _i < _a.length; _i++) {
-                var radio = _a[_i];
-                if (radio.getValue()) return radio.inner.text;
-            }
-        }, RadioButtonPanel.prototype.setValue = function(val) {
-            for (var _i = 0, _a = this.radios; _i < _a.length; _i++) {
-                var radio = _a[_i];
-                radio.setValue(radio.inner.text === val);
-            }
-        }, RadioButtonPanel;
-    }(Panel_1.Panel);
-    exports.RadioButtonPanel = RadioButtonPanel;
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
-    }, function(d, b) {
-        function __() {
-            this.constructor = d;
-        }
-        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
-        new __());
-    });
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    });
-    var RadioButton = function(_super) {
-        function RadioButton(text, selected) {
-            void 0 === selected && (selected = !1);
-            var _this = _super.call(this, "radiobutton") || this;
-            return _this.text = text, _this.selected = selected, _this;
-        }
-        return __extends(RadioButton, _super), RadioButton.prototype.init = function() {
-            _super.prototype.init.call(this), this.inner.text = this.text, this.setValue(this.selected);
-        }, RadioButton.prototype.getValue = function() {
-            return this.inner.value;
-        }, RadioButton.prototype.setValue = function(val) {
-            this.inner.value = val;
-        }, RadioButton;
-    }(__webpack_require__(0).Component);
-    exports.RadioButton = RadioButton;
-}, function(module, exports) {
-    module.exports = "/version 3\r/name [ 9\r\t5f5f636c65616e7570\r]\r/isOpen 1\r/actionCount 1\r/action-1 {\r\t/name [ 7\r\t\t636c65616e7570\r\t]\r\t/keyIndex 0\r\t/colorIndex 0\r\t/isOpen 1\r\t/eventCount 12\r\t/event-1 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_symbol_palette)\r\t\t/localizedName [ 7\r\t\t\t53796d626f6c73\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 12\r\t\t}\r\t}\r\t/event-2 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_symbol_palette)\r\t\t/localizedName [ 7\r\t\t\t53796d626f6c73\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (enumerated)\r\t\t\t/name [ 13\r\t\t\t\t44656c6574652053796d626f6c\r\t\t\t]\r\t\t\t/value 5\r\t\t}\r\t}\r\t/event-3 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (adobe_stop)\r\t\t/localizedName [ 4\r\t\t\t53746f70\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 0\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 2\r\t\t/parameter-1 {\r\t\t\t/key 1952807028\r\t\t\t/showInPalette 0\r\t\t\t/type (ustring)\r\t\t\t/value [ 0\r\r\t\t\t]\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1668247156\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t}\r\t/event-4 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_styles)\r\t\t/localizedName [ 14\r\t\t\t47726170686963205374796c6573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 14\r\t\t}\r\t}\r\t/event-5 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_styles)\r\t\t/localizedName [ 14\r\t\t\t47726170686963205374796c6573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 12\r\t\t\t\t44656c657465205374796c65\r\t\t\t]\r\t\t\t/value 3\r\t\t}\r\t}\r\t/event-6 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (adobe_stop)\r\t\t/localizedName [ 4\r\t\t\t53746f70\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 0\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 2\r\t\t/parameter-1 {\r\t\t\t/key 1952807028\r\t\t\t/showInPalette 0\r\t\t\t/type (ustring)\r\t\t\t/value [ 0\r\r\t\t\t]\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1668247156\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t}\r\t/event-7 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_brush)\r\t\t/localizedName [ 5\r\t\t\t4272757368\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 8\r\t\t}\r\t}\r\t/event-8 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_brush)\r\t\t/localizedName [ 5\r\t\t\t4272757368\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 12\r\t\t\t\t44656c657465204272757368\r\t\t\t]\r\t\t\t/value 3\r\t\t}\r\t}\r\t/event-9 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (adobe_stop)\r\t\t/localizedName [ 4\r\t\t\t53746f70\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 0\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 2\r\t\t/parameter-1 {\r\t\t\t/key 1952807028\r\t\t\t/showInPalette 0\r\t\t\t/type (ustring)\r\t\t\t/value [ 0\r\r\t\t\t]\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1668247156\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t}\r\t/event-10 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_swatches)\r\t\t/localizedName [ 8\r\t\t\t5377617463686573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 11\r\t\t}\r\t}\r\t/event-11 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_swatches)\r\t\t/localizedName [ 8\r\t\t\t5377617463686573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 13\r\t\t\t\t44656c65746520537761746368\r\t\t\t]\r\t\t\t/value 3\r\t\t}\r\t}\r\t/event-12 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (adobe_stop)\r\t\t/localizedName [ 4\r\t\t\t53746f70\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 0\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 2\r\t\t/parameter-1 {\r\t\t\t/key 1952807028\r\t\t\t/showInPalette 0\r\t\t\t/type (ustring)\r\t\t\t/value [ 0\r\r\t\t\t]\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1668247156\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t}\r}\r";
-}, function(module, exports) {
-    module.exports = "/version 3\r/name [ 14\r\t5f5f657870616e644f626a656374\r]\r/isOpen 1\r/actionCount 1\r/action-1 {\r\t/name [ 13\r\t\t657870616e642d6f626a656374\r\t]\r\t/keyIndex 0\r\t/colorIndex 0\r\t/isOpen 0\r\t/eventCount 1\r\t/event-1 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (ai_plugin_expand)\r\t\t/localizedName [ 6\r\t\t\t457870616e64\r\t\t]\r\t\t/isOpen 1\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 4\r\t\t/parameter-1 {\r\t\t\t/key 1868720756\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1718185068\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t\t/parameter-3 {\r\t\t\t/key 1937011307\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t\t/parameter-4 {\r\t\t\t/key 1936553064\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t}\r}\r";
 } ]);
