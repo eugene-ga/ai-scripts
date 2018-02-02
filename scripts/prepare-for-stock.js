@@ -45,7 +45,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(23), Component = function() {
+    var write_1 = __webpack_require__(24), Component = function() {
         function Component(type) {
             this.type = type;
         }
@@ -337,10 +337,11 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var closePaths_1 = __webpack_require__(10), shutterEps_1 = __webpack_require__(11), menu_1 = __webpack_require__(14), openFile_1 = __webpack_require__(15), path_1 = __webpack_require__(16), toFile_1 = __webpack_require__(2), withAction_1 = __webpack_require__(18), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(21), FieldComponent_1 = __webpack_require__(24), FileProcessor_1 = __webpack_require__(25), RadioButtonPanel_1 = __webpack_require__(32), cleanupAction = __webpack_require__(34), expandObjectAction = __webpack_require__(35), strings = translation_1.tranEnRu({
+    var closePaths_1 = __webpack_require__(10), shutterEps_1 = __webpack_require__(11), menu_1 = __webpack_require__(14), openFile_1 = __webpack_require__(15), path_1 = __webpack_require__(16), toArray_1 = __webpack_require__(18), toFile_1 = __webpack_require__(2), withAction_1 = __webpack_require__(19), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(22), FieldComponent_1 = __webpack_require__(25), FileProcessor_1 = __webpack_require__(26), RadioButtonPanel_1 = __webpack_require__(33), cleanupAction = __webpack_require__(35), expandObjectAction = __webpack_require__(36), strings = translation_1.tranEnRu({
         prepareForStock: [ "Prepare For Stock", "Подготовить для стоков" ],
         closeAllPath: [ "Close all paths", "Закрыть все пути" ],
         cleanupPath: [ "Cleanup Path", "Почистить пути" ],
+        unlockAllLayers: [ "Unlock Layers", "Разблокировать слои" ],
         unlockAll: [ "Unlock all", "Разблокировать все" ],
         expandText: [ "Expand text", "Expand text" ],
         convertToRgb: [ "Convert to RGB", "Convert to RGB" ],
@@ -351,6 +352,11 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         format: [ "Format", "Формат" ],
         actions: [ "Actions", "Действия" ]
     }), steps = {
+        unlockAllLayers: function() {
+            for (var _i = 0, _a = toArray_1.default(app.activeDocument.layers); _i < _a.length; _i++) {
+                _a[_i].locked = !1;
+            }
+        },
         unlockAll: function() {
             menu_1.callMenu("unlockAll");
         },
@@ -606,8 +612,24 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     "use strict";
     Object.defineProperty(exports, "__esModule", {
         value: !0
+    }), exports.default = function(obj) {
+        var result = [];
+        if (!obj) return result;
+        try {
+            for (var length_1 = obj.length, i = 0; i < length_1; i++) try {
+                result.push(obj[i]);
+            } catch (e) {}
+        } catch (e) {
+            return result;
+        }
+        return result;
+    };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
     });
-    var disposeAction_1 = __webpack_require__(19), ensureAction_1 = __webpack_require__(20);
+    var disposeAction_1 = __webpack_require__(20), ensureAction_1 = __webpack_require__(21);
     function withActions(sets, fn) {
         try {
             for (var _i = 0, sets_1 = sets; _i < sets_1.length; _i++) {
@@ -665,7 +687,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var CheckBox_1 = __webpack_require__(22), CheckBoxPanel = function(_super) {
+    var CheckBox_1 = __webpack_require__(23), CheckBoxPanel = function(_super) {
         function CheckBoxPanel(items, selectedItems, opts) {
             var _this = _super.call(this, opts) || this;
             return _this.items = items, _this.selectedItems = selectedItems, _this.checks = [], 
@@ -739,7 +761,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     }), exports.write = function(text) {
-        $.writeln(text);
+        $.fileName.indexOf("ai-scripts/scripts/standalone") >= 0 && $.writeln(text);
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -779,7 +801,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(7), Group_1 = __webpack_require__(3), Dialog_1 = __webpack_require__(26), Progressbar_1 = __webpack_require__(27), DirectorySelectInOut_1 = __webpack_require__(28), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(7), Group_1 = __webpack_require__(3), Dialog_1 = __webpack_require__(27), Progressbar_1 = __webpack_require__(28), DirectorySelectInOut_1 = __webpack_require__(29), strings = translation_1.tranEnRu({
         cancel: [ "Cancel", "Отмена" ],
         canceling: [ "Canceling", "Отменяю" ],
         start: [ "Start", "Запустить" ],
@@ -926,7 +948,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(29), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(30), strings = translation_1.tranEnRu({
         sourceDirectory: [ "Source directory:", "Откуда:" ],
         destinationDirectory: [ "Destination directory:", "Куда:" ]
     }), DirectorySelectInOut = function(_super) {
@@ -976,7 +998,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             var newPath = Folder.selectDialog(this.label);
             return newPath ? newPath.toString() : "";
         }, DirectorySelect;
-    }(__webpack_require__(30).SelectDialog);
+    }(__webpack_require__(31).SelectDialog);
     exports.DirectorySelect = DirectorySelect;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -996,7 +1018,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(7), EditText_1 = __webpack_require__(31), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(7), EditText_1 = __webpack_require__(32), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
         choose: [ "Choose...", "Выбрать..." ]
     }), SelectDialog = function(_super) {
         function SelectDialog(label, basePath) {
@@ -1073,7 +1095,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var Panel_1 = __webpack_require__(6), RadioButton_1 = __webpack_require__(33), RadioButtonPanel = function(_super) {
+    var Panel_1 = __webpack_require__(6), RadioButton_1 = __webpack_require__(34), RadioButtonPanel = function(_super) {
         function RadioButtonPanel(texts, selectedText) {
             var _this = _super.call(this) || this;
             return _this.texts = texts, _this.selectedText = selectedText, _this.radios = [], 

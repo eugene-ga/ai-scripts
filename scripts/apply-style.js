@@ -45,7 +45,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(14), Component = function() {
+    var write_1 = __webpack_require__(15), Component = function() {
         function Component(type) {
             this.type = type;
         }
@@ -245,7 +245,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var ai_1 = __webpack_require__(9), copyFile_1 = __webpack_require__(10), openFile_1 = __webpack_require__(5), toArray_1 = __webpack_require__(11), toFile_1 = __webpack_require__(2), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(12), FieldComponent_1 = __webpack_require__(16), FileProcessor_1 = __webpack_require__(17), strings = translation_1.tranEnRu({
+    var ai_1 = __webpack_require__(9), copyFile_1 = __webpack_require__(10), menu_1 = __webpack_require__(11), openFile_1 = __webpack_require__(5), toArray_1 = __webpack_require__(12), toFile_1 = __webpack_require__(2), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(13), FieldComponent_1 = __webpack_require__(17), FileProcessor_1 = __webpack_require__(18), strings = translation_1.tranEnRu({
         applyStyle: [ "Apply Style", "Применить стиль" ],
         styles: [ "Styles", "Стили" ],
         noOpenedDocument: [ "Document with styles should be opened", "Документ со стилями должен быть открыт" ],
@@ -272,7 +272,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             for (var styles = this.fieldStyles.ctrl.getValue(), destDir = this.srcSelect.getValue().destDir, _i = 0, styles_1 = styles; _i < styles_1.length; _i++) {
                 var styleName = styles_1[_i], finalFilePath = this.getFinalPath(file, destDir, styleName);
                 if (!toFile_1.default(finalFilePath).exists) {
-                    app.executeMenuCommand("pasteInPlace"), app.activeDocument.fitArtboardToSelectedArt(app.activeDocument.artboards.getActiveArtboardIndex());
+                    menu_1.callMenu("pasteInPlace"), app.activeDocument.fitArtboardToSelectedArt(app.activeDocument.artboards.getActiveArtboardIndex());
                     for (var style = app.activeDocument.graphicStyles.getByName(styleName), selectedItems = app.selection, itemsCount = selectedItems.length, i = 0; i < itemsCount; i++) style.applyTo(selectedItems[i]);
                     ai_1.default(finalFilePath), app.activeDocument.close(SaveOptions.DONOTSAVECHANGES), 
                     openFile_1.default(this.templateFile);
@@ -308,6 +308,17 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     "use strict";
     Object.defineProperty(exports, "__esModule", {
         value: !0
+    }), exports.callMenu = function(menuCommand) {
+        try {
+            app.executeMenuCommand(menuCommand);
+        } catch (e) {
+            if (1200 !== e.number) throw e;
+        }
+    };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
     }), exports.default = function(obj) {
         var result = [];
         if (!obj) return result;
@@ -338,7 +349,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var CheckBox_1 = __webpack_require__(13), CheckBoxPanel = function(_super) {
+    var CheckBox_1 = __webpack_require__(14), CheckBoxPanel = function(_super) {
         function CheckBoxPanel(items, selectedItems, opts) {
             var _this = _super.call(this, opts) || this;
             return _this.items = items, _this.selectedItems = selectedItems, _this.checks = [], 
@@ -362,7 +373,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                 check.setValue(val.indexOf(check.item.key) >= 0);
             }
         }, CheckBoxPanel;
-    }(__webpack_require__(15).Panel);
+    }(__webpack_require__(16).Panel);
     exports.CheckBoxPanel = CheckBoxPanel;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -412,7 +423,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     }), exports.write = function(text) {
-        $.writeln(text);
+        $.fileName.indexOf("ai-scripts/scripts/standalone") >= 0 && $.writeln(text);
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -489,7 +500,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(6), Group_1 = __webpack_require__(3), Dialog_1 = __webpack_require__(18), Progressbar_1 = __webpack_require__(19), DirectorySelectInOut_1 = __webpack_require__(20), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(6), Group_1 = __webpack_require__(3), Dialog_1 = __webpack_require__(19), Progressbar_1 = __webpack_require__(20), DirectorySelectInOut_1 = __webpack_require__(21), strings = translation_1.tranEnRu({
         cancel: [ "Cancel", "Отмена" ],
         canceling: [ "Canceling", "Отменяю" ],
         start: [ "Start", "Запустить" ],
@@ -636,7 +647,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(21), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(22), strings = translation_1.tranEnRu({
         sourceDirectory: [ "Source directory:", "Откуда:" ],
         destinationDirectory: [ "Destination directory:", "Куда:" ]
     }), DirectorySelectInOut = function(_super) {
@@ -686,7 +697,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             var newPath = Folder.selectDialog(this.label);
             return newPath ? newPath.toString() : "";
         }, DirectorySelect;
-    }(__webpack_require__(22).SelectDialog);
+    }(__webpack_require__(23).SelectDialog);
     exports.DirectorySelect = DirectorySelect;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -706,7 +717,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(6), EditText_1 = __webpack_require__(23), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(6), EditText_1 = __webpack_require__(24), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
         choose: [ "Choose...", "Выбрать..." ]
     }), SelectDialog = function(_super) {
         function SelectDialog(label, basePath) {

@@ -596,7 +596,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     }), exports.write = function(text) {
-        $.writeln(text);
+        $.fileName.indexOf("ai-scripts/scripts/standalone") >= 0 && $.writeln(text);
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
