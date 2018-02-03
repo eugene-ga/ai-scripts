@@ -26,7 +26,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         return __webpack_require__.d(getter, "a", getter), getter;
     }, __webpack_require__.o = function(object, property) {
         return Object.prototype.hasOwnProperty.call(object, property);
-    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 8);
+    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 9);
 }([ function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -45,7 +45,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(24), Component = function() {
+    var write_1 = __webpack_require__(28), Component = function() {
         function Component(type) {
             this.type = type;
         }
@@ -244,7 +244,23 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         } : function(str, start, len) {
             return start < 0 && (start = str.length + start), str.substr(start, len);
         };
-    }).call(exports, __webpack_require__(17));
+    }).call(exports, __webpack_require__(20));
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    }), exports.default = function(obj) {
+        var result = [];
+        if (!obj) return result;
+        try {
+            for (var length_1 = obj.length, i = 0; i < length_1; i++) try {
+                result.push(obj[i]);
+            } catch (e) {}
+        } catch (e) {
+            return result;
+        }
+        return result;
+    };
 }, function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -318,7 +334,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     }(__webpack_require__(0).Component);
     exports.Button = Button;
 }, function(module, exports, __webpack_require__) {
-    module.exports = __webpack_require__(9);
+    module.exports = __webpack_require__(10);
 }, function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -337,43 +353,113 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var closePaths_1 = __webpack_require__(10), shutterEps_1 = __webpack_require__(11), menu_1 = __webpack_require__(14), openFile_1 = __webpack_require__(15), path_1 = __webpack_require__(16), toArray_1 = __webpack_require__(18), toFile_1 = __webpack_require__(2), withAction_1 = __webpack_require__(19), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(22), FieldComponent_1 = __webpack_require__(25), FileProcessor_1 = __webpack_require__(26), RadioButtonPanel_1 = __webpack_require__(33), cleanupAction = __webpack_require__(35), expandObjectAction = __webpack_require__(36), strings = translation_1.tranEnRu({
+    var closePaths_1 = __webpack_require__(11), shutterEps_1 = __webpack_require__(12), doAction_1 = __webpack_require__(15), getByName_1 = __webpack_require__(16), menu_1 = __webpack_require__(17), openFile_1 = __webpack_require__(18), path_1 = __webpack_require__(19), toArray_1 = __webpack_require__(6), toFile_1 = __webpack_require__(2), withAction_1 = __webpack_require__(21), withSelection_1 = __webpack_require__(24), withTempRect_1 = __webpack_require__(25), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(26), FieldComponent_1 = __webpack_require__(29), FileProcessor_1 = __webpack_require__(30), RadioButtonPanel_1 = __webpack_require__(37), cleanupAction = __webpack_require__(39), expandObjectAction = __webpack_require__(40), expandFillAction = __webpack_require__(41), strings = translation_1.tranEnRu({
         prepareForStock: [ "Prepare For Stock", "Подготовить для стоков" ],
         closeAllPath: [ "Close all paths", "Закрыть все пути" ],
         cleanupPath: [ "Cleanup Path", "Почистить пути" ],
-        unlockAllLayers: [ "Unlock Layers", "Разблокировать слои" ],
         unlockAll: [ "Unlock all", "Разблокировать все" ],
         expandText: [ "Expand text", "Expand text" ],
         convertToRgb: [ "Convert to RGB", "Convert to RGB" ],
         deleteUnusedPanelItems: [ "Delete unused panel items", "Удалить неиспользуемые элементы" ],
+        expandStyledObjects: [ "Expand Styled Objects", "Expand Styled Objects" ],
+        expandSymbolInstances: [ "Expand Symbol Instances", "Expand Symbol Instances" ],
+        expandPatternObjects: [ "Expand Pattern Objects", "Expand Pattern Objects" ],
+        expandBrushedObjects: [ "Expand Brushed Objects", "Expand Brushed Objects" ],
         saving: [ "Saving", "Saving" ],
         closing: [ "Closing", "Closing" ],
         opening: [ "Opening", "Opening" ],
         format: [ "Format", "Формат" ],
         actions: [ "Actions", "Действия" ]
     }), steps = {
-        unlockAllLayers: function() {
-            for (var _i = 0, _a = toArray_1.default(app.activeDocument.layers); _i < _a.length; _i++) {
-                _a[_i].locked = !1;
-            }
+        unlockAll: {
+            fn: function() {
+                for (var _i = 0, _a = toArray_1.default(app.activeDocument.layers); _i < _a.length; _i++) {
+                    _a[_i].locked = !1;
+                }
+                menu_1.callMenu("unlockAll");
+            },
+            order: 0
         },
-        unlockAll: function() {
-            menu_1.callMenu("unlockAll");
+        expandStyledObjects: {
+            fn: function() {
+                withTempRect_1.default(function(tempRect) {
+                    for (var _loop_1 = function(style) {
+                        withSelection_1.restoreSelection(function() {
+                            style.applyTo(tempRect), menu_1.callMenu("Find Style menu item"), tempRect.selected = !1, 
+                            menu_1.callMenu("expandStyle");
+                        });
+                    }, _i = 0, _a = toArray_1.default(app.activeDocument.graphicStyles); _i < _a.length; _i++) {
+                        _loop_1(_a[_i]);
+                    }
+                });
+            },
+            order: 2
         },
-        expandText: function() {
-            menu_1.callMenu("Text Objects menu item"), app.doScript("expand-object", "__expandObject");
+        expandSymbolInstances: {
+            fn: function() {
+                withSelection_1.default(app.activeDocument.symbolItems, function() {
+                    app.selection && app.selection.length && doAction_1.default(expandObjectAction);
+                });
+            },
+            order: 3
         },
-        closeAllPath: function() {
-            closePaths_1.closePaths();
+        expandPatternObjects: {
+            fn: function() {
+                withTempRect_1.default(function(tempRect) {
+                    for (var _loop_2 = function(pattern) {
+                        var swatch = getByName_1.default(app.activeDocument.swatches, pattern.name);
+                        swatch && withSelection_1.restoreSelection(function() {
+                            tempRect.fillColor = swatch.color, menu_1.callMenu("Find Fill Color menu item"), 
+                            tempRect.selected = !1, app.selection && app.selection.length && doAction_1.default(expandFillAction);
+                        });
+                    }, _i = 0, _a = toArray_1.default(app.activeDocument.patterns); _i < _a.length; _i++) {
+                        _loop_2(_a[_i]);
+                    }
+                });
+            },
+            order: 4
         },
-        cleanupPath: function() {
-            menu_1.callMenu("Stray Points menu item"), menu_1.callMenu("Cut");
+        expandBrushedObjects: {
+            fn: function() {
+                withSelection_1.restoreSelection(function() {
+                    menu_1.callMenu("Brush Strokes menu item"), menu_1.callMenu("expandStyle");
+                });
+            },
+            order: 5
         },
-        convertToRgb: function() {
-            menu_1.callMenu("selectall"), menu_1.callMenu("Colors9");
+        expandText: {
+            fn: function() {
+                withSelection_1.restoreSelection(function() {
+                    menu_1.callMenu("Text Objects menu item"), doAction_1.default(expandObjectAction);
+                });
+            },
+            order: 6
         },
-        deleteUnusedPanelItems: function() {
-            app.doScript("cleanup", "__cleanup");
+        cleanupPath: {
+            fn: function() {
+                withSelection_1.restoreSelection(function() {
+                    menu_1.callMenu("Stray Points menu item"), menu_1.callMenu("Cut");
+                });
+            },
+            order: 7
+        },
+        closeAllPath: {
+            fn: function() {
+                closePaths_1.closePaths();
+            },
+            order: 8
+        },
+        convertToRgb: {
+            fn: function() {
+                menu_1.callMenu("selectall"), menu_1.callMenu("Colors9");
+            },
+            order: 9
+        },
+        deleteUnusedPanelItems: {
+            fn: function() {
+                doAction_1.default(cleanupAction);
+            },
+            order: 10
         }
     }, PrepareForStockProcessor = function(_super) {
         function PrepareForStockProcessor() {
@@ -383,7 +469,9 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         }
         return __extends(PrepareForStockProcessor, _super), PrepareForStockProcessor.prototype.onInit = function() {
             this.fieldFormat = this.dlg.add(new FieldComponent_1.FieldComponent(strings.format, new RadioButtonPanel_1.RadioButtonPanel([ "eps 8", "eps 10" ], "eps 10")));
-            var items = Object.keys(steps).map(function(k) {
+            var items = Object.keys(steps).sort(function(k1, k2) {
+                return steps[k1].order - steps[k2].order;
+            }).map(function(k) {
                 return {
                     key: k,
                     text: strings[k]
@@ -398,11 +486,13 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             var destDir = this.srcSelect.getValue().destDir, name = path_1.parse(file).name, finalFile = path_1.join(destDir, name + ".eps");
             if (!toFile_1.default(finalFile).exists) {
                 var actions = this.fieldActions.ctrl.getValue(), epsV = this.fieldFormat.ctrl.getValue();
-                this.setStatus(strings.opening), openFile_1.default(file);
-                for (var _i = 0, _a = Object.keys(steps); _i < _a.length; _i++) {
+                this.setStatus(strings.opening), openFile_1.default(file), Object.keys(steps).indexOf("deleteUnusedPanelItems") >= 0 && steps.deleteUnusedPanelItems.fn();
+                for (var _i = 0, _a = Object.keys(steps).sort(function(k1, k2) {
+                    return steps[k1].order - steps[k2].order;
+                }); _i < _a.length; _i++) {
                     var step = _a[_i];
                     if (actions.indexOf(step) >= 0) try {
-                        this.setStatus(strings[step]), steps[step]();
+                        this.setStatus(strings[step]), steps[step].fn();
                     } catch (e) {
                         alert("[" + strings[step] + "] failed. " + e.message);
                     }
@@ -412,14 +502,8 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                 }), this.setStatus(strings.closing), app.activeDocument.close();
             }
         }, PrepareForStockProcessor.prototype.processFiles = function(files) {
-            var _this = this, requiredActions = [], selectedSteps = this.fieldActions.ctrl.getValue();
-            selectedSteps.indexOf("deleteUnusedPanelItems") >= 0 && requiredActions.push({
-                name: "__cleanup",
-                content: cleanupAction
-            }), selectedSteps.indexOf("expandText") >= 0 && requiredActions.push({
-                name: "__expandObject",
-                content: expandObjectAction
-            }), withAction_1.withActions(requiredActions, function() {
+            var _this = this;
+            withAction_1.withActions([ cleanupAction, expandObjectAction, expandFillAction ], function() {
                 _super.prototype.processFiles.call(_this, files);
             });
         }, PrepareForStockProcessor;
@@ -445,7 +529,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var toFile_1 = __webpack_require__(2), clean_1 = __webpack_require__(12), validateShutter_1 = __webpack_require__(13);
+    var toFile_1 = __webpack_require__(2), clean_1 = __webpack_require__(13), validateShutter_1 = __webpack_require__(14);
     exports.default = function(file, opts) {
         validateShutter_1.default(), opts = __assign({
             compatibility: Compatibility.ILLUSTRATOR10,
@@ -473,6 +557,29 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         value: !0
     }), exports.default = function() {
         if (app.activeDocument.rasterItems.length) throw new Error("File contains raster items.");
+    };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    }), exports.default = function(action, name) {
+        for (var _i = 0, actions_1 = name ? [ name ] : action.actions; _i < actions_1.length; _i++) {
+            var act = actions_1[_i];
+            app.doScript(act, action.setName);
+        }
+    };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    }), exports.default = function(items, name, required) {
+        void 0 === required && (required = !1);
+        try {
+            return items.getByName(name);
+        } catch (e) {
+            if (required) throw e;
+            return;
+        }
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -612,24 +719,8 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     "use strict";
     Object.defineProperty(exports, "__esModule", {
         value: !0
-    }), exports.default = function(obj) {
-        var result = [];
-        if (!obj) return result;
-        try {
-            for (var length_1 = obj.length, i = 0; i < length_1; i++) try {
-                result.push(obj[i]);
-            } catch (e) {}
-        } catch (e) {
-            return result;
-        }
-        return result;
-    };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
     });
-    var disposeAction_1 = __webpack_require__(20), ensureAction_1 = __webpack_require__(21);
+    var disposeAction_1 = __webpack_require__(22), ensureAction_1 = __webpack_require__(23);
     function withActions(sets, fn) {
         try {
             for (var _i = 0, sets_1 = sets; _i < sets_1.length; _i++) {
@@ -640,15 +731,12 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         } finally {
             for (var _a = 0, sets_2 = sets; _a < sets_2.length; _a++) {
                 set = sets_2[_a];
-                disposeAction_1.default(set.name);
+                disposeAction_1.default(set.setName);
             }
         }
     }
-    exports.withActions = withActions, exports.default = function(setName, actionContent, fn) {
-        withActions([ {
-            name: setName,
-            content: actionContent
-        } ], fn);
+    exports.withActions = withActions, exports.default = function(actionDef, fn) {
+        withActions([ actionDef ], fn);
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -671,6 +759,40 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var toArray_1 = __webpack_require__(6);
+    function restoreSelection(fn) {
+        var selection = app.selection;
+        app.selection = void 0;
+        try {
+            fn();
+        } finally {
+            app.selection = selection;
+        }
+    }
+    exports.restoreSelection = restoreSelection, exports.default = function(items, fn) {
+        restoreSelection(function() {
+            for (var _i = 0, _a = toArray_1.default(items); _i < _a.length; _i++) _a[_i].selected = !0;
+            fn();
+        });
+    };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    }), exports.default = function(fn) {
+        var tempRect = app.activeDocument.pathItems.rectangle(0, 0, 1, 1);
+        tempRect.name = "__tempRect";
+        try {
+            fn(tempRect);
+        } finally {
+            tempRect.remove();
+        }
+    };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
         __proto__: []
     } instanceof Array && function(d, b) {
@@ -687,7 +809,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var CheckBox_1 = __webpack_require__(23), CheckBoxPanel = function(_super) {
+    var CheckBox_1 = __webpack_require__(27), CheckBoxPanel = function(_super) {
         function CheckBoxPanel(items, selectedItems, opts) {
             var _this = _super.call(this, opts) || this;
             return _this.items = items, _this.selectedItems = selectedItems, _this.checks = [], 
@@ -711,7 +833,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                 check.setValue(val.indexOf(check.item.key) >= 0);
             }
         }, CheckBoxPanel;
-    }(__webpack_require__(6).Panel);
+    }(__webpack_require__(7).Panel);
     exports.CheckBoxPanel = CheckBoxPanel;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -801,7 +923,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(7), Group_1 = __webpack_require__(3), Dialog_1 = __webpack_require__(27), Progressbar_1 = __webpack_require__(28), DirectorySelectInOut_1 = __webpack_require__(29), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(8), Group_1 = __webpack_require__(3), Dialog_1 = __webpack_require__(31), Progressbar_1 = __webpack_require__(32), DirectorySelectInOut_1 = __webpack_require__(33), strings = translation_1.tranEnRu({
         cancel: [ "Cancel", "Отмена" ],
         canceling: [ "Canceling", "Отменяю" ],
         start: [ "Start", "Запустить" ],
@@ -948,7 +1070,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(30), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(34), strings = translation_1.tranEnRu({
         sourceDirectory: [ "Source directory:", "Откуда:" ],
         destinationDirectory: [ "Destination directory:", "Куда:" ]
     }), DirectorySelectInOut = function(_super) {
@@ -998,7 +1120,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             var newPath = Folder.selectDialog(this.label);
             return newPath ? newPath.toString() : "";
         }, DirectorySelect;
-    }(__webpack_require__(31).SelectDialog);
+    }(__webpack_require__(35).SelectDialog);
     exports.DirectorySelect = DirectorySelect;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -1018,7 +1140,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(7), EditText_1 = __webpack_require__(32), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(8), EditText_1 = __webpack_require__(36), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
         choose: [ "Choose...", "Выбрать..." ]
     }), SelectDialog = function(_super) {
         function SelectDialog(label, basePath) {
@@ -1095,7 +1217,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var Panel_1 = __webpack_require__(6), RadioButton_1 = __webpack_require__(34), RadioButtonPanel = function(_super) {
+    var Panel_1 = __webpack_require__(7), RadioButton_1 = __webpack_require__(38), RadioButtonPanel = function(_super) {
         function RadioButtonPanel(texts, selectedText) {
             var _this = _super.call(this) || this;
             return _this.texts = texts, _this.selectedText = selectedText, _this.radios = [], 
@@ -1154,7 +1276,21 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     }(__webpack_require__(0).Component);
     exports.RadioButton = RadioButton;
 }, function(module, exports) {
-    module.exports = "/version 3\r/name [ 9\r\t5f5f636c65616e7570\r]\r/isOpen 1\r/actionCount 1\r/action-1 {\r\t/name [ 7\r\t\t636c65616e7570\r\t]\r\t/keyIndex 0\r\t/colorIndex 0\r\t/isOpen 1\r\t/eventCount 12\r\t/event-1 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_symbol_palette)\r\t\t/localizedName [ 7\r\t\t\t53796d626f6c73\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 12\r\t\t}\r\t}\r\t/event-2 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_symbol_palette)\r\t\t/localizedName [ 7\r\t\t\t53796d626f6c73\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (enumerated)\r\t\t\t/name [ 13\r\t\t\t\t44656c6574652053796d626f6c\r\t\t\t]\r\t\t\t/value 5\r\t\t}\r\t}\r\t/event-3 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (adobe_stop)\r\t\t/localizedName [ 4\r\t\t\t53746f70\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 0\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 2\r\t\t/parameter-1 {\r\t\t\t/key 1952807028\r\t\t\t/showInPalette 0\r\t\t\t/type (ustring)\r\t\t\t/value [ 0\r\r\t\t\t]\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1668247156\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t}\r\t/event-4 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_styles)\r\t\t/localizedName [ 14\r\t\t\t47726170686963205374796c6573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 14\r\t\t}\r\t}\r\t/event-5 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_styles)\r\t\t/localizedName [ 14\r\t\t\t47726170686963205374796c6573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 12\r\t\t\t\t44656c657465205374796c65\r\t\t\t]\r\t\t\t/value 3\r\t\t}\r\t}\r\t/event-6 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (adobe_stop)\r\t\t/localizedName [ 4\r\t\t\t53746f70\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 0\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 2\r\t\t/parameter-1 {\r\t\t\t/key 1952807028\r\t\t\t/showInPalette 0\r\t\t\t/type (ustring)\r\t\t\t/value [ 0\r\r\t\t\t]\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1668247156\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t}\r\t/event-7 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_brush)\r\t\t/localizedName [ 5\r\t\t\t4272757368\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 8\r\t\t}\r\t}\r\t/event-8 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_brush)\r\t\t/localizedName [ 5\r\t\t\t4272757368\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 12\r\t\t\t\t44656c657465204272757368\r\t\t\t]\r\t\t\t/value 3\r\t\t}\r\t}\r\t/event-9 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (adobe_stop)\r\t\t/localizedName [ 4\r\t\t\t53746f70\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 0\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 2\r\t\t/parameter-1 {\r\t\t\t/key 1952807028\r\t\t\t/showInPalette 0\r\t\t\t/type (ustring)\r\t\t\t/value [ 0\r\r\t\t\t]\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1668247156\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t}\r\t/event-10 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_swatches)\r\t\t/localizedName [ 8\r\t\t\t5377617463686573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 11\r\t\t}\r\t}\r\t/event-11 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_swatches)\r\t\t/localizedName [ 8\r\t\t\t5377617463686573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 13\r\t\t\t\t44656c65746520537761746368\r\t\t\t]\r\t\t\t/value 3\r\t\t}\r\t}\r\t/event-12 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (adobe_stop)\r\t\t/localizedName [ 4\r\t\t\t53746f70\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 0\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 2\r\t\t/parameter-1 {\r\t\t\t/key 1952807028\r\t\t\t/showInPalette 0\r\t\t\t/type (ustring)\r\t\t\t/value [ 0\r\r\t\t\t]\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1668247156\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t}\r}\r";
+    module.exports = {
+        setName: "__cleanup",
+        actions: [ "cleanup" ],
+        content: "/version 3\r/name [ 9\r\t5f5f636c65616e7570\r]\r/isOpen 1\r/actionCount 1\r/action-1 {\r\t/name [ 7\r\t\t636c65616e7570\r\t]\r\t/keyIndex 0\r\t/colorIndex 0\r\t/isOpen 0\r\t/eventCount 8\r\t/event-1 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_symbol_palette)\r\t\t/localizedName [ 7\r\t\t\t53796d626f6c73\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 12\r\t\t}\r\t}\r\t/event-2 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_symbol_palette)\r\t\t/localizedName [ 7\r\t\t\t53796d626f6c73\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (enumerated)\r\t\t\t/name [ 13\r\t\t\t\t44656c6574652053796d626f6c\r\t\t\t]\r\t\t\t/value 5\r\t\t}\r\t}\r\t/event-3 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_styles)\r\t\t/localizedName [ 14\r\t\t\t47726170686963205374796c6573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 14\r\t\t}\r\t}\r\t/event-4 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_styles)\r\t\t/localizedName [ 14\r\t\t\t47726170686963205374796c6573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 12\r\t\t\t\t44656c657465205374796c65\r\t\t\t]\r\t\t\t/value 3\r\t\t}\r\t}\r\t/event-5 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_brush)\r\t\t/localizedName [ 5\r\t\t\t4272757368\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 8\r\t\t}\r\t}\r\t/event-6 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_brush)\r\t\t/localizedName [ 5\r\t\t\t4272757368\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 12\r\t\t\t\t44656c657465204272757368\r\t\t\t]\r\t\t\t/value 3\r\t\t}\r\t}\r\t/event-7 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_swatches)\r\t\t/localizedName [ 8\r\t\t\t5377617463686573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 17\r\t\t\t\t53656c65637420416c6c20556e75736564\r\t\t\t]\r\t\t\t/value 11\r\t\t}\r\t}\r\t/event-8 {\r\t\t/useRulersIn1stQuadrant 1\r\t\t/internalName (ai_plugin_swatches)\r\t\t/localizedName [ 8\r\t\t\t5377617463686573\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1835363957\r\t\t\t/showInPalette 1\r\t\t\t/type (enumerated)\r\t\t\t/name [ 13\r\t\t\t\t44656c65746520537761746368\r\t\t\t]\r\t\t\t/value 3\r\t\t}\r\t}\r}\r"
+    };
 }, function(module, exports) {
-    module.exports = "/version 3\r/name [ 14\r\t5f5f657870616e644f626a656374\r]\r/isOpen 1\r/actionCount 1\r/action-1 {\r\t/name [ 13\r\t\t657870616e642d6f626a656374\r\t]\r\t/keyIndex 0\r\t/colorIndex 0\r\t/isOpen 0\r\t/eventCount 1\r\t/event-1 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (ai_plugin_expand)\r\t\t/localizedName [ 6\r\t\t\t457870616e64\r\t\t]\r\t\t/isOpen 1\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 4\r\t\t/parameter-1 {\r\t\t\t/key 1868720756\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1718185068\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t\t/parameter-3 {\r\t\t\t/key 1937011307\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t\t/parameter-4 {\r\t\t\t/key 1936553064\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t}\r}\r";
+    module.exports = {
+        setName: "__expandObject",
+        actions: [ "expandObject" ],
+        content: "/version 3\r/name [ 14\r\t5f5f657870616e644f626a656374\r]\r/isOpen 1\r/actionCount 1\r/action-1 {\r\t/name [ 12\r\t\t657870616e644f626a656374\r\t]\r\t/keyIndex 0\r\t/colorIndex 0\r\t/isOpen 0\r\t/eventCount 1\r\t/event-1 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (ai_plugin_expand)\r\t\t/localizedName [ 6\r\t\t\t457870616e64\r\t\t]\r\t\t/isOpen 1\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 4\r\t\t/parameter-1 {\r\t\t\t/key 1868720756\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1718185068\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t\t/parameter-3 {\r\t\t\t/key 1937011307\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t\t/parameter-4 {\r\t\t\t/key 1936553064\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t}\r}\r"
+    };
+}, function(module, exports) {
+    module.exports = {
+        setName: "__expandFill",
+        actions: [ "expandFill" ],
+        content: "/version 3\r/name [ 12\r\t5f5f657870616e6446696c6c\r]\r/isOpen 1\r/actionCount 1\r/action-1 {\r\t/name [ 10\r\t\t657870616e6446696c6c\r\t]\r\t/keyIndex 0\r\t/colorIndex 0\r\t/isOpen 0\r\t/eventCount 1\r\t/event-1 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (ai_plugin_expand)\r\t\t/localizedName [ 6\r\t\t\t457870616e64\r\t\t]\r\t\t/isOpen 1\r\t\t/isOn 1\r\t\t/hasDialog 1\r\t\t/showDialog 0\r\t\t/parameterCount 4\r\t\t/parameter-1 {\r\t\t\t/key 1868720756\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t\t/parameter-2 {\r\t\t\t/key 1718185068\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 1\r\t\t}\r\t\t/parameter-3 {\r\t\t\t/key 1937011307\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t\t/parameter-4 {\r\t\t\t/key 1936553064\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (boolean)\r\t\t\t/value 0\r\t\t}\r\t}\r}\r"
+    };
 } ]);
