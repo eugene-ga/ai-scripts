@@ -251,6 +251,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     var ai_1 = __webpack_require__(9), copyFile_1 = __webpack_require__(10), getActiveDocument_1 = __webpack_require__(11), menu_1 = __webpack_require__(12), openFile_1 = __webpack_require__(5), toArray_1 = __webpack_require__(13), toFile_1 = __webpack_require__(2), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(14), FieldComponent_1 = __webpack_require__(18), FileProcessor_1 = __webpack_require__(19), strings = translation_1.tranEnRu({
         applyStyle: [ "Apply Style", "Применить стиль" ],
         styles: [ "Styles", "Стили" ],
+        style: [ "Style", "Стиль" ],
         noOpenedDocument: [ "Document with styles should be opened", "Документ со стилями должен быть открыт" ],
         noStylesInDocument: [ "Current document does not contain any styles", "Текущий документ не содержит стилей" ]
     }), ApplyStyleProcessor = function(_super) {
@@ -272,12 +273,15 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                 orientation: "column"
             })));
         }, ApplyStyleProcessor.prototype.onProcess = function(file) {
-            var doc = getActiveDocument_1.default();
             copyFile_1.copyFile(file);
-            for (var styles = this.fieldStyles.ctrl.getValue(), destDir = this.srcSelect.getValue().destDir, _i = 0, styles_1 = styles; _i < styles_1.length; _i++) {
-                var styleName = styles_1[_i], finalFilePath = this.getFinalPath(file, destDir, styleName);
+            for (var styles = this.fieldStyles.ctrl.getValue(), destDir = this.srcSelect.getValue().destDir, index = 0, _i = 0, styles_1 = styles; _i < styles_1.length; _i++) {
+                var styleName = styles_1[_i];
+                index++, this.setStatus(strings.style + ": " + styleName + " (" + index + "/" + styles.length + ")");
+                var finalFilePath = this.getFinalPath(file, destDir, styleName);
                 if (!toFile_1.default(finalFilePath).exists) {
-                    menu_1.callMenu("pasteInPlace"), doc.fitArtboardToSelectedArt(doc.artboards.getActiveArtboardIndex());
+                    menu_1.callMenu("pasteInPlace");
+                    var doc = getActiveDocument_1.default();
+                    doc.fitArtboardToSelectedArt(doc.artboards.getActiveArtboardIndex());
                     for (var style = doc.graphicStyles.getByName(styleName), selectedItems = app.selection, itemsCount = selectedItems.length, i = 0; i < itemsCount; i++) style.applyTo(selectedItems[i]);
                     ai_1.default(finalFilePath), doc.close(SaveOptions.DONOTSAVECHANGES), openFile_1.default(this.templateFile);
                 }
