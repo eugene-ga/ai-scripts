@@ -29,7 +29,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         return __webpack_require__.d(getter, "a", getter), getter;
     }, __webpack_require__.o = function(object, property) {
         return Object.prototype.hasOwnProperty.call(object, property);
-    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 9);
+    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 10);
 }([ function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -48,7 +48,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(28), Component = function() {
+    var write_1 = __webpack_require__(5), Component = function() {
         function Component(type) {
             this.type = type;
         }
@@ -177,6 +177,13 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     }(__webpack_require__(0).Component);
     exports.StaticText = StaticText;
 }, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    }), exports.write = function(text) {
+        $.fileName.indexOf("ai-scripts/scripts/standalone") >= 0 && $.writeln(text);
+    };
+}, function(module, exports, __webpack_require__) {
     (function(process) {
         function normalizeArray(parts, allowAboveRoot) {
             for (var up = 0, i = parts.length - 1; i >= 0; i--) {
@@ -247,7 +254,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         } : function(str, start, len) {
             return start < 0 && (start = str.length + start), str.substr(start, len);
         };
-    }).call(exports, __webpack_require__(20));
+    }).call(exports, __webpack_require__(21));
 }, function(module, exports, __webpack_require__) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
@@ -337,7 +344,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     }(__webpack_require__(0).Component);
     exports.Button = Button;
 }, function(module, exports, __webpack_require__) {
-    module.exports = __webpack_require__(10);
+    module.exports = __webpack_require__(11);
 }, function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -356,7 +363,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var closePaths_1 = __webpack_require__(11), shutterEps_1 = __webpack_require__(12), doAction_1 = __webpack_require__(15), getByName_1 = __webpack_require__(16), menu_1 = __webpack_require__(17), openFile_1 = __webpack_require__(18), path_1 = __webpack_require__(19), toArray_1 = __webpack_require__(6), toFile_1 = __webpack_require__(2), withAction_1 = __webpack_require__(21), withSelection_1 = __webpack_require__(24), withTempRect_1 = __webpack_require__(25), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(26), FieldComponent_1 = __webpack_require__(29), FileProcessor_1 = __webpack_require__(30), RadioButtonPanel_1 = __webpack_require__(37), cleanupAction = __webpack_require__(39), expandObjectAction = __webpack_require__(40), expandFillAction = __webpack_require__(41), strings = translation_1.tranEnRu({
+    var closePaths_1 = __webpack_require__(12), shutterEps_1 = __webpack_require__(13), doAction_1 = __webpack_require__(16), getByName_1 = __webpack_require__(17), menu_1 = __webpack_require__(18), openFile_1 = __webpack_require__(19), path_1 = __webpack_require__(20), toArray_1 = __webpack_require__(7), toFile_1 = __webpack_require__(2), withAction_1 = __webpack_require__(22), withSelection_1 = __webpack_require__(26), withTempRect_1 = __webpack_require__(27), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(28), FieldComponent_1 = __webpack_require__(30), FileProcessor_1 = __webpack_require__(31), RadioButtonPanel_1 = __webpack_require__(38), cleanupAction = __webpack_require__(40), expandObjectAction = __webpack_require__(41), expandFillAction = __webpack_require__(42), strings = translation_1.tranEnRu({
         prepareForStock: [ "Prepare For Stock", "Подготовить для стоков" ],
         closeAllPath: [ "Close all paths", "Закрыть все пути" ],
         cleanupPath: [ "Cleanup Path", "Почистить пути" ],
@@ -532,7 +539,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var toFile_1 = __webpack_require__(2), clean_1 = __webpack_require__(13), validateShutter_1 = __webpack_require__(14);
+    var toFile_1 = __webpack_require__(2), clean_1 = __webpack_require__(14), validateShutter_1 = __webpack_require__(15);
     exports.default = function(file, opts) {
         validateShutter_1.default(), opts = __assign({
             compatibility: Compatibility.ILLUSTRATOR10,
@@ -565,10 +572,12 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     "use strict";
     Object.defineProperty(exports, "__esModule", {
         value: !0
-    }), exports.default = function(action, name) {
+    });
+    var write_1 = __webpack_require__(5);
+    exports.default = function(action, name) {
         for (var _i = 0, actions_1 = name ? [ name ] : action.actions; _i < actions_1.length; _i++) {
             var act = actions_1[_i];
-            app.doScript(act, action.setName);
+            write_1.write("doAction: [" + action.setName + "->" + action.setName + "]"), app.doScript(act, action.setName);
         }
     };
 }, function(module, exports, __webpack_require__) {
@@ -617,7 +626,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var path = __webpack_require__(5);
+    var path = __webpack_require__(6);
     exports.parse = function(filePath) {
         var basename = path.basename(filePath), ext = path.extname(filePath), dir = path.dirname(filePath);
         return {
@@ -627,7 +636,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             basename: basename
         };
     };
-    var path_1 = __webpack_require__(5);
+    var path_1 = __webpack_require__(6);
     exports.join = path_1.join, exports.basename = path_1.basename, exports.dirname = path_1.dirname, 
     exports.extname = path_1.extname;
 }, function(module, exports) {
@@ -720,17 +729,21 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
+    var __assign = this && this.__assign || Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+        return t;
+    };
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var disposeAction_1 = __webpack_require__(22), ensureAction_1 = __webpack_require__(23);
+    var isFunction_1 = __webpack_require__(23), disposeAction_1 = __webpack_require__(24), ensureAction_1 = __webpack_require__(25);
     function withActions(sets, fn) {
         try {
             for (var _i = 0, sets_1 = sets; _i < sets_1.length; _i++) {
                 var set = sets_1[_i];
                 ensureAction_1.default(set.content);
             }
-            fn();
+            fn(sets);
         } finally {
             for (var _a = 0, sets_2 = sets; _a < sets_2.length; _a++) {
                 set = sets_2[_a];
@@ -738,8 +751,24 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             }
         }
     }
-    exports.withActions = withActions, exports.default = function(actionDef, fn) {
-        withActions([ actionDef ], fn);
+    exports.withActions = withActions, exports.default = function(actionDef, params, fn) {
+        isFunction_1.default(params) && (fn = params, params = {}), withActions([ __assign({}, actionDef, {
+            content: function(content, params) {
+                return params = params || {}, content.replace(/<%=\s*([^} ]*)\s*%>/gi, function(substr, key) {
+                    if (!params[key]) throw new Error("Param " + key + " does not exists");
+                    return params[key];
+                });
+            }(actionDef.content, params)
+        }) ], function(acts) {
+            fn(acts[0]);
+        });
+    };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    }), exports.default = function(functionToCheck) {
+        return functionToCheck && "[object Function]" === {}.toString.call(functionToCheck);
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -765,7 +794,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var toArray_1 = __webpack_require__(6);
+    var toArray_1 = __webpack_require__(7);
     function restoreSelection(fn) {
         var selection = app.selection;
         app.selection = void 0;
@@ -812,7 +841,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var CheckBox_1 = __webpack_require__(27), CheckBoxPanel = function(_super) {
+    var CheckBox_1 = __webpack_require__(29), CheckBoxPanel = function(_super) {
         function CheckBoxPanel(items, selectedItems, opts) {
             var _this = _super.call(this, opts) || this;
             return _this.items = items, _this.selectedItems = selectedItems, _this.checks = [], 
@@ -836,7 +865,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                 check.setValue(val.indexOf(check.item.key) >= 0);
             }
         }, CheckBoxPanel;
-    }(__webpack_require__(7).Panel);
+    }(__webpack_require__(8).Panel);
     exports.CheckBoxPanel = CheckBoxPanel;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -883,13 +912,6 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     exports.CheckBox = CheckBox;
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    }), exports.write = function(text) {
-        $.fileName.indexOf("ai-scripts/scripts/standalone") >= 0 && $.writeln(text);
-    };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
         __proto__: []
     } instanceof Array && function(d, b) {
@@ -926,7 +948,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(8), Group_1 = __webpack_require__(3), Dialog_1 = __webpack_require__(31), Progressbar_1 = __webpack_require__(32), DirectorySelectInOut_1 = __webpack_require__(33), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(9), Group_1 = __webpack_require__(3), Dialog_1 = __webpack_require__(32), Progressbar_1 = __webpack_require__(33), DirectorySelectInOut_1 = __webpack_require__(34), strings = translation_1.tranEnRu({
         cancel: [ "Cancel", "Отмена" ],
         canceling: [ "Canceling", "Отменяю" ],
         start: [ "Start", "Запустить" ],
@@ -1073,7 +1095,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(34), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(35), strings = translation_1.tranEnRu({
         sourceDirectory: [ "Source directory:", "Откуда:" ],
         destinationDirectory: [ "Destination directory:", "Куда:" ]
     }), DirectorySelectInOut = function(_super) {
@@ -1123,7 +1145,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             var newPath = Folder.selectDialog(this.label);
             return newPath ? newPath.toString() : "";
         }, DirectorySelect;
-    }(__webpack_require__(35).SelectDialog);
+    }(__webpack_require__(36).SelectDialog);
     exports.DirectorySelect = DirectorySelect;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -1143,7 +1165,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(8), EditText_1 = __webpack_require__(36), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(9), EditText_1 = __webpack_require__(37), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
         choose: [ "Choose...", "Выбрать..." ]
     }), SelectDialog = function(_super) {
         function SelectDialog(label, basePath) {
@@ -1220,7 +1242,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var Panel_1 = __webpack_require__(7), RadioButton_1 = __webpack_require__(38), RadioButtonPanel = function(_super) {
+    var Panel_1 = __webpack_require__(8), RadioButton_1 = __webpack_require__(39), RadioButtonPanel = function(_super) {
         function RadioButtonPanel(texts, selectedText) {
             var _this = _super.call(this) || this;
             return _this.texts = texts, _this.selectedText = selectedText, _this.radios = [], 
