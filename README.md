@@ -1,8 +1,9 @@
 # ai scripts
 
+[Инструкция на русском языке](https://github.com/shvendala/ai-scripts/blob/master/README.ru.md)
+
 ## jpeg-export.js
 [download](https://raw.githubusercontent.com/shvendala/ai-scripts/master/scripts/jpeg-export.js)   
-Generates raster copies for vector files.   
 
 Script generates raster JPG preview for vector EPS or AI files. 
 How to:
@@ -18,7 +19,6 @@ In case the script was interrupted and you run it over again, it will take into 
 
 ## prepare-for-stock.js
 [download](https://raw.githubusercontent.com/shvendala/ai-scripts/master/scripts/prepare-for-stock.js)   
-Prepares vector files for publication to microstock sites (e.g. shutterstock, istock, etc...).   
 
 Script prepares vector files for publication to microstock sites (e.g. shutterstock, istock, etc…):
 * Unlock all objects and entire layers
@@ -42,7 +42,6 @@ In case the script was interrupted and you run it over again, it will take into 
 
 ## apply-style.js
 [download](https://raw.githubusercontent.com/shvendala/ai-scripts/master/scripts/apply-style.js)   
-Apply selected styles to the documents and save new document per each style.   
 
 Apply selected styles to multiple objects and save new document per each style.
 
