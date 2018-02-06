@@ -1,8 +1,6 @@
 # Ai Scripts
----
-Table of Contents:
----
 
+## Table of Contents:
 * [Инструкция на русском языке](https://github.com/shvendala/ai-scripts/blob/master/README.ru.md)
 * [Jpeg Export](https://github.com/shvendala/ai-scripts#jpeg-exportjs)
 * [Prepare for stocks](https://github.com/shvendala/ai-scripts#prepare-for-stockjs)
@@ -24,8 +22,6 @@ How to:
 In case the script was interrupted and you run it over again, it will take into account already saved files and resume it’s work from the place where it was previously stopped
 
 ![screenshot](https://github.com/shvendala/ai-scripts/blob/master/assets/jpeg-export.png?raw=true)   
-
----
 
 ## prepare-for-stock.js
 [download](https://raw.githubusercontent.com/shvendala/ai-scripts/master/scripts/prepare-for-stock.js)   
@@ -49,8 +45,6 @@ How to:
 In case the script was interrupted and you run it over again, it will take into account already saved files and resume it’s work from the place where it was previously stopped
 
 ![screenshot](https://github.com/shvendala/ai-scripts/blob/master/assets/prepare-for-stock.png?raw=true)   
-
----
 
 ## apply-style.js
 [download](https://raw.githubusercontent.com/shvendala/ai-scripts/master/scripts/apply-style.js)   
