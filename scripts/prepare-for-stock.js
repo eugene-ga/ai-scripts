@@ -181,7 +181,6 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     }), exports.write = function(text) {
-        $.fileName.indexOf("ai-scripts/scripts/standalone") >= 0 && $.writeln(text);
     };
 }, function(module, exports, __webpack_require__) {
     (function(process) {
@@ -507,7 +506,8 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                     if (actions.indexOf(step) >= 0) try {
                         this.setStatus(PrepareForStockStrings_1.default[step]), steps[step].fn();
                     } catch (e) {
-                        alert("[" + PrepareForStockStrings_1.default[step] + "] failed. " + e.message);
+                        throw alert("[" + PrepareForStockStrings_1.default[step] + "] failed. " + e.message), 
+                        e;
                     }
                 }
                 this.setStatus(PrepareForStockStrings_1.default.saving), shutterEps_1.default(finalFile, {
@@ -986,7 +986,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         FileProcessor.prototype.processFiles = function(files) {
             for (var index = 0, total = files.length, _i = 0, files_1 = files; _i < files_1.length; _i++) {
                 var filePath = files_1[_i];
-                if (this.stopSignal) throw this.stopSignal;
+                if (this.stopSignal) return alert(CommonStrings_1.default.operationCanceled), void (this.stopSignal = null);
                 this.checkStop(), index++, this.currentStatus = CommonStrings_1.default.processing + " " + index + " " + CommonStrings_1.default.of + " " + total + " [" + filePath.match(/[^\/]*$/g)[0] + "].", 
                 this.progBar.setLabel(this.currentStatus), this.progBar.setValue(index / total * 100), 
                 this.dlg.update(), this.onProcess(filePath);
@@ -1017,9 +1017,11 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                 } catch (e) {
                     alert(e);
                 } finally {
-                    _this.isRunning = !1, _this.stopSignal = null, _this.onComplete(), _this.dlg.close();
+                    _this.complete(), _this.dlg.close();
                 }
             };
+        }, FileProcessor.prototype.complete = function() {
+            this.isRunning = !1, this.stopSignal = null, this.onComplete();
         }, FileProcessor.prototype.checkStop = function() {
             if ($.sleep(50), this.stopSignal) throw this.stopSignal;
         }, FileProcessor;
