@@ -1,4 +1,12 @@
-# ai scripts
+# Ai Scripts
+
+## Содержание:
+* [Manual in English](https://github.com/shvendala/ai-scripts/blob/master/README.md)
+* [Экспортировать Jpeg](https://github.com/shvendala/ai-scripts/blob/master/README.ru.md#jpeg-exportjs)
+* [Подготовить для стоков](https://github.com/shvendala/ai-scripts/blob/master/README.ru.md#prepare-for-stockjs)
+* [Применить стиль](https://github.com/shvendala/ai-scripts/blob/master/README.ru.md#apply-stylejs)
+
+---
 
 ## jpeg-export.js
 [download](https://raw.githubusercontent.com/shvendala/ai-scripts/master/scripts/jpeg-export.js)   
