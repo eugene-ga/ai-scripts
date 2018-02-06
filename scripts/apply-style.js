@@ -29,7 +29,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         return __webpack_require__.d(getter, "a", getter), getter;
     }, __webpack_require__.o = function(object, property) {
         return Object.prototype.hasOwnProperty.call(object, property);
-    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 7);
+    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 8);
 }([ function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -48,7 +48,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(16), Component = function() {
+    var write_1 = __webpack_require__(18), Component = function() {
         function Component(type) {
             this.type = type;
         }
@@ -88,9 +88,9 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
 }, function(module, exports, __webpack_require__) {
     "use strict";
     function translation(en, translations, locale) {
-        for (var _i = 0, translations_1 = translations; _i < translations_1.length; _i++) {
+        if (locale = locale || app.locale) for (var _i = 0, translations_1 = translations; _i < translations_1.length; _i++) {
             var trans = translations_1[_i];
-            if (0 === "en".indexOf(trans.locale)) return trans.strings;
+            if (0 === locale.indexOf(trans.locale)) return trans.strings;
         }
         return en;
     }
@@ -195,6 +195,25 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var translation_1 = __webpack_require__(1);
+    exports.default = translation_1.tranEnRu({
+        choose: [ "Choose...", "Выбрать..." ],
+        sourceDirectory: [ "Source directory", "Откуда" ],
+        destinationDirectory: [ "Destination directory", "Куда" ],
+        cancel: [ "Cancel", "Отменить" ],
+        canceling: [ "Canceling", "Отменяю" ],
+        start: [ "Start", "Старт" ],
+        of: [ "of", "из" ],
+        done: [ "Done", "Готово" ],
+        processing: [ "Processing", "Обрабатываю" ],
+        processFiles: [ "Process Files", "Обработка файлов" ],
+        operationCanceled: [ "Operation Canceled", "Операция отменена" ]
+    });
+}, function(module, exports, __webpack_require__) {
+    "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
         __proto__: []
     } instanceof Array && function(d, b) {
@@ -229,7 +248,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     }(__webpack_require__(0).Component);
     exports.Button = Button;
 }, function(module, exports, __webpack_require__) {
-    module.exports = __webpack_require__(8);
+    module.exports = __webpack_require__(9);
 }, function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -248,35 +267,29 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var ai_1 = __webpack_require__(9), copyFile_1 = __webpack_require__(10), getActiveDocument_1 = __webpack_require__(11), menu_1 = __webpack_require__(12), openFile_1 = __webpack_require__(5), toArray_1 = __webpack_require__(13), toFile_1 = __webpack_require__(2), translation_1 = __webpack_require__(1), CheckBoxPanel_1 = __webpack_require__(14), FieldComponent_1 = __webpack_require__(18), FileProcessor_1 = __webpack_require__(19), strings = translation_1.tranEnRu({
-        applyStyle: [ "Apply Style", "Применить стиль" ],
-        styles: [ "Styles", "Стили" ],
-        style: [ "Style", "Стиль" ],
-        noOpenedDocument: [ "Document with styles should be opened", "Документ со стилями должен быть открыт" ],
-        noStylesInDocument: [ "Current document does not contain any styles", "Текущий документ не содержит стилей" ]
-    }), ApplyStyleProcessor = function(_super) {
+    var ApplyStyleStrings_1 = __webpack_require__(10), ai_1 = __webpack_require__(11), copyFile_1 = __webpack_require__(12), getActiveDocument_1 = __webpack_require__(13), menu_1 = __webpack_require__(14), openFile_1 = __webpack_require__(5), toArray_1 = __webpack_require__(15), toFile_1 = __webpack_require__(2), CheckBoxPanel_1 = __webpack_require__(16), FieldComponent_1 = __webpack_require__(20), ApplyStyleProcessor = function(_super) {
         function ApplyStyleProcessor() {
             return _super.call(this, {
-                title: strings.applyStyle
+                title: ApplyStyleStrings_1.default.applyStyle
             }) || this;
         }
         return __extends(ApplyStyleProcessor, _super), ApplyStyleProcessor.prototype.onInit = function() {
             var doc = getActiveDocument_1.default();
-            if (!doc) throw new Error(strings.noOpenedDocument);
+            if (!doc) throw new Error(ApplyStyleStrings_1.default.noOpenedDocument);
             var styles = toArray_1.default(doc.graphicStyles).map(function(s) {
                 return s.name;
             }).filter(function(n) {
                 return "[Default]" !== n;
             });
-            if (!styles.length) throw new Error(strings.noStylesInDocument);
-            this.templateFile = doc.path + "/" + doc.name, this.fieldStyles = this.dlg.add(new FieldComponent_1.FieldComponent(strings.styles, new CheckBoxPanel_1.CheckBoxPanel(styles, styles, {
+            if (!styles.length) throw new Error(ApplyStyleStrings_1.default.noStylesInDocument);
+            this.templateFile = doc.path + "/" + doc.name, this.fieldStyles = this.dlg.add(new FieldComponent_1.FieldComponent(ApplyStyleStrings_1.default.styles, new CheckBoxPanel_1.CheckBoxPanel(styles, styles, {
                 orientation: "column"
             })));
         }, ApplyStyleProcessor.prototype.onProcess = function(file) {
             copyFile_1.copyFile(file);
             for (var styles = this.fieldStyles.ctrl.getValue(), destDir = this.srcSelect.getValue().destDir, index = 0, _i = 0, styles_1 = styles; _i < styles_1.length; _i++) {
                 var styleName = styles_1[_i];
-                index++, this.setStatus(strings.style + ": " + styleName + " (" + index + "/" + styles.length + ")");
+                index++, this.setStatus(ApplyStyleStrings_1.default.style + ": " + styleName + " (" + index + "/" + styles.length + ")");
                 var finalFilePath = this.getFinalPath(file, destDir, styleName);
                 if (!toFile_1.default(finalFilePath).exists) {
                     menu_1.callMenu("pasteInPlace");
@@ -289,9 +302,22 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         }, ApplyStyleProcessor.prototype.getFinalPath = function(aiEpsPath, outputFolder, styleName) {
             return outputFolder + "/" + aiEpsPath.match(/[^\/]*$/g)[0].match(/^[^\.]*/g) + "__" + styleName + ".ai";
         }, ApplyStyleProcessor;
-    }(FileProcessor_1.FileProcessor);
+    }(__webpack_require__(21).FileProcessor);
     exports.ApplyStyleProcessor = ApplyStyleProcessor;
     new ApplyStyleProcessor();
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var translation_1 = __webpack_require__(1);
+    exports.default = translation_1.tranEnRu({
+        applyStyle: [ "Apply Style", "Применить стиль" ],
+        style: [ "Style", "Стиль" ],
+        styles: [ "Styles", "Стили" ],
+        noOpenedDocument: [ "Document with styles should be opened", "Документ со стилями должен быть открыт" ],
+        noStylesInDocument: [ "Current document does not contain any styles", "Текущий документ не содержит стилей" ]
+    });
 }, function(module, exports, __webpack_require__) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
@@ -370,7 +396,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var CheckBox_1 = __webpack_require__(15), CheckBoxPanel = function(_super) {
+    var CheckBox_1 = __webpack_require__(17), CheckBoxPanel = function(_super) {
         function CheckBoxPanel(items, selectedItems, opts) {
             var _this = _super.call(this, opts) || this;
             return _this.items = items, _this.selectedItems = selectedItems, _this.checks = [], 
@@ -394,7 +420,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                 check.setValue(val.indexOf(check.item.key) >= 0);
             }
         }, CheckBoxPanel;
-    }(__webpack_require__(17).Panel);
+    }(__webpack_require__(19).Panel);
     exports.CheckBoxPanel = CheckBoxPanel;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -521,19 +547,10 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(6), Group_1 = __webpack_require__(3), Dialog_1 = __webpack_require__(20), Progressbar_1 = __webpack_require__(21), DirectorySelectInOut_1 = __webpack_require__(22), strings = translation_1.tranEnRu({
-        cancel: [ "Cancel", "Отмена" ],
-        canceling: [ "Canceling", "Отменяю" ],
-        start: [ "Start", "Запустить" ],
-        of: [ "of", "из" ],
-        done: [ "Done", "Готово" ],
-        processing: [ "Processing", "Обрабатываю" ],
-        processFiles: [ "Process Files", "Обработка файлов" ],
-        operationCanceled: [ "Operation Canceled", "Операция отменена" ]
-    }), FileProcessor = function() {
+    var CommonStrings_1 = __webpack_require__(6), Button_1 = __webpack_require__(7), Dialog_1 = __webpack_require__(22), DirectorySelectInOut_1 = __webpack_require__(23), Group_1 = __webpack_require__(3), Progressbar_1 = __webpack_require__(27), FileProcessor = function() {
         function FileProcessor(opts) {
             this.opts = opts, this.opts = __assign({
-                title: strings.processFiles
+                title: CommonStrings_1.default.processFiles
             }, opts), this.dlg = new Dialog_1.Dialog(this.opts.title), this.init(), this.dlg.show();
         }
         return FileProcessor.prototype.onCanceled = function() {}, FileProcessor.prototype.onProcess = function(file) {}, 
@@ -542,7 +559,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             for (var index = 0, total = files.length, _i = 0, files_1 = files; _i < files_1.length; _i++) {
                 var filePath = files_1[_i];
                 if (this.stopSignal) throw this.stopSignal;
-                this.checkStop(), index++, this.currentStatus = strings.processing + " " + index + " " + strings.of + " " + total + " [" + filePath.match(/[^\/]*$/g)[0] + "].", 
+                this.checkStop(), index++, this.currentStatus = CommonStrings_1.default.processing + " " + index + " " + CommonStrings_1.default.of + " " + total + " [" + filePath.match(/[^\/]*$/g)[0] + "].", 
                 this.progBar.setLabel(this.currentStatus), this.progBar.setValue(index / total * 100), 
                 this.dlg.update(), this.onProcess(filePath);
             }
@@ -554,9 +571,11 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             this.onInit(), this.progBar = this.dlg.add(new Progressbar_1.Progressbar()), this.progBar.inner.alignment = "left", 
             this.progBar.label.inner.alignment = "left", this.progBar.setSize(530, 10);
             var btnGroup = this.dlg.add(new Group_1.Group());
-            this.btnCancel = btnGroup.add(new Button_1.Button(strings.cancel)), this.btnStart = btnGroup.add(new Button_1.Button(strings.start)), 
+            this.btnCancel = btnGroup.add(new Button_1.Button(CommonStrings_1.default.cancel)), 
+            this.btnStart = btnGroup.add(new Button_1.Button(CommonStrings_1.default.start)), 
             this.btnCancel.onClick = function() {
-                _this.isRunning ? (_this.btnCancel.setValue(strings.canceling + "..."), _this.stopSignal = new Error(strings.operationCanceled)) : (_this.onCanceled(), 
+                _this.isRunning ? (_this.btnCancel.setValue(CommonStrings_1.default.canceling + "..."), 
+                _this.stopSignal = new Error(CommonStrings_1.default.operationCanceled)) : (_this.onCanceled(), 
                 _this.dlg.close());
             }, this.btnStart.onClick = function() {
                 if (!_this.isRunning) try {
@@ -566,7 +585,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                     if (0 === inputFiles.length) throw new Error("No eps or ai files in dir: [" + srcDir + "]");
                     _this.processFiles(inputFiles.map(function(f) {
                         return f.absoluteURI;
-                    })), _this.progBar.setLabel(strings.done);
+                    })), _this.progBar.setLabel(CommonStrings_1.default.done);
                 } catch (e) {
                     alert(e);
                 } finally {
@@ -631,54 +650,14 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var Component_1 = __webpack_require__(0), StaticText_1 = __webpack_require__(4), Progressbar = function(_super) {
-        function Progressbar() {
-            return _super.call(this, "progressbar") || this;
-        }
-        return __extends(Progressbar, _super), Progressbar.prototype.init = function() {
-            _super.prototype.init.call(this), this.inner.minvalue = 0, this.inner.maxvalue = 100, 
-            this.label = this.parent.add(new StaticText_1.StaticText("")), this.label.setSize(400, 20), 
-            this.setSize(400, 10);
-        }, Progressbar.prototype.getValue = function() {
-            return this.inner.value;
-        }, Progressbar.prototype.setValue = function(val) {
-            this.inner.value = val;
-        }, Progressbar.prototype.getLabel = function() {
-            return this.label.getValue();
-        }, Progressbar.prototype.setLabel = function(val) {
-            this.label.setValue(val);
-        }, Progressbar;
-    }(Component_1.Component);
-    exports.Progressbar = Progressbar;
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
-    }, function(d, b) {
-        function __() {
-            this.constructor = d;
-        }
-        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
-        new __());
-    });
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    });
-    var translation_1 = __webpack_require__(1), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(23), strings = translation_1.tranEnRu({
-        sourceDirectory: [ "Source directory:", "Откуда:" ],
-        destinationDirectory: [ "Destination directory:", "Куда:" ]
-    }), DirectorySelectInOut = function(_super) {
+    var CommonStrings_1 = __webpack_require__(6), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(24), DirectorySelectInOut = function(_super) {
         function DirectorySelectInOut() {
             return _super.call(this, "") || this;
         }
         return __extends(DirectorySelectInOut, _super), DirectorySelectInOut.prototype.init = function() {
             var _this = this;
-            _super.prototype.init.call(this), this.srcSelect = this.parent.add(new DirectorySelect_1.DirectorySelect(strings.sourceDirectory)), 
-            this.destSelect = this.parent.add(new DirectorySelect_1.DirectorySelect(strings.destinationDirectory)), 
+            _super.prototype.init.call(this), this.srcSelect = this.parent.add(new DirectorySelect_1.DirectorySelect(CommonStrings_1.default.sourceDirectory)), 
+            this.destSelect = this.parent.add(new DirectorySelect_1.DirectorySelect(CommonStrings_1.default.destinationDirectory)), 
             this.srcSelect.onChange = function(newPath) {
                 _this.destSelect.setValue(newPath), _this.debug("changed"), _this.onChange && _this.onChange();
             };
@@ -718,7 +697,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             var newPath = Folder.selectDialog(this.label);
             return newPath ? newPath.toString() : "";
         }, DirectorySelect;
-    }(__webpack_require__(24).SelectDialog);
+    }(__webpack_require__(25).SelectDialog);
     exports.DirectorySelect = DirectorySelect;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -738,7 +717,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(6), EditText_1 = __webpack_require__(25), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(1), Button_1 = __webpack_require__(7), EditText_1 = __webpack_require__(26), Group_1 = __webpack_require__(3), StaticText_1 = __webpack_require__(4), strings = translation_1.tranEnRu({
         choose: [ "Choose...", "Выбрать..." ]
     }), SelectDialog = function(_super) {
         function SelectDialog(label, basePath) {
@@ -797,6 +776,43 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         }, EditText;
     }(__webpack_require__(0).Component);
     exports.EditText = EditText;
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
+        __proto__: []
+    } instanceof Array && function(d, b) {
+        d.__proto__ = b;
+    } || function(d, b) {
+        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    }, function(d, b) {
+        function __() {
+            this.constructor = d;
+        }
+        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
+        new __());
+    });
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var Component_1 = __webpack_require__(0), StaticText_1 = __webpack_require__(4), Progressbar = function(_super) {
+        function Progressbar() {
+            return _super.call(this, "progressbar") || this;
+        }
+        return __extends(Progressbar, _super), Progressbar.prototype.init = function() {
+            _super.prototype.init.call(this), this.inner.minvalue = 0, this.inner.maxvalue = 100, 
+            this.label = this.parent.add(new StaticText_1.StaticText("")), this.label.setSize(400, 20), 
+            this.setSize(400, 10);
+        }, Progressbar.prototype.getValue = function() {
+            return this.inner.value;
+        }, Progressbar.prototype.setValue = function(val) {
+            this.inner.value = val;
+        }, Progressbar.prototype.getLabel = function() {
+            return this.label.getValue();
+        }, Progressbar.prototype.setLabel = function(val) {
+            this.label.setValue(val);
+        }, Progressbar;
+    }(Component_1.Component);
+    exports.Progressbar = Progressbar;
 } ]);
 					} catch (e) {
 						alert(e.message);

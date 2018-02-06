@@ -29,7 +29,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         return __webpack_require__.d(getter, "a", getter), getter;
     }, __webpack_require__.o = function(object, property) {
         return Object.prototype.hasOwnProperty.call(object, property);
-    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 9);
+    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 10);
 }([ function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -95,9 +95,9 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
 }, function(module, exports, __webpack_require__) {
     "use strict";
     function translation(en, translations, locale) {
-        for (var _i = 0, translations_1 = translations; _i < translations_1.length; _i++) {
+        if (locale = locale || app.locale) for (var _i = 0, translations_1 = translations; _i < translations_1.length; _i++) {
             var trans = translations_1[_i];
-            if (0 === "en".indexOf(trans.locale)) return trans.strings;
+            if (0 === locale.indexOf(trans.locale)) return trans.strings;
         }
         return en;
     }
@@ -254,7 +254,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         } : function(str, start, len) {
             return start < 0 && (start = str.length + start), str.substr(start, len);
         };
-    }).call(exports, __webpack_require__(14));
+    }).call(exports, __webpack_require__(16));
 }, function(module, exports, __webpack_require__) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
@@ -272,6 +272,25 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             height: top - _a[3]
         };
     };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var translation_1 = __webpack_require__(2);
+    exports.default = translation_1.tranEnRu({
+        choose: [ "Choose...", "Выбрать..." ],
+        sourceDirectory: [ "Source directory", "Откуда" ],
+        destinationDirectory: [ "Destination directory", "Куда" ],
+        cancel: [ "Cancel", "Отменить" ],
+        canceling: [ "Canceling", "Отменяю" ],
+        start: [ "Start", "Старт" ],
+        of: [ "of", "из" ],
+        done: [ "Done", "Готово" ],
+        processing: [ "Processing", "Обрабатываю" ],
+        processFiles: [ "Process Files", "Обработка файлов" ],
+        operationCanceled: [ "Operation Canceled", "Операция отменена" ]
+    });
 }, function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -308,7 +327,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     }(__webpack_require__(0).Component);
     exports.Button = Button;
 }, function(module, exports, __webpack_require__) {
-    module.exports = __webpack_require__(10);
+    module.exports = __webpack_require__(11);
 }, function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
@@ -327,26 +346,15 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var jpeg_1 = __webpack_require__(11), openFile_1 = __webpack_require__(12), path_1 = __webpack_require__(13), resizeToResolution_1 = __webpack_require__(15), toFile_1 = __webpack_require__(3), translation_1 = __webpack_require__(2), FileProcessor_1 = __webpack_require__(24), Group_1 = __webpack_require__(4), Slider_1 = __webpack_require__(31), StaticText_1 = __webpack_require__(5), strings = translation_1.tranEnRu({
-        exportJpeg: [ "Export Jpeg", "Экспорт Jpeg" ],
-        jpegResolution: [ "Jpeg Resolution", "Разрешение" ],
-        saving: [ "Saving", "Saving" ],
-        closing: [ "Closing", "Closing" ],
-        opening: [ "Opening", "Opening" ],
-        resizing: [ "Resizing", "Resizing" ]
-    });
-    !function(Labels) {
-        Labels[Labels.closing = 0] = "closing", Labels[Labels.opening = 1] = "opening";
-    }(exports.Labels || (exports.Labels = {}));
-    var ExportJpegProcessor = function(_super) {
+    var JpegExportStrings_1 = __webpack_require__(12), jpeg_1 = __webpack_require__(13), openFile_1 = __webpack_require__(14), path_1 = __webpack_require__(15), resizeToResolution_1 = __webpack_require__(17), toFile_1 = __webpack_require__(3), FileProcessor_1 = __webpack_require__(26), Group_1 = __webpack_require__(4), Slider_1 = __webpack_require__(33), StaticText_1 = __webpack_require__(5), ExportJpegProcessor = function(_super) {
         function ExportJpegProcessor() {
             return _super.call(this, {
-                title: strings.exportJpeg
+                title: JpegExportStrings_1.default.exportJpeg
             }) || this;
         }
         return __extends(ExportJpegProcessor, _super), ExportJpegProcessor.prototype.onInit = function() {
             var _this = this, group = this.dlg.add(new Group_1.Group());
-            group.add(new StaticText_1.StaticText(strings.jpegResolution + ":")).setSize(130, 20), 
+            group.add(new StaticText_1.StaticText(JpegExportStrings_1.default.jpegResolution + ":")).setSize(130, 20), 
             this.slider = group.add(new Slider_1.Slider({
                 min: 6,
                 max: 64,
@@ -362,16 +370,30 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         }, ExportJpegProcessor.prototype.onProcess = function(file) {
             var destDir = this.srcSelect.getValue().destDir, name = path_1.parse(file).name, finalFile = path_1.join(destDir, name + ".jpg");
             if (!toFile_1.default(finalFile).exists) {
-                this.setStatus(strings.opening);
+                this.setStatus(JpegExportStrings_1.default.opening);
                 var doc = openFile_1.default(file);
-                this.setStatus(strings.resizing), resizeToResolution_1.default(this.slider.getValue()), 
-                this.setStatus(strings.saving), jpeg_1.default(finalFile), this.setStatus(strings.closing), 
+                this.setStatus(JpegExportStrings_1.default.resizing), resizeToResolution_1.default(this.slider.getValue()), 
+                this.setStatus(JpegExportStrings_1.default.saving), jpeg_1.default(finalFile), this.setStatus(JpegExportStrings_1.default.closing), 
                 doc.close(SaveOptions.DONOTSAVECHANGES);
             }
         }, ExportJpegProcessor;
     }(FileProcessor_1.FileProcessor);
     exports.ExportJpegProcessor = ExportJpegProcessor;
     new ExportJpegProcessor();
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var translation_1 = __webpack_require__(2);
+    exports.default = translation_1.tranEnRu({
+        exportJpeg: [ "Export Jpeg", "Экспорт Jpeg" ],
+        jpegResolution: [ "Jpeg Resolution", "Разрешение" ],
+        saving: [ "Saving", "Сохраняю" ],
+        closing: [ "Closing", "Закрываю" ],
+        opening: [ "Opening", "Открываю" ],
+        resizing: [ "Resizing", "Изменяю размер" ]
+    });
 }, function(module, exports, __webpack_require__) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
@@ -513,7 +535,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(1), getArtboardSize_1 = __webpack_require__(7), resizeScale_1 = __webpack_require__(16);
+    var write_1 = __webpack_require__(1), getArtboardSize_1 = __webpack_require__(7), resizeScale_1 = __webpack_require__(18);
     exports.default = function(resolution) {
         var artboardSize = getArtboardSize_1.default(), oldResolution = artboardSize.width * artboardSize.height, newResolution = 1e6 * resolution, scale = Math.ceil(100 * Math.sqrt(newResolution / oldResolution));
         write_1.write("Resizing from resolution " + oldResolution / 1e6 + " to resolution " + newResolution / 1e6 + ". Scale factor: " + scale), 
@@ -524,11 +546,11 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var doAction_1 = __webpack_require__(17), getArtboardSize_1 = __webpack_require__(7), menu_1 = __webpack_require__(18), withAction_1 = __webpack_require__(19), write_1 = __webpack_require__(1);
+    var doAction_1 = __webpack_require__(19), getArtboardSize_1 = __webpack_require__(7), menu_1 = __webpack_require__(20), withAction_1 = __webpack_require__(21), write_1 = __webpack_require__(1);
     exports.default = function(scaleW, scaleH) {
         scaleH = scaleH || scaleW, menu_1.callMenu("unlockAll"), menu_1.callMenu("selectall");
         var artboardSize = getArtboardSize_1.default(), newWidth = artboardSize.width * scaleW / 100, newHeight = artboardSize.height * scaleH / 100;
-        write_1.write("Resizing to [" + newWidth + "x" + newHeight + "]"), withAction_1.default(__webpack_require__(23), {
+        write_1.write("Resizing to [" + newWidth + "x" + newHeight + "]"), withAction_1.default(__webpack_require__(25), {
             width: newWidth.toFixed(1),
             height: newHeight.toFixed(1)
         }, function(act) {
@@ -567,7 +589,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var isFunction_1 = __webpack_require__(20), disposeAction_1 = __webpack_require__(21), ensureAction_1 = __webpack_require__(22);
+    var isFunction_1 = __webpack_require__(22), disposeAction_1 = __webpack_require__(23), ensureAction_1 = __webpack_require__(24);
     function withActions(sets, fn) {
         try {
             for (var _i = 0, sets_1 = sets; _i < sets_1.length; _i++) {
@@ -635,19 +657,10 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(2), Button_1 = __webpack_require__(8), Group_1 = __webpack_require__(4), Dialog_1 = __webpack_require__(25), Progressbar_1 = __webpack_require__(26), DirectorySelectInOut_1 = __webpack_require__(27), strings = translation_1.tranEnRu({
-        cancel: [ "Cancel", "Отмена" ],
-        canceling: [ "Canceling", "Отменяю" ],
-        start: [ "Start", "Запустить" ],
-        of: [ "of", "из" ],
-        done: [ "Done", "Готово" ],
-        processing: [ "Processing", "Обрабатываю" ],
-        processFiles: [ "Process Files", "Обработка файлов" ],
-        operationCanceled: [ "Operation Canceled", "Операция отменена" ]
-    }), FileProcessor = function() {
+    var CommonStrings_1 = __webpack_require__(8), Button_1 = __webpack_require__(9), Dialog_1 = __webpack_require__(27), DirectorySelectInOut_1 = __webpack_require__(28), Group_1 = __webpack_require__(4), Progressbar_1 = __webpack_require__(32), FileProcessor = function() {
         function FileProcessor(opts) {
             this.opts = opts, this.opts = __assign({
-                title: strings.processFiles
+                title: CommonStrings_1.default.processFiles
             }, opts), this.dlg = new Dialog_1.Dialog(this.opts.title), this.init(), this.dlg.show();
         }
         return FileProcessor.prototype.onCanceled = function() {}, FileProcessor.prototype.onProcess = function(file) {}, 
@@ -656,7 +669,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             for (var index = 0, total = files.length, _i = 0, files_1 = files; _i < files_1.length; _i++) {
                 var filePath = files_1[_i];
                 if (this.stopSignal) throw this.stopSignal;
-                this.checkStop(), index++, this.currentStatus = strings.processing + " " + index + " " + strings.of + " " + total + " [" + filePath.match(/[^\/]*$/g)[0] + "].", 
+                this.checkStop(), index++, this.currentStatus = CommonStrings_1.default.processing + " " + index + " " + CommonStrings_1.default.of + " " + total + " [" + filePath.match(/[^\/]*$/g)[0] + "].", 
                 this.progBar.setLabel(this.currentStatus), this.progBar.setValue(index / total * 100), 
                 this.dlg.update(), this.onProcess(filePath);
             }
@@ -668,9 +681,11 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             this.onInit(), this.progBar = this.dlg.add(new Progressbar_1.Progressbar()), this.progBar.inner.alignment = "left", 
             this.progBar.label.inner.alignment = "left", this.progBar.setSize(530, 10);
             var btnGroup = this.dlg.add(new Group_1.Group());
-            this.btnCancel = btnGroup.add(new Button_1.Button(strings.cancel)), this.btnStart = btnGroup.add(new Button_1.Button(strings.start)), 
+            this.btnCancel = btnGroup.add(new Button_1.Button(CommonStrings_1.default.cancel)), 
+            this.btnStart = btnGroup.add(new Button_1.Button(CommonStrings_1.default.start)), 
             this.btnCancel.onClick = function() {
-                _this.isRunning ? (_this.btnCancel.setValue(strings.canceling + "..."), _this.stopSignal = new Error(strings.operationCanceled)) : (_this.onCanceled(), 
+                _this.isRunning ? (_this.btnCancel.setValue(CommonStrings_1.default.canceling + "..."), 
+                _this.stopSignal = new Error(CommonStrings_1.default.operationCanceled)) : (_this.onCanceled(), 
                 _this.dlg.close());
             }, this.btnStart.onClick = function() {
                 if (!_this.isRunning) try {
@@ -680,7 +695,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                     if (0 === inputFiles.length) throw new Error("No eps or ai files in dir: [" + srcDir + "]");
                     _this.processFiles(inputFiles.map(function(f) {
                         return f.absoluteURI;
-                    })), _this.progBar.setLabel(strings.done);
+                    })), _this.progBar.setLabel(CommonStrings_1.default.done);
                 } catch (e) {
                     alert(e);
                 } finally {
@@ -745,54 +760,14 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var Component_1 = __webpack_require__(0), StaticText_1 = __webpack_require__(5), Progressbar = function(_super) {
-        function Progressbar() {
-            return _super.call(this, "progressbar") || this;
-        }
-        return __extends(Progressbar, _super), Progressbar.prototype.init = function() {
-            _super.prototype.init.call(this), this.inner.minvalue = 0, this.inner.maxvalue = 100, 
-            this.label = this.parent.add(new StaticText_1.StaticText("")), this.label.setSize(400, 20), 
-            this.setSize(400, 10);
-        }, Progressbar.prototype.getValue = function() {
-            return this.inner.value;
-        }, Progressbar.prototype.setValue = function(val) {
-            this.inner.value = val;
-        }, Progressbar.prototype.getLabel = function() {
-            return this.label.getValue();
-        }, Progressbar.prototype.setLabel = function(val) {
-            this.label.setValue(val);
-        }, Progressbar;
-    }(Component_1.Component);
-    exports.Progressbar = Progressbar;
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
-    }, function(d, b) {
-        function __() {
-            this.constructor = d;
-        }
-        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
-        new __());
-    });
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    });
-    var translation_1 = __webpack_require__(2), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(28), strings = translation_1.tranEnRu({
-        sourceDirectory: [ "Source directory:", "Откуда:" ],
-        destinationDirectory: [ "Destination directory:", "Куда:" ]
-    }), DirectorySelectInOut = function(_super) {
+    var CommonStrings_1 = __webpack_require__(8), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(29), DirectorySelectInOut = function(_super) {
         function DirectorySelectInOut() {
             return _super.call(this, "") || this;
         }
         return __extends(DirectorySelectInOut, _super), DirectorySelectInOut.prototype.init = function() {
             var _this = this;
-            _super.prototype.init.call(this), this.srcSelect = this.parent.add(new DirectorySelect_1.DirectorySelect(strings.sourceDirectory)), 
-            this.destSelect = this.parent.add(new DirectorySelect_1.DirectorySelect(strings.destinationDirectory)), 
+            _super.prototype.init.call(this), this.srcSelect = this.parent.add(new DirectorySelect_1.DirectorySelect(CommonStrings_1.default.sourceDirectory)), 
+            this.destSelect = this.parent.add(new DirectorySelect_1.DirectorySelect(CommonStrings_1.default.destinationDirectory)), 
             this.srcSelect.onChange = function(newPath) {
                 _this.destSelect.setValue(newPath), _this.debug("changed"), _this.onChange && _this.onChange();
             };
@@ -832,7 +807,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             var newPath = Folder.selectDialog(this.label);
             return newPath ? newPath.toString() : "";
         }, DirectorySelect;
-    }(__webpack_require__(29).SelectDialog);
+    }(__webpack_require__(30).SelectDialog);
     exports.DirectorySelect = DirectorySelect;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -852,7 +827,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(2), Button_1 = __webpack_require__(8), EditText_1 = __webpack_require__(30), Group_1 = __webpack_require__(4), StaticText_1 = __webpack_require__(5), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(2), Button_1 = __webpack_require__(9), EditText_1 = __webpack_require__(31), Group_1 = __webpack_require__(4), StaticText_1 = __webpack_require__(5), strings = translation_1.tranEnRu({
         choose: [ "Choose...", "Выбрать..." ]
     }), SelectDialog = function(_super) {
         function SelectDialog(label, basePath) {
@@ -911,6 +886,43 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         }, EditText;
     }(__webpack_require__(0).Component);
     exports.EditText = EditText;
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
+        __proto__: []
+    } instanceof Array && function(d, b) {
+        d.__proto__ = b;
+    } || function(d, b) {
+        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    }, function(d, b) {
+        function __() {
+            this.constructor = d;
+        }
+        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
+        new __());
+    });
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var Component_1 = __webpack_require__(0), StaticText_1 = __webpack_require__(5), Progressbar = function(_super) {
+        function Progressbar() {
+            return _super.call(this, "progressbar") || this;
+        }
+        return __extends(Progressbar, _super), Progressbar.prototype.init = function() {
+            _super.prototype.init.call(this), this.inner.minvalue = 0, this.inner.maxvalue = 100, 
+            this.label = this.parent.add(new StaticText_1.StaticText("")), this.label.setSize(400, 20), 
+            this.setSize(400, 10);
+        }, Progressbar.prototype.getValue = function() {
+            return this.inner.value;
+        }, Progressbar.prototype.setValue = function(val) {
+            this.inner.value = val;
+        }, Progressbar.prototype.getLabel = function() {
+            return this.label.getValue();
+        }, Progressbar.prototype.setLabel = function(val) {
+            this.label.setValue(val);
+        }, Progressbar;
+    }(Component_1.Component);
+    exports.Progressbar = Progressbar;
 }, function(module, exports, __webpack_require__) {
     "use strict";
     var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
