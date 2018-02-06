@@ -12,7 +12,7 @@
 5. Нажать Start   
 
 Если работа скрипта была прервана и вы запускаете скрипт заново, то он учтет уже сохраненные файлы и начнет работу с того места, где был остановлен.
-![screenshot](https://github.com/shvendala/ai-scripts/blob/master/assets/jpeg-export.png?raw=true)   
+![screenshot](https://github.com/shvendala/ai-scripts/blob/master/assets/jpeg-export.ru.png?raw=true)   
 
 ## prepare-for-stock.js
 [download](https://raw.githubusercontent.com/shvendala/ai-scripts/master/scripts/prepare-for-stock.js)   
@@ -34,7 +34,7 @@
 
 Если работа скрипта была прервана и вы запускаете скрипт заново, то он учтет уже сохраненные файлы и начнет работу с того места, где был остановлен.
 
-![screenshot](https://github.com/shvendala/ai-scripts/blob/master/assets/prepare-for-stock.png?raw=true)   
+![screenshot](https://github.com/shvendala/ai-scripts/blob/master/assets/prepare-for-stock.ru.png?raw=true)   
 
 ## apply-style.js
 [download](https://raw.githubusercontent.com/shvendala/ai-scripts/master/scripts/apply-style.js)     
@@ -52,4 +52,4 @@
 
 Если работа скрипта была прервана и вы запускаете скрипт заново, то он учтет уже сохраненные файлы и начнет работу с того места, где был остановлен.
 
-![screenshot](https://github.com/shvendala/ai-scripts/blob/master/assets/apply-style.png?raw=true)   
+![screenshot](https://github.com/shvendala/ai-scripts/blob/master/assets/apply-style.ru.png?raw=true)   
