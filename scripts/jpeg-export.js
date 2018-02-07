@@ -48,7 +48,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(1), Component = function() {
+    var write_1 = __webpack_require__(2), Component = function() {
         function Component(type) {
             this.type = type;
         }
@@ -89,6 +89,13 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     "use strict";
     Object.defineProperty(exports, "__esModule", {
         value: !0
+    }), exports.default = function(path) {
+        return new File(path);
+    };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
     }), exports.write = function(text) {
     };
 }, function(module, exports, __webpack_require__) {
@@ -112,76 +119,6 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             strings: ru
         } ]);
     };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    }), exports.default = function(path) {
-        return new File(path);
-    };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
-    }, function(d, b) {
-        function __() {
-            this.constructor = d;
-        }
-        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
-        new __());
-    });
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    });
-    var Group = function(_super) {
-        function Group() {
-            return _super.call(this, "group") || this;
-        }
-        return __extends(Group, _super), Group.prototype.mountChild = function(component) {
-            return (component = _super.prototype.mountChild.call(this, component)).inner = this.inner.add(component.type), 
-            component;
-        }, Group.prototype.init = function() {
-            _super.prototype.init.call(this), this.inner.orientation = "row", this.inner.alignment = [ ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP ];
-        }, Group;
-    }(__webpack_require__(0).CompositeComponent);
-    exports.Group = Group;
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
-    }, function(d, b) {
-        function __() {
-            this.constructor = d;
-        }
-        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
-        new __());
-    });
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    });
-    var StaticText = function(_super) {
-        function StaticText(defaultValue) {
-            var _this = _super.call(this, "statictext") || this;
-            return _this.defaultValue = defaultValue, _this;
-        }
-        return __extends(StaticText, _super), StaticText.prototype.init = function() {
-            _super.prototype.init.call(this), this.inner.alignment = [ ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP ], 
-            this.setValue(this.defaultValue);
-        }, StaticText.prototype.getValue = function() {
-            return this.inner.text;
-        }, StaticText.prototype.setValue = function(val) {
-            this.inner.text = val;
-        }, StaticText;
-    }(__webpack_require__(0).Component);
-    exports.StaticText = StaticText;
 }, function(module, exports, __webpack_require__) {
     (function(process) {
         function normalizeArray(parts, allowAboveRoot) {
@@ -256,6 +193,69 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     }).call(exports, __webpack_require__(16));
 }, function(module, exports, __webpack_require__) {
     "use strict";
+    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
+        __proto__: []
+    } instanceof Array && function(d, b) {
+        d.__proto__ = b;
+    } || function(d, b) {
+        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    }, function(d, b) {
+        function __() {
+            this.constructor = d;
+        }
+        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
+        new __());
+    });
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var Group = function(_super) {
+        function Group() {
+            return _super.call(this, "group") || this;
+        }
+        return __extends(Group, _super), Group.prototype.mountChild = function(component) {
+            return (component = _super.prototype.mountChild.call(this, component)).inner = this.inner.add(component.type), 
+            component;
+        }, Group.prototype.init = function() {
+            _super.prototype.init.call(this), this.inner.orientation = "row", this.inner.alignment = [ ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP ];
+        }, Group;
+    }(__webpack_require__(0).CompositeComponent);
+    exports.Group = Group;
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
+        __proto__: []
+    } instanceof Array && function(d, b) {
+        d.__proto__ = b;
+    } || function(d, b) {
+        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    }, function(d, b) {
+        function __() {
+            this.constructor = d;
+        }
+        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
+        new __());
+    });
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var StaticText = function(_super) {
+        function StaticText(defaultValue) {
+            var _this = _super.call(this, "statictext") || this;
+            return _this.defaultValue = defaultValue, _this;
+        }
+        return __extends(StaticText, _super), StaticText.prototype.init = function() {
+            _super.prototype.init.call(this), this.inner.alignment = [ ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP ], 
+            this.setValue(this.defaultValue);
+        }, StaticText.prototype.getValue = function() {
+            return this.inner.text;
+        }, StaticText.prototype.setValue = function(val) {
+            this.inner.text = val;
+        }, StaticText;
+    }(__webpack_require__(0).Component);
+    exports.StaticText = StaticText;
+}, function(module, exports, __webpack_require__) {
+    "use strict";
     Object.defineProperty(exports, "__esModule", {
         value: !0
     }), exports.default = function(art) {
@@ -276,7 +276,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(2);
+    var translation_1 = __webpack_require__(3);
     exports.default = translation_1.tranEnRu({
         choose: [ "Choose...", "Выбрать..." ],
         sourceDirectory: [ "Source directory", "Откуда" ],
@@ -345,7 +345,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var JpegExportStrings_1 = __webpack_require__(12), jpeg_1 = __webpack_require__(13), openFile_1 = __webpack_require__(14), path_1 = __webpack_require__(15), resizeToResolution_1 = __webpack_require__(17), toFile_1 = __webpack_require__(3), FileProcessor_1 = __webpack_require__(26), Group_1 = __webpack_require__(4), Slider_1 = __webpack_require__(33), StaticText_1 = __webpack_require__(5), ExportJpegProcessor = function(_super) {
+    var JpegExportStrings_1 = __webpack_require__(12), jpeg_1 = __webpack_require__(13), openFile_1 = __webpack_require__(14), path_1 = __webpack_require__(15), resizeToResolution_1 = __webpack_require__(17), toFile_1 = __webpack_require__(1), FileProcessor_1 = __webpack_require__(27), Group_1 = __webpack_require__(5), Slider_1 = __webpack_require__(34), StaticText_1 = __webpack_require__(6), ExportJpegProcessor = function(_super) {
         function ExportJpegProcessor() {
             return _super.call(this, {
                 title: JpegExportStrings_1.default.exportJpeg
@@ -384,7 +384,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(2);
+    var translation_1 = __webpack_require__(3);
     exports.default = translation_1.tranEnRu({
         exportJpeg: [ "Export Jpeg", "Экспорт Jpeg" ],
         jpegResolution: [ "Jpeg Resolution", "Разрешение" ],
@@ -398,7 +398,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var toFile_1 = __webpack_require__(3);
+    var toFile_1 = __webpack_require__(1);
     exports.default = function(file) {
         !function(file) {
             var jpegOpts = new ExportOptionsJPEG();
@@ -411,24 +411,20 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var toFile_1 = __webpack_require__(3);
-    function openFile(file) {
+    var toFile_1 = __webpack_require__(1);
+    exports.default = function(file) {
         try {
             return app.open(toFile_1.default(file));
         } catch (e) {
             throw new Error("Can't open file: " + file + ". Error: " + e);
         }
-    }
-    exports.default = openFile, exports.reopenCurrentFile = function() {
-        var currentFile = app.activeDocument.path + "/" + app.activeDocument.name;
-        app.activeDocument.close(SaveOptions.DONOTSAVECHANGES), openFile(currentFile);
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var path = __webpack_require__(6);
+    var path = __webpack_require__(4);
     exports.parse = function(filePath) {
         var basename = path.basename(filePath), ext = path.extname(filePath), dir = path.dirname(filePath);
         return {
@@ -438,7 +434,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
             basename: basename
         };
     };
-    var path_1 = __webpack_require__(6);
+    var path_1 = __webpack_require__(4);
     exports.join = path_1.join, exports.basename = path_1.basename, exports.dirname = path_1.dirname, 
     exports.extname = path_1.extname;
 }, function(module, exports) {
@@ -534,7 +530,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(1), getArtboardSize_1 = __webpack_require__(7), resizeScale_1 = __webpack_require__(18);
+    var write_1 = __webpack_require__(2), getArtboardSize_1 = __webpack_require__(7), resizeScale_1 = __webpack_require__(18);
     exports.default = function(resolution) {
         var artboardSize = getArtboardSize_1.default(), oldResolution = artboardSize.width * artboardSize.height, newResolution = 1e6 * resolution, scale = Math.ceil(100 * Math.sqrt(newResolution / oldResolution));
         write_1.write("Resizing from resolution " + oldResolution / 1e6 + " to resolution " + newResolution / 1e6 + ". Scale factor: " + scale), 
@@ -545,11 +541,11 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var doAction_1 = __webpack_require__(19), getArtboardSize_1 = __webpack_require__(7), menu_1 = __webpack_require__(20), withAction_1 = __webpack_require__(21), write_1 = __webpack_require__(1);
+    var doAction_1 = __webpack_require__(19), getArtboardSize_1 = __webpack_require__(7), menu_1 = __webpack_require__(20), withAction_1 = __webpack_require__(21), write_1 = __webpack_require__(2);
     exports.default = function(scaleW, scaleH) {
         scaleH = scaleH || scaleW, menu_1.callMenu("unlockAll"), menu_1.callMenu("selectall");
         var artboardSize = getArtboardSize_1.default(), newWidth = artboardSize.width * scaleW / 100, newHeight = artboardSize.height * scaleH / 100;
-        write_1.write("Resizing to [" + newWidth + "x" + newHeight + "]"), withAction_1.default(__webpack_require__(25), {
+        write_1.write("Resizing to [" + newWidth + "x" + newHeight + "]"), withAction_1.default(__webpack_require__(26), {
             width: newWidth.toFixed(1),
             height: newHeight.toFixed(1)
         }, function(act) {
@@ -561,7 +557,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(1);
+    var write_1 = __webpack_require__(2);
     exports.default = function(action, name) {
         for (var _i = 0, actions_1 = name ? [ name ] : action.actions; _i < actions_1.length; _i++) {
             var act = actions_1[_i];
@@ -635,11 +631,38 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     "use strict";
     Object.defineProperty(exports, "__esModule", {
         value: !0
-    }), exports.default = function(actionContent) {
-        var scriptDir = new File($.fileName).path, actionFile = new File(scriptDir + "/temp.aia");
-        actionFile.open("w", void 0, void 0), actionFile.encoding = "UTF-8", actionFile.lineFeed = "Unix", 
-        actionFile.writeln(actionContent), actionFile.close(), app.loadAction(actionFile), 
-        actionFile.remove();
+    });
+    var path = __webpack_require__(4), writeFile_1 = __webpack_require__(25);
+    exports.default = function(actionContent) {
+        var tempDir = Folder.temp.fsName, tempAction = path.join(tempDir, "temp.aia"), actionFile = new File(tempAction);
+        try {
+            writeFile_1.default(actionFile, actionContent), app.loadAction(actionFile);
+        } finally {
+            actionFile.remove();
+        }
+    };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var toFile_1 = __webpack_require__(1);
+    function withFile(filePath, fn, openFlag) {
+        void 0 === openFlag && (openFlag = "w");
+        var file = toFile_1.default(filePath);
+        if (!file.open(openFlag, void 0, void 0)) throw new Error("can't open file " + filePath);
+        try {
+            return file.encoding = "UTF-8", file.lineFeed = "Unix", fn(file);
+        } catch (e) {
+            throw e;
+        } finally {
+            file.close();
+        }
+    }
+    exports.withFile = withFile, exports.default = function(filePath, content) {
+        withFile(filePath, function(file) {
+            file.write(content);
+        }, "w");
     };
 }, function(module, exports) {
     module.exports = {
@@ -656,7 +679,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var CommonStrings_1 = __webpack_require__(8), Button_1 = __webpack_require__(9), Dialog_1 = __webpack_require__(27), DirectorySelectInOut_1 = __webpack_require__(28), Group_1 = __webpack_require__(4), Progressbar_1 = __webpack_require__(32), FileProcessor = function() {
+    var CommonStrings_1 = __webpack_require__(8), Button_1 = __webpack_require__(9), Dialog_1 = __webpack_require__(28), DirectorySelectInOut_1 = __webpack_require__(29), Group_1 = __webpack_require__(5), Progressbar_1 = __webpack_require__(33), FileProcessor = function() {
         function FileProcessor(opts) {
             this.opts = opts, this.opts = __assign({
                 title: CommonStrings_1.default.processFiles
@@ -673,7 +696,8 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                 this.dlg.update(), this.onProcess(filePath);
             }
         }, FileProcessor.prototype.setStatus = function(info) {
-            this.dlg.update(), this.checkStop(), this.progBar.setLabel(this.currentStatus + (info ? " " + info : ""));
+            this.checkStop(), this.progBar.setLabel(this.currentStatus + (info ? " " + info : "")), 
+            this.dlg.update();
         }, FileProcessor.prototype.init = function() {
             var _this = this;
             this.srcSelect = this.dlg.add(new DirectorySelectInOut_1.DirectorySelectInOut()), 
@@ -761,7 +785,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var CommonStrings_1 = __webpack_require__(8), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(29), DirectorySelectInOut = function(_super) {
+    var CommonStrings_1 = __webpack_require__(8), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(30), DirectorySelectInOut = function(_super) {
         function DirectorySelectInOut() {
             return _super.call(this, "") || this;
         }
@@ -802,13 +826,13 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     });
     var DirectorySelect = function(_super) {
         function DirectorySelect(label, basePath) {
-            return void 0 === basePath && (basePath = "~/Desktop"), _super.call(this, label, basePath) || this;
+            return void 0 === basePath && (basePath = Folder.desktop.fsName), _super.call(this, label, basePath) || this;
         }
         return __extends(DirectorySelect, _super), DirectorySelect.prototype.select = function() {
             var newPath = Folder.selectDialog(this.label);
-            return newPath ? newPath.toString() : "";
+            return newPath ? newPath.fsName : "";
         }, DirectorySelect;
-    }(__webpack_require__(30).SelectDialog);
+    }(__webpack_require__(31).SelectDialog);
     exports.DirectorySelect = DirectorySelect;
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -828,7 +852,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(2), Button_1 = __webpack_require__(9), EditText_1 = __webpack_require__(31), Group_1 = __webpack_require__(4), StaticText_1 = __webpack_require__(5), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(3), Button_1 = __webpack_require__(9), EditText_1 = __webpack_require__(32), Group_1 = __webpack_require__(5), StaticText_1 = __webpack_require__(6), strings = translation_1.tranEnRu({
         choose: [ "Choose...", "Выбрать..." ]
     }), SelectDialog = function(_super) {
         function SelectDialog(label, basePath) {
@@ -905,7 +929,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var Component_1 = __webpack_require__(0), StaticText_1 = __webpack_require__(5), Progressbar = function(_super) {
+    var Component_1 = __webpack_require__(0), StaticText_1 = __webpack_require__(6), Progressbar = function(_super) {
         function Progressbar() {
             return _super.call(this, "progressbar") || this;
         }

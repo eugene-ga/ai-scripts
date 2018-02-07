@@ -182,16 +182,12 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
         value: !0
     });
     var toFile_1 = __webpack_require__(2);
-    function openFile(file) {
+    exports.default = function(file) {
         try {
             return app.open(toFile_1.default(file));
         } catch (e) {
             throw new Error("Can't open file: " + file + ". Error: " + e);
         }
-    }
-    exports.default = openFile, exports.reopenCurrentFile = function() {
-        var currentFile = app.activeDocument.path + "/" + app.activeDocument.name;
-        app.activeDocument.close(SaveOptions.DONOTSAVECHANGES), openFile(currentFile);
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -563,7 +559,8 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
                 this.dlg.update(), this.onProcess(filePath);
             }
         }, FileProcessor.prototype.setStatus = function(info) {
-            this.dlg.update(), this.checkStop(), this.progBar.setLabel(this.currentStatus + (info ? " " + info : ""));
+            this.checkStop(), this.progBar.setLabel(this.currentStatus + (info ? " " + info : "")), 
+            this.dlg.update();
         }, FileProcessor.prototype.init = function() {
             var _this = this;
             this.srcSelect = this.dlg.add(new DirectorySelectInOut_1.DirectorySelectInOut()), 
@@ -692,11 +689,11 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(void 0===
     });
     var DirectorySelect = function(_super) {
         function DirectorySelect(label, basePath) {
-            return void 0 === basePath && (basePath = "~/Desktop"), _super.call(this, label, basePath) || this;
+            return void 0 === basePath && (basePath = Folder.desktop.fsName), _super.call(this, label, basePath) || this;
         }
         return __extends(DirectorySelect, _super), DirectorySelect.prototype.select = function() {
             var newPath = Folder.selectDialog(this.label);
-            return newPath ? newPath.toString() : "";
+            return newPath ? newPath.fsName : "";
         }, DirectorySelect;
     }(__webpack_require__(25).SelectDialog);
     exports.DirectorySelect = DirectorySelect;
