@@ -526,7 +526,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var closePaths_1 = __webpack_require__(19), jpeg_1 = __webpack_require__(20), shutterEps_1 = __webpack_require__(21), doAction_1 = __webpack_require__(9), getArtboardSize_1 = __webpack_require__(4), getByName_1 = __webpack_require__(24), menu_1 = __webpack_require__(10), openFile_1 = __webpack_require__(25), path_1 = __webpack_require__(11), resizeToResolution_1 = __webpack_require__(27), toArray_1 = __webpack_require__(13), toFile_1 = __webpack_require__(1), withAction_1 = __webpack_require__(12), withSelection_1 = __webpack_require__(33), withTempRect_1 = __webpack_require__(34), CheckBox_1 = __webpack_require__(14), CheckBoxPanel_1 = __webpack_require__(35), FieldComponent_1 = __webpack_require__(36), RadioButtonPanel_1 = __webpack_require__(37), PrepareForStockStrings_1 = __webpack_require__(39), JpegExportStrings_1 = __webpack_require__(40), FileProcessor_1 = __webpack_require__(41), cleanupAction = __webpack_require__(54), expandObjectAction = __webpack_require__(55), expandFillAction = __webpack_require__(56), version = "1.0.1", steps = {
+    var closePaths_1 = __webpack_require__(19), jpeg_1 = __webpack_require__(20), shutterEps_1 = __webpack_require__(21), doAction_1 = __webpack_require__(9), getArtboardSize_1 = __webpack_require__(4), getByName_1 = __webpack_require__(24), menu_1 = __webpack_require__(10), openFile_1 = __webpack_require__(25), path_1 = __webpack_require__(11), resizeToResolution_1 = __webpack_require__(27), toArray_1 = __webpack_require__(13), toFile_1 = __webpack_require__(1), withAction_1 = __webpack_require__(12), withSelection_1 = __webpack_require__(33), withTempRect_1 = __webpack_require__(34), CheckBox_1 = __webpack_require__(14), CheckBoxPanel_1 = __webpack_require__(35), FieldComponent_1 = __webpack_require__(36), RadioButtonPanel_1 = __webpack_require__(37), JpegExportStrings_1 = __webpack_require__(39), PrepareForStockStrings_1 = __webpack_require__(40), FileProcessor_1 = __webpack_require__(41), cleanupAction = __webpack_require__(54), expandObjectAction = __webpack_require__(55), expandFillAction = __webpack_require__(56), version = "1.0.2", steps = {
         unlockAll: {
             fn: function() {
                 for (var _i = 0, _a = toArray_1.default(app.activeDocument.layers); _i < _a.length; _i++) {
@@ -1129,6 +1129,20 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     });
     var translation_1 = __webpack_require__(3);
     exports.default = translation_1.tranEnRu({
+        exportJpeg: [ "Export Jpeg", "Экспорт Jpeg" ],
+        jpegResolution: [ "Jpeg Resolution", "Разрешение Jpeg" ],
+        saving: [ "Saving", "Сохранение файла" ],
+        closing: [ "Closing", "Закрытие файла" ],
+        opening: [ "Opening", "Открытие файла" ],
+        resizing: [ "Resizing", "Измение размера" ]
+    });
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var translation_1 = __webpack_require__(3);
+    exports.default = translation_1.tranEnRu({
         preview: [ "Preview", "Превью" ],
         generatePreview: [ "Generate Preview", "Добавить растровое превью" ],
         clipToArtboardSize: [ "Clip to Artboard Size", "Обрезать по размеру артборда" ],
@@ -1148,20 +1162,6 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
         opening: [ "Opening", "Открытие файла" ],
         format: [ "Format", "Формат" ],
         actions: [ "Actions", "Действия" ]
-    });
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    });
-    var translation_1 = __webpack_require__(3);
-    exports.default = translation_1.tranEnRu({
-        exportJpeg: [ "Export Jpeg", "Экспорт Jpeg" ],
-        jpegResolution: [ "Jpeg Resolution", "Разрешение Jpeg" ],
-        saving: [ "Saving", "Сохранение файла" ],
-        closing: [ "Closing", "Закрытие файла" ],
-        opening: [ "Opening", "Открытие файла" ],
-        resizing: [ "Resizing", "Измение размера" ]
     });
 }, function(module, exports, __webpack_require__) {
     "use strict";
