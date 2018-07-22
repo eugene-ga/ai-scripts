@@ -898,7 +898,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
             var panel = this.inner, scrollGroup = this.group.inner;
             scrollGroup.size = {
                 height: height,
-                width: 200,
+                width: 300,
                 length: 2
             };
             var scrollBar = panel.add("scrollbar {stepdelta: 1}"), numItems = this.items.length, scrollGroupActualHeight = 0, itemHeight = 0;
@@ -1266,7 +1266,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     exports.default = function() {
         app.activeDocument, menu_1.callMenu("selectall"), menu_1.callMenu("group"), menu_1.callMenu("deselectall");
         var size = getArtboardSize_1.default();
-        app.activeDocument.pathItems.rectangle(size.height, 0, size.width, size.height).selected = !0, 
+        app.activeDocument.pathItems.rectangle(size.top, size.left, size.width, size.height).selected = !0, 
         menu_1.callMenu("sendToFront"), menu_1.callMenu("selectall"), menu_1.callMenu("makeMask");
     };
 }, function(module, exports, __webpack_require__) {

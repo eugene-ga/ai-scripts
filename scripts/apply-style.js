@@ -517,7 +517,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
             var panel = this.inner, scrollGroup = this.group.inner;
             scrollGroup.size = {
                 height: height,
-                width: 200,
+                width: 300,
                 length: 2
             };
             var scrollBar = panel.add("scrollbar {stepdelta: 1}"), numItems = this.items.length, scrollGroupActualHeight = 0, itemHeight = 0;
