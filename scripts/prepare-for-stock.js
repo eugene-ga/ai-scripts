@@ -619,7 +619,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         function PrepareForStockProcessor() {
             return _super.call(this, {
                 title: PrepareForStockStrings_1.default.prepareForStock,
-                version: "1.0.2"
+                version: "1.0.3"
             }) || this;
         }
         return __extends(PrepareForStockProcessor, _super), PrepareForStockProcessor.prototype.onInit = function() {

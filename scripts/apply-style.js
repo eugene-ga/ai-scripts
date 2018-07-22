@@ -384,7 +384,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         function ApplyStyleProcessor() {
             return _super.call(this, {
                 title: ApplyStyleStrings_1.default.applyStyle,
-                version: "1.0.3",
+                version: "1.0.4",
                 filesFilter: /\.(eps|ai|jpe?g)$/i
             }) || this;
         }

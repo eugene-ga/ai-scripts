@@ -445,7 +445,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         function ExportJpegProcessor() {
             return _super.call(this, {
                 title: JpegExportStrings_1.default.exportJpeg,
-                version: "1.0.2"
+                version: "1.0.3"
             }) || this;
         }
         return __extends(ExportJpegProcessor, _super), ExportJpegProcessor.prototype.onInit = function() {
