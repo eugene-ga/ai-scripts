@@ -1,4 +1,4 @@
-Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==this)throw new TypeError("Array.prototype.every called on null or undefined");var o=Object(this),i=o.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(r=arguments.length>1?t:void 0,n=0;n<i;){var a;if(n in o)if(a=o[n],!e.call(r,a,n,o))return!1;n++}return!0}),Array.prototype.filter||(Array.prototype.filter=function(e,t){if(null==this)throw new TypeError("Array.prototype.filter called on null or undefined");var r=Object(this),n=r.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(var o=[],i=arguments.length>1?t:void 0,a=0;a<n;a++)if(a in r){var c=r[a];e.call(i,c,a,r)&&o.push(c)}return o}),Array.prototype.forEach||(Array.prototype.forEach=function(e,t){if(null==this)throw new TypeError("Array.prototype.forEach called on null or undefined");var r=Object(this),n=r.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(var o=arguments.length>1?t:void 0,i=0;i<n;i++){var a;i in r&&(a=r[i],e.call(o,a,i,r))}}),Array.prototype.indexOf||(Array.prototype.indexOf=function(e,t){if(null==this)throw new TypeError("Array.prototype.indexOf called on null or undefined");var r,n=Object(this),o=n.length>>>0;if(0===o)return-1;var i=+t||0;if(Math.abs(i)===1/0&&(i=0),i>=o)return-1;for(r=Math.max(i>=0?i:o-Math.abs(i),0);r<o;){if(r in n&&n[r]===e)return r;r++}return-1}),Array.isArray||(Array.isArray=function(e){return null!=e&&"Array"===e.__class__}),Array.prototype.lastIndexOf||(Array.prototype.lastIndexOf=function(e,t){if(null==this)throw new TypeError("Array.prototype.lastIndexOf called on null or undefined");var r,n,o=Object(this),i=o.length>>>0;if(0===i)return-1;for(r=i-1,arguments.length>1&&((r=Number(arguments[1]))!=r?r=0:0!=r&&r!=1/0&&r!=-1/0&&(r=(r>0||-1)*Math.floor(Math.abs(r)))),n=r>=0?Math.min(r,i-1):i-Math.abs(r);n>=0;n--)if(n in o&&o[n]===e)return n;return-1}),Array.prototype.map||(Array.prototype.map=function(e,t){var r,n;if(null==this)throw new TypeError("Array.prototype.map called on null or undefined");var o=Object(this),i=o.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");r=arguments.length>1?t:void 0,n=new Array(i);for(var a=0;a<i;a++){var c,l;a in o&&(c=o[a],l=e.call(r,c,a,o),n[a]=l)}return n}),Array.prototype.reduce||(Array.prototype.reduce=function(e,t){if(null==this)throw new TypeError("Array.prototype.reduce called on null or undefined");if("Function"!==e.__class__)throw new TypeError(e+" is not a function");var r,n=Object(this),o=n.length>>>0,i=0;if(arguments.length>1)r=t;else{for(;i<o&&!(i in n);)i++;if(i>=o)throw new TypeError("Reduce of empty array with no initial value");r=n[i++]}for(;i<o;i++)i in n&&(r=e(r,n[i],i,n));return r}),Array.prototype.reduceRight||(Array.prototype.reduceRight=function(e,t){if(null==this)throw new TypeError("Array.prototype.reduceRight called on null or undefined");if("Function"!==e.__class__)throw new TypeError(e+" is not a function");var r,n=Object(this),o=(n.length>>>0)-1;if(arguments.length>1)r=t;else{for(;o>=0&&!(o in n);)o--;if(o<0)throw new TypeError("Reduce of empty array with no initial value");r=n[o--]}for(;o>=0;o--)o in n&&(r=e(r,n[o],o,n));return r}),Array.prototype.some||(Array.prototype.some=function(e,t){if(null==this)throw new TypeError("Array.prototype.some called on null or undefined");if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(var r=Object(this),n=r.length>>>0,o=arguments.length>1?t:void 0,i=0;i<n;i++)if(i in r&&e.call(o,r[i],i,r))return!0;return!1}),Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==this.__class__)throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");var t=Array.prototype.slice.call(arguments,1),r=this,n=function(){},o=function(){return r.apply(this instanceof n?this:e,t.concat(Array.prototype.slice.call(arguments)))};return this.prototype&&(n.prototype=this.prototype),o.prototype=new n,o}),String.prototype.trim||(String.prototype.trim=function(){return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,"")}),Object.create||(Object.create=function(){function e(){}var t=Object.prototype.hasOwnProperty;return function(r){if(Object(r)!==r&&null!==r)throw TypeError("Object prototype may only be an Object or null");e.prototype=r;var n=new e;if(e.prototype=null,arguments.length>1){var o=Object(arguments[1]);for(var i in o)if(t.call(o,i)){var a=o[i];if(Object(a)!==a)throw TypeError(i+"must be an object");if("get"in a||"set"in a)throw new TypeError("getters & setters can not be defined on this javascript engine");"value"in a&&(n[i]=o[i])}}return n}}()),Object.defineProperties||(Object.defineProperties=function(e,t){function r(e,t){return Object.prototype.hasOwnProperty.call(e,t)}function n(e){if(Object(e)!==e)throw new TypeError("Descriptor can only be an Object.");var t={};if(r(e,"enumerable")&&(t.enumerable=!!e.enumerable),r(e,"configurable")&&(t.configurable=!!e.configurable),r(e,"value")&&(t.value=e.value),r(e,"writable")&&(t.writable=!!e.writable),r(e,"get"))throw new TypeError("getters & setters can not be defined on this javascript engine");if(r(e,"set"))throw new TypeError("getters & setters can not be defined on this javascript engine");return t}if(Object(e)!==e)throw new TypeError("Object.defineProperties can only be called on Objects.");if(Object(t)!==t)throw new TypeError("Properties can only be an Object.");var o=Object(t);for(propName in o)if(hasOwnProperty.call(o,propName)){var i=n(o[propName]);e[propName]=i.value}return e}),Object.defineProperty||(Object.defineProperty=function(e,t,r){if(Object(e)!==e)throw new TypeError("Object.defineProperty can only be called on Objects.");if(Object(r)!==r)throw new TypeError("Property description can only be an Object.");if("get"in r||"set"in r)throw new TypeError("getters & setters can not be defined on this javascript engine");return"value"in r&&(e[t]=r.value),e}),Object.freeze||(Object.freeze=function(e){if(Object(e)!==e)throw new TypeError("Object.freeze can only be called on Objects.");return e}),Object.getOwnPropertyDescriptor||(Object.getOwnPropertyDescriptor=function(e,t){if(Object(e)!==e)throw new TypeError("Object.getOwnPropertyDescriptor can only be called on Objects.");var r;if(!Object.prototype.hasOwnProperty.call(e,t))return r;(r={enumerable:Object.prototype.propertyIsEnumerable.call(e,t),configurable:!0}).value=e[t];var n=e.reflect.find(t).type;return r.writable="readwrite"===n,r}),Object.getOwnPropertyNames||(Object.getOwnPropertyNames=function(e){if(Object(e)!==e)throw new TypeError("Object.getOwnPropertyNames can only be called on Objects.");for(var t=e.reflect.properties,r=e.reflect.methods.concat(t),n=[],o=0;o<r.length;o++)n.push(r[o].name);return n}),Object.getPrototypeOf||(Object.getPrototypeOf=function(e){if(Object(e)!==e)throw new TypeError("Object.getPrototypeOf can only be called on Objects.");return e.__proto__}),Object.isExtensible||(Object.isExtensible=function(e){if(Object(e)!==e)throw new TypeError("Object.isExtensible can only be called on Objects.");return!0}),Object.isFrozen||(Object.isFrozen=function(e){if(Object(e)!==e)throw new TypeError("Object.isFrozen can only be called on Objects.");return!1}),Object.isSealed||(Object.isSealed=function(e){if(Object(e)!==e)throw new TypeError("Object.isSealed can only be called on Objects.");return!1}),Object.keys||(Object.keys=function(){var e=Object.prototype.hasOwnProperty;return function(t){if(Object(t)!==t)throw new TypeError("Object.keys can only be called on Objects.");var r,n=[];for(r in t)e.call(t,r)&&n.push(r);return n}}()),Object.preventExtensions||(Object.preventExtensions=function(e){if(Object(e)!==e)throw new TypeError("Object.preventExtensions can only be called on Objects.");return e}),Object.seal||(Object.seal=function(e){if(Object(e)!==e)throw new TypeError("Object.seal can only be called on Objects.");return e}),"object"!=typeof JSON&&(JSON={}),function(){"use strict";function f(e){return 10>e?"0"+e:e}function this_value(){return this.valueOf()}function quote(e){return rx_escapable.lastIndex=0,rx_escapable.test(e)?'"'+e.replace(rx_escapable,function(e){var t=meta[e];return"string"==typeof t?t:"\\u"+("0000"+e.charCodeAt(0).toString(16)).slice(-4)})+'"':'"'+e+'"'}function str(e,t){var r,n,o,i,a,c=gap,l=t[e];switch(l&&"object"==typeof l&&"function"==typeof l.toJSON&&(l=l.toJSON(e)),"function"==typeof rep&&(l=rep.call(t,e,l)),typeof l){case"string":return quote(l);case"number":return isFinite(l)?l+"":"null";case"boolean":case"null":return l+"";case"object":if(!l)return"null";if(gap+=indent,a=[],"[object Array]"===Object.prototype.toString.apply(l)){for(i=l.length,r=0;i>r;r+=1)a[r]=str(r,l)||"null";return o=0===a.length?"[]":gap?"[\n"+gap+a.join(",\n"+gap)+"\n"+c+"]":"["+a.join(",")+"]",gap=c,o}if(rep&&"object"==typeof rep)for(i=rep.length,r=0;i>r;r+=1)"string"==typeof rep[r]&&((o=str(n=rep[r],l))&&a.push(quote(n)+(gap?": ":":")+o));else for(n in l)Object.prototype.hasOwnProperty.call(l,n)&&((o=str(n,l))&&a.push(quote(n)+(gap?": ":":")+o));return o=0===a.length?"{}":gap?"{\n"+gap+a.join(",\n"+gap)+"\n"+c+"}":"{"+a.join(",")+"}",gap=c,o}}var rx_one=/^[\],:{}\s]*$/,rx_two=/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,rx_three=/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,rx_four=/(?:^|:|,)(?:\s*\[)+/g,rx_escapable=/[\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,rx_dangerous=/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,gap,indent,meta,rep;"function"!=typeof Date.prototype.toJSON&&(Date.prototype.toJSON=function(){return isFinite(this.valueOf())?this.getUTCFullYear()+"-"+f(this.getUTCMonth()+1)+"-"+f(this.getUTCDate())+"T"+f(this.getUTCHours())+":"+f(this.getUTCMinutes())+":"+f(this.getUTCSeconds())+"Z":null},Boolean.prototype.toJSON=this_value,Number.prototype.toJSON=this_value,String.prototype.toJSON=this_value),"function"!=typeof JSON.stringify&&(meta={"\b":"\\b","\t":"\\t","\n":"\\n","\f":"\\f","\r":"\\r",'"':'\\"',"\\":"\\\\"},JSON.stringify=function(e,t,r){var n;if(gap="",indent="","number"==typeof r)for(n=0;r>n;n+=1)indent+=" ";else"string"==typeof r&&(indent=r);if(rep=t,t&&"function"!=typeof t&&("object"!=typeof t||"number"!=typeof t.length))throw Error("JSON.stringify");return str("",{"":e})}),"function"!=typeof JSON.parse&&(JSON.parse=function(text,reviver){function walk(e,t){var r,n,o=e[t];if(o&&"object"==typeof o)for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(void 0!==(n=walk(o,r))?o[r]=n:delete o[r]);return reviver.call(e,t,o)}var j;if(text+="",rx_dangerous.lastIndex=0,rx_dangerous.test(text)&&(text=text.replace(rx_dangerous,function(e){return"\\u"+("0000"+e.charCodeAt(0).toString(16)).slice(-4)})),rx_one.test(text.replace(rx_two,"@").replace(rx_three,"]").replace(rx_four,"")))return j=eval("("+text+")"),"function"==typeof reviver?walk({"":j},""):j;throw new SyntaxError("JSON.parse")})}();;
+Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==this.__class__)throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");var r=Array.prototype.slice.call(arguments,1),t=this,n=function(){},o=function(){return t.apply(this instanceof n?this:e,r.concat(Array.prototype.slice.call(arguments)))};return this.prototype&&(n.prototype=this.prototype),o.prototype=new n,o}),Array.prototype.forEach||(Array.prototype.forEach=function(e,r){if(null==this)throw new TypeError("Array.prototype.forEach called on null or undefined");var t=Object(this),n=t.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(var o=1<arguments.length?r:void 0,i=0;i<n;i++){var a;i in t&&(a=t[i],e.call(o,a,i,t))}}),Array.prototype.every||(Array.prototype.every=function(e,r){var t,n;if(null==this)throw new TypeError("Array.prototype.every called on null or undefined");var o=Object(this),i=o.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(t=1<arguments.length?r:void 0,n=0;n<i;){var a;if(n in o)if(a=o[n],!e.call(t,a,n,o))return!1;n++}return!0}),Array.prototype.filter||(Array.prototype.filter=function(e,r){if(null==this)throw new TypeError("Array.prototype.filter called on null or undefined");var t=Object(this),n=t.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(var o=[],i=1<arguments.length?r:void 0,a=0;a<n;a++)if(a in t){var c=t[a];e.call(i,c,a,t)&&o.push(c)}return o}),Array.isArray||(Array.isArray=function(e){return null!=e&&"Array"===e.__class__}),Array.prototype.indexOf||(Array.prototype.indexOf=function(e,r){if(null==this)throw new TypeError("Array.prototype.indexOf called on null or undefined");var t,n=Object(this),o=n.length>>>0;if(0===o)return-1;var i=+r||0;if(Math.abs(i)===1/0&&(i=0),o<=i)return-1;for(t=Math.max(0<=i?i:o-Math.abs(i),0);t<o;){if(t in n&&n[t]===e)return t;t++}return-1}),Array.prototype.lastIndexOf||(Array.prototype.lastIndexOf=function(e,r){if(null==this)throw new TypeError("Array.prototype.lastIndexOf called on null or undefined");var t,n,o=Object(this),i=o.length>>>0;if(0===i)return-1;for(t=i-1,1<arguments.length&&((t=Number(r))!=t?t=0:0!=t&&t!=1/0&&t!=-1/0&&(t=(0<t||-1)*Math.floor(Math.abs(t)))),n=0<=t?Math.min(t,i-1):i-Math.abs(t);0<=n;n--)if(n in o&&o[n]===e)return n;return-1}),Array.prototype.map||(Array.prototype.map=function(e,r){var t,n;if(null==this)throw new TypeError("Array.prototype.map called on null or undefined");var o=Object(this),i=o.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");t=1<arguments.length?r:void 0,n=new Array(i);for(var a=0;a<i;a++){var c,l;a in o&&(c=o[a],l=e.call(t,c,a,o),n[a]=l)}return n}),Array.prototype.reduceRight||(Array.prototype.reduceRight=function(e,r){if(null==this)throw new TypeError("Array.prototype.reduceRight called on null or undefined");if("Function"!==e.__class__)throw new TypeError(e+" is not a function");var t,n=Object(this),o=(n.length>>>0)-1;if(1<arguments.length)t=r;else{for(;0<=o&&!(o in n);)o--;if(o<0)throw new TypeError("Reduce of empty array with no initial value");t=n[o--]}for(;0<=o;o--)o in n&&(t=e(t,n[o],o,n));return t}),Array.prototype.reduce||(Array.prototype.reduce=function(e,r){if(null==this)throw new TypeError("Array.prototype.reduce called on null or undefined");if("Function"!==e.__class__)throw new TypeError(e+" is not a function");var t,n=Object(this),o=n.length>>>0,i=0;if(1<arguments.length)t=r;else{for(;i<o&&!(i in n);)i++;if(o<=i)throw new TypeError("Reduce of empty array with no initial value");t=n[i++]}for(;i<o;i++)i in n&&(t=e(t,n[i],i,n));return t}),Object.create||(Object.create=function(){function i(){}var a=Object.prototype.hasOwnProperty;return function(e){if(Object(e)!==e&&null!==e)throw TypeError("Object prototype may only be an Object or null");i.prototype=e;var r=new i;if(i.prototype=null,1<arguments.length){var t=Object(arguments[1]);for(var n in t)if(a.call(t,n)){var o=t[n];if(Object(o)!==o)throw TypeError(n+"must be an object");if("get"in o||"set"in o)throw new TypeError("getters & setters can not be defined on this javascript engine");"value"in o&&(r[n]=t[n])}}return r}}()),Array.prototype.some||(Array.prototype.some=function(e,r){if(null==this)throw new TypeError("Array.prototype.some called on null or undefined");if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(var t=Object(this),n=t.length>>>0,o=1<arguments.length?r:void 0,i=0;i<n;i++)if(i in t&&e.call(o,t[i],i,t))return!0;return!1}),Object.defineProperty||(Object.defineProperty=function(e,r,t){if(Object(e)!==e)throw new TypeError("Object.defineProperty can only be called on Objects.");if(Object(t)!==t)throw new TypeError("Property description can only be an Object.");if("get"in t||"set"in t)throw new TypeError("getters & setters can not be defined on this javascript engine");return"value"in t&&(e[r]=t.value),e}),Object.defineProperties||(Object.defineProperties=function(e,r){function t(e,r){return Object.prototype.hasOwnProperty.call(e,r)}function n(e){if(Object(e)!==e)throw new TypeError("Descriptor can only be an Object.");var r={};if(t(e,"enumerable")&&(r.enumerable=!!e.enumerable),t(e,"configurable")&&(r.configurable=!!e.configurable),t(e,"value")&&(r.value=e.value),t(e,"writable")&&(r.writable=!!e.writable),t(e,"get"))throw new TypeError("getters & setters can not be defined on this javascript engine");if(t(e,"set"))throw new TypeError("getters & setters can not be defined on this javascript engine");return r}if(Object(e)!==e)throw new TypeError("Object.defineProperties can only be called on Objects.");if(Object(r)!==r)throw new TypeError("Properties can only be an Object.");var o=Object(r);for(propName in o)if(hasOwnProperty.call(o,propName)){var i=n(o[propName]);e[propName]=i.value}return e}),Object.getOwnPropertyDescriptor||(Object.getOwnPropertyDescriptor=function(e,r){if(Object(e)!==e)throw new TypeError("Object.getOwnPropertyDescriptor can only be called on Objects.");var t;if(!Object.prototype.hasOwnProperty.call(e,r))return t;(t={enumerable:Object.prototype.propertyIsEnumerable.call(e,r),configurable:!0}).value=e[r];var n=e.reflect.find(r).type;return t.writable=!("readonly"===n),t}),Object.freeze||(Object.freeze=function(e){if(Object(e)!==e)throw new TypeError("Object.freeze can only be called on Objects.");return e}),Object.getOwnPropertyNames||(Object.getOwnPropertyNames=function(e){if(Object(e)!==e)throw new TypeError("Object.getOwnPropertyNames can only be called on Objects.");var r=[],t=Object.prototype.hasOwnProperty,n=Object.prototype.propertyIsEnumerable;for(var o in e)t.call(e,o)&&r.push(o);for(var i=e.reflect.properties,a=e.reflect.methods.concat(i),c=0;c<a.length;c++){o=a[c].name;t.call(e,o)&&!n.call(e,o)&&r.push(o)}return r}),Object.getPrototypeOf||(Object.getPrototypeOf=function(e){if(Object(e)!==e)throw new TypeError("Object.getPrototypeOf can only be called on Objects.");return e.__proto__}),Object.isFrozen||(Object.isFrozen=function(e){if(Object(e)!==e)throw new TypeError("Object.isFrozen can only be called on Objects.");return!1}),Object.isExtensible||(Object.isExtensible=function(e){if(Object(e)!==e)throw new TypeError("Object.isExtensible can only be called on Objects.");return!0}),Object.preventExtensions||(Object.preventExtensions=function(e){if(Object(e)!==e)throw new TypeError("Object.preventExtensions can only be called on Objects.");return e}),Object.isSealed||(Object.isSealed=function(e){if(Object(e)!==e)throw new TypeError("Object.isSealed can only be called on Objects.");return!1}),Object.seal||(Object.seal=function(e){if(Object(e)!==e)throw new TypeError("Object.seal can only be called on Objects.");return e}),Object.keys||(Object.keys=function(e){if(Object(e)!==e)throw new TypeError("Object.keys can only be called on Objects.");var r=Object.prototype.hasOwnProperty,t=[];for(var n in e)r.call(e,n)&&t.push(n);return t}),String.prototype.trim||(String.prototype.trim=function(){return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,"")}),"object"!=typeof JSON&&(JSON={}),function(){"use strict";function f(e){return e<10?"0"+e:e}function this_value(){return this.valueOf()}function quote(e){return rx_escapable.lastIndex=0,rx_escapable.test(e)?'"'+e.replace(rx_escapable,function(e){var r=meta[e];return"string"==typeof r?r:"\\u"+("0000"+e.charCodeAt(0).toString(16)).slice(-4)})+'"':'"'+e+'"'}function str(e,r){var t,n,o,i,a,c=gap,l=r[e];switch(l&&"object"==typeof l&&"function"==typeof l.toJSON&&(l=l.toJSON(e)),"function"==typeof rep&&(l=rep.call(r,e,l)),typeof l){case"string":return quote(l);case"number":return isFinite(l)?l+"":"null";case"boolean":case"null":return l+"";case"object":if(!l)return"null";if(gap+=indent,a=[],"[object Array]"===Object.prototype.toString.apply(l)){for(i=l.length,t=0;t<i;t+=1)a[t]=str(t,l)||"null";return o=0===a.length?"[]":gap?"[\n"+gap+a.join(",\n"+gap)+"\n"+c+"]":"["+a.join(",")+"]",gap=c,o}if(rep&&"object"==typeof rep)for(i=rep.length,t=0;t<i;t+=1)"string"==typeof rep[t]&&((o=str(n=rep[t],l))&&a.push(quote(n)+(gap?": ":":")+o));else for(n in l)Object.prototype.hasOwnProperty.call(l,n)&&((o=str(n,l))&&a.push(quote(n)+(gap?": ":":")+o));return o=0===a.length?"{}":gap?"{\n"+gap+a.join(",\n"+gap)+"\n"+c+"}":"{"+a.join(",")+"}",gap=c,o}}var rx_one=/^[\],:{}\s]*$/,rx_two=/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,rx_three=/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,rx_four=/(?:^|:|,)(?:\s*\[)+/g,rx_escapable=/[\\"\u0000-\u001f\u007f-\u009f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,rx_dangerous=/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,gap,indent,meta,rep;"function"!=typeof Date.prototype.toJSON&&(Date.prototype.toJSON=function(){return isFinite(this.valueOf())?this.getUTCFullYear()+"-"+f(this.getUTCMonth()+1)+"-"+f(this.getUTCDate())+"T"+f(this.getUTCHours())+":"+f(this.getUTCMinutes())+":"+f(this.getUTCSeconds())+"Z":null},Boolean.prototype.toJSON=this_value,Number.prototype.toJSON=this_value,String.prototype.toJSON=this_value),"function"!=typeof JSON.stringify&&(meta={"\b":"\\b","\t":"\\t","\n":"\\n","\f":"\\f","\r":"\\r",'"':'\\"',"\\":"\\\\"},JSON.stringify=function(e,r,t){var n;if(indent=gap="","number"==typeof t)for(n=0;n<t;n+=1)indent+=" ";else"string"==typeof t&&(indent=t);if((rep=r)&&"function"!=typeof r&&("object"!=typeof r||"number"!=typeof r.length))throw Error("JSON.stringify");return str("",{"":e})}),"function"!=typeof JSON.parse&&(JSON.parse=function(text,reviver){function walk(e,r){var t,n,o=e[r];if(o&&"object"==typeof o)for(t in o)Object.prototype.hasOwnProperty.call(o,t)&&(void 0!==(n=walk(o,t))?o[t]=n:delete o[t]);return reviver.call(e,r,o)}var j;if(text+="",rx_dangerous.lastIndex=0,rx_dangerous.test(text)&&(text=text.replace(rx_dangerous,function(e){return"\\u"+("0000"+e.charCodeAt(0).toString(16)).slice(-4)})),rx_one.test(text.replace(rx_two,"@").replace(rx_three,"]").replace(rx_four,"")))return j=eval("("+text+")"),"function"==typeof reviver?walk({"":j},""):j;throw new SyntaxError("JSON.parse")})}();;
 
 				(function(){
 					try {
@@ -29,15 +29,17 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
         return __webpack_require__.d(getter, "a", getter), getter;
     }, __webpack_require__.o = function(object, property) {
         return Object.prototype.hasOwnProperty.call(object, property);
-    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 11);
+    }, __webpack_require__.p = "", __webpack_require__(__webpack_require__.s = 12);
 }([ function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
@@ -48,12 +50,16 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(2), Component = function() {
-        function Component(type) {
-            this.type = type;
+    var write_1 = __webpack_require__(2), eventHandler_1 = __webpack_require__(25), Component = function() {
+        function Component(type, params) {
+            this.type = type, this.params = params, this.listeners = [], this.params = params || {};
         }
         return Component.prototype.init = function() {
             this.debug("initializing");
+            for (var _i = 0, _a = Object.keys(this.params); _i < _a.length; _i++) {
+                var key = _a[_i];
+                this.inner[key] = this.params[key];
+            }
         }, Component.prototype.getValue = function() {
             return null;
         }, Component.prototype.setValue = function(val) {}, Component.prototype.getClassName = function() {
@@ -65,12 +71,19 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
                 var key = _a[_i];
                 this.inner[key] = props[key];
             }
+        }, Component.prototype.send = function(eventName) {
+            this.debug("sending " + eventName + " event. " + this.listeners.length + " listeners");
+            for (var _i = 0, _a = this.listeners; _i < _a.length; _i++) {
+                var handler = _a[_i];
+                handler.name === eventName && handler.fn();
+            }
+        }, Component.prototype.on = function(eventName, fn) {
+            var listener = new eventHandler_1.EventHandler();
+            listener.name = eventName, listener.fn = fn, this.listeners.push(listener);
         }, Component.prototype.debug = function(str) {
             write_1.write("[" + this.getClassName() + "] " + str);
         }, Component;
-    }();
-    exports.Component = Component;
-    var CompositeComponent = function(_super) {
+    }(), CompositeComponent = function(_super) {
         function CompositeComponent(type) {
             var _this = _super.call(this, type) || this;
             return _this.children = [], _this;
@@ -78,13 +91,27 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
         return __extends(CompositeComponent, _super), CompositeComponent.prototype.init = function() {
             _super.prototype.init.call(this);
         }, CompositeComponent.prototype.add = function(component) {
-            return component.parent = this, this.children.push(component), this.mountChild(component), 
+            return (component.parent = this).children.push(component), this.mountChild(component), 
             component.init(), component;
+        }, CompositeComponent.prototype.send = function(eventName) {
+            _super.prototype.send.call(this, eventName);
+            for (var _i = 0, _a = this.children; _i < _a.length; _i++) {
+                _a[_i].send(eventName);
+            }
         }, CompositeComponent.prototype.mountChild = function(component) {
-            return this.debug("mounting child <" + component.getClassName() + ">"), component;
+            return this.debug("mounting child <" + component.getClassName() + "> with params " + JSON.stringify(component.params, null, 2)), 
+            component;
         }, CompositeComponent;
-    }(Component);
-    exports.CompositeComponent = CompositeComponent;
+    }(exports.Component = Component), CompositeComponentContainer = function(_super) {
+        function CompositeComponentContainer() {
+            return null !== _super && _super.apply(this, arguments) || this;
+        }
+        return __extends(CompositeComponentContainer, _super), CompositeComponentContainer.prototype.mountChild = function(component) {
+            return (component = _super.prototype.mountChild.call(this, component)).inner = this.inner.add(component.type, void 0, void 0, component.params), 
+            component;
+        }, CompositeComponentContainer;
+    }(exports.CompositeComponent = CompositeComponent);
+    exports.CompositeComponentContainer = CompositeComponentContainer;
 }, function(module, exports, __webpack_require__) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
@@ -102,7 +129,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
 }, function(module, exports, __webpack_require__) {
     (function(process) {
         function normalizeArray(parts, allowAboveRoot) {
-            for (var up = 0, i = parts.length - 1; i >= 0; i--) {
+            for (var up = 0, i = parts.length - 1; 0 <= i; i--) {
                 var last = parts[i];
                 "." === last ? parts.splice(i, 1) : ".." === last ? (parts.splice(i, 1), up++) : up && (parts.splice(i, 1), 
                 up--);
@@ -119,8 +146,8 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
             return res;
         }
         exports.resolve = function() {
-            for (var resolvedPath = "", resolvedAbsolute = !1, i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
-                var path = i >= 0 ? arguments[i] : process.cwd();
+            for (var resolvedPath = "", resolvedAbsolute = !1, i = arguments.length - 1; -1 <= i && !resolvedAbsolute; i--) {
+                var path = 0 <= i ? arguments[i] : process.cwd();
                 if ("string" != typeof path) throw new TypeError("Arguments to path.resolve must be strings");
                 path && (resolvedPath = path + "/" + resolvedPath, resolvedAbsolute = "/" === path.charAt(0));
             }
@@ -144,8 +171,8 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
         }, exports.relative = function(from, to) {
             function trim(arr) {
                 for (var start = 0; start < arr.length && "" === arr[start]; start++) ;
-                for (var end = arr.length - 1; end >= 0 && "" === arr[end]; end--) ;
-                return start > end ? [] : arr.slice(start, end - start + 1);
+                for (var end = arr.length - 1; 0 <= end && "" === arr[end]; end--) ;
+                return end < start ? [] : arr.slice(start, end - start + 1);
             }
             from = exports.resolve(from).substr(1), to = exports.resolve(to).substr(1);
             for (var fromParts = trim(from.split("/")), toParts = trim(to.split("/")), length = Math.min(fromParts.length, toParts.length), samePartsLength = length, i = 0; i < length; i++) if (fromParts[i] !== toParts[i]) {
@@ -170,7 +197,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
         } : function(str, start, len) {
             return start < 0 && (start = str.length + start), str.substr(start, len);
         };
-    }).call(exports, __webpack_require__(15));
+    }).call(exports, __webpack_require__(16));
 }, function(module, exports, __webpack_require__) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
@@ -199,12 +226,14 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
@@ -219,22 +248,21 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
         function Group() {
             return _super.call(this, "group") || this;
         }
-        return __extends(Group, _super), Group.prototype.mountChild = function(component) {
-            return (component = _super.prototype.mountChild.call(this, component)).inner = this.inner.add(component.type), 
-            component;
-        }, Group.prototype.init = function() {
+        return __extends(Group, _super), Group.prototype.init = function() {
             _super.prototype.init.call(this), this.inner.orientation = "row", this.inner.alignment = [ ScriptUI.Alignment.LEFT, ScriptUI.Alignment.TOP ];
         }, Group;
-    }(__webpack_require__(0).CompositeComponent);
+    }(__webpack_require__(0).CompositeComponentContainer);
     exports.Group = Group;
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
@@ -318,12 +346,52 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    var __assign = this && this.__assign || function() {
+        return (__assign = Object.assign || function(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+            return t;
+        }).apply(this, arguments);
+    };
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var isFunction_1 = __webpack_require__(20), disposeAction_1 = __webpack_require__(21), ensureAction_1 = __webpack_require__(22);
+    function withActions(sets, fn) {
+        try {
+            for (var _i = 0, sets_1 = sets; _i < sets_1.length; _i++) {
+                var set = sets_1[_i];
+                ensureAction_1.default(set.content);
+            }
+            fn(sets);
+        } finally {
+            for (var _a = 0, sets_2 = sets; _a < sets_2.length; _a++) {
+                set = sets_2[_a];
+                disposeAction_1.default(set.setName);
+            }
+        }
+    }
+    exports.withActions = withActions, exports.default = function(actionDef, params, fn) {
+        isFunction_1.default(params) && (fn = params, params = {}), withActions([ __assign({}, actionDef, {
+            content: function(content, params) {
+                return params = params || {}, content.replace(/<%=\s*([^} ]*)\s*%>/gi, function(substr, key) {
+                    if (!params[key]) throw new Error("Param " + key + " does not exists");
+                    return params[key];
+                });
+            }(actionDef.content, params)
+        }) ], function(acts) {
+            fn(acts[0]);
+        });
+    };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
@@ -352,15 +420,17 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     }(__webpack_require__(0).Component);
     exports.Button = Button;
 }, function(module, exports, __webpack_require__) {
-    module.exports = __webpack_require__(12);
+    module.exports = __webpack_require__(13);
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
@@ -371,11 +441,11 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var jpeg_1 = __webpack_require__(13), openFile_1 = __webpack_require__(14), path_1 = __webpack_require__(8), resizeToResolution_1 = __webpack_require__(16), toFile_1 = __webpack_require__(1), Group_1 = __webpack_require__(5), Slider_1 = __webpack_require__(25), StaticText_1 = __webpack_require__(6), JpegExportStrings_1 = __webpack_require__(26), FileProcessor_1 = __webpack_require__(27), version = "1.0.2", ExportJpegProcessor = function(_super) {
+    var jpeg_1 = __webpack_require__(14), openFile_1 = __webpack_require__(15), path_1 = __webpack_require__(8), resizeToResolution_1 = __webpack_require__(17), toFile_1 = __webpack_require__(1), Group_1 = __webpack_require__(5), Slider_1 = __webpack_require__(26), StaticText_1 = __webpack_require__(6), JpegExportStrings_1 = __webpack_require__(27), FileProcessor_1 = __webpack_require__(28), ExportJpegProcessor = function(_super) {
         function ExportJpegProcessor() {
             return _super.call(this, {
                 title: JpegExportStrings_1.default.exportJpeg,
-                version: version
+                version: "1.0.2"
             }) || this;
         }
         return __extends(ExportJpegProcessor, _super), ExportJpegProcessor.prototype.onInit = function() {
@@ -395,7 +465,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
             };
         }, ExportJpegProcessor.prototype.onProcess = function(file, index) {
             var destDir = this.srcSelect.getValue().destDir, name = path_1.parse(file).name, finalFile = path_1.join(destDir, name + ".jpg");
-            if (!(this.existingFiles.indexOf(finalFile.toLowerCase()) >= 0) && !toFile_1.default(finalFile).exists) {
+            if (!(0 <= this.existingFiles.indexOf(finalFile.toLowerCase())) && !toFile_1.default(finalFile).exists) {
                 this.setStatus(JpegExportStrings_1.default.opening);
                 var doc = openFile_1.default(file);
                 this.setStatus(JpegExportStrings_1.default.resizing), resizeToResolution_1.default(this.slider.getValue()), 
@@ -409,8 +479,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
             }), _super.prototype.processFiles.call(this, files);
         }, ExportJpegProcessor;
     }(FileProcessor_1.FileProcessor);
-    exports.ExportJpegProcessor = ExportJpegProcessor;
-    new ExportJpegProcessor();
+    new (exports.ExportJpegProcessor = ExportJpegProcessor)();
 }, function(module, exports, __webpack_require__) {
     "use strict";
     Object.defineProperty(exports, "__esModule", {
@@ -512,7 +581,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     function noop() {}
     process.nextTick = function(fun) {
         var args = new Array(arguments.length - 1);
-        if (arguments.length > 1) for (var i = 1; i < arguments.length; i++) args[i - 1] = arguments[i];
+        if (1 < arguments.length) for (var i = 1; i < arguments.length; i++) args[i - 1] = arguments[i];
         queue.push(new Item(fun, args)), 1 !== queue.length || draining || runTimeout(drainQueue);
     }, Item.prototype.run = function() {
         this.fun.apply(null, this.array);
@@ -536,7 +605,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(2), getArtboardSize_1 = __webpack_require__(9), resizeScale_1 = __webpack_require__(17);
+    var write_1 = __webpack_require__(2), getArtboardSize_1 = __webpack_require__(9), resizeScale_1 = __webpack_require__(18);
     exports.default = function(resolution, fast) {
         var artboardSize = getArtboardSize_1.default(), oldResolution = artboardSize.width * artboardSize.height, newResolution = 1e6 * resolution, scale = Math.ceil(100 * Math.sqrt(newResolution / oldResolution));
         write_1.write("Resizing from resolution " + oldResolution / 1e6 + " to resolution " + newResolution / 1e6 + ". Scale factor: " + scale), 
@@ -547,7 +616,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(2), doAction_1 = __webpack_require__(18), getArtboardSize_1 = __webpack_require__(9), menu_1 = __webpack_require__(19), withAction_1 = __webpack_require__(20);
+    var write_1 = __webpack_require__(2), doAction_1 = __webpack_require__(19), getArtboardSize_1 = __webpack_require__(9), menu_1 = __webpack_require__(23), withAction_1 = __webpack_require__(10);
     exports.default = function(scaleW, scaleH) {
         scaleH = scaleH || scaleW, menu_1.callMenu("unlockAll"), menu_1.callMenu("selectall");
         var artboardSize = getArtboardSize_1.default(), newWidth = artboardSize.width * scaleW / 100, newHeight = artboardSize.height * scaleH / 100;
@@ -567,58 +636,16 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var write_1 = __webpack_require__(2);
-    exports.default = function(action, name) {
+    var write_1 = __webpack_require__(2), withAction_1 = __webpack_require__(10);
+    function doAction(action, name) {
         for (var _i = 0, actions_1 = name ? [ name ] : action.actions; _i < actions_1.length; _i++) {
             var act = actions_1[_i];
-            write_1.write("doAction: [" + action.setName + "->" + action.setName + "]"), app.doScript(act, action.setName);
-        }
-    };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    }), exports.callMenu = function(menuCommand) {
-        try {
-            app.executeMenuCommand(menuCommand);
-        } catch (e) {
-            if (1200 !== e.number) throw e;
-        }
-    };
-}, function(module, exports, __webpack_require__) {
-    "use strict";
-    var __assign = this && this.__assign || Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-        return t;
-    };
-    Object.defineProperty(exports, "__esModule", {
-        value: !0
-    });
-    var isFunction_1 = __webpack_require__(21), disposeAction_1 = __webpack_require__(22), ensureAction_1 = __webpack_require__(23);
-    function withActions(sets, fn) {
-        try {
-            for (var _i = 0, sets_1 = sets; _i < sets_1.length; _i++) {
-                var set = sets_1[_i];
-                ensureAction_1.default(set.content);
-            }
-            fn(sets);
-        } finally {
-            for (var _a = 0, sets_2 = sets; _a < sets_2.length; _a++) {
-                set = sets_2[_a];
-                disposeAction_1.default(set.setName);
-            }
+            write_1.write("doAction: [" + action.setName + "->" + action.setName + "]"), app.doScript(act, action.setName, !1);
         }
     }
-    exports.withActions = withActions, exports.default = function(actionDef, params, fn) {
-        isFunction_1.default(params) && (fn = params, params = {}), withActions([ __assign({}, actionDef, {
-            content: function(content, params) {
-                return params = params || {}, content.replace(/<%=\s*([^} ]*)\s*%>/gi, function(substr, key) {
-                    if (!params[key]) throw new Error("Param " + key + " does not exists");
-                    return params[key];
-                });
-            }(actionDef.content, params)
-        }) ], function(acts) {
-            fn(acts[0]);
+    exports.default = doAction, exports.loadAndDoAction = function(action, name) {
+        withAction_1.default(action, function() {
+            doAction(action, name);
         });
     };
 }, function(module, exports, __webpack_require__) {
@@ -651,6 +678,17 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
             actionFile.remove();
         }
     };
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    }), exports.callMenu = function(menuCommand) {
+        try {
+            app.executeMenuCommand(menuCommand);
+        } catch (e) {
+            if (1200 !== e.number) throw e;
+        }
+    };
 }, function(module, exports) {
     module.exports = {
         setName: "__resize",
@@ -659,12 +697,21 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    Object.defineProperty(exports, "__esModule", {
+        value: !0
+    });
+    var EventHandler = function() {};
+    exports.EventHandler = EventHandler;
+}, function(module, exports, __webpack_require__) {
+    "use strict";
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
@@ -706,18 +753,20 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
         saving: [ "Saving", "Сохранение файла" ],
         closing: [ "Closing", "Закрытие файла" ],
         opening: [ "Opening", "Открытие файла" ],
-        resizing: [ "Resizing", "Измение размера" ]
+        resizing: [ "Resizing", "Изменение размера" ]
     });
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var __assign = this && this.__assign || Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-        return t;
+    var __assign = this && this.__assign || function() {
+        return (__assign = Object.assign || function(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+            return t;
+        }).apply(this, arguments);
     };
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var Button_1 = __webpack_require__(10), Dialog_1 = __webpack_require__(28), DirectorySelectInOut_1 = __webpack_require__(29), Group_1 = __webpack_require__(5), Progressbar_1 = __webpack_require__(38), CommonStrings_1 = __webpack_require__(39), FileProcessor = function() {
+    var Button_1 = __webpack_require__(11), Dialog_1 = __webpack_require__(29), DirectorySelectInOut_1 = __webpack_require__(30), Group_1 = __webpack_require__(5), Progressbar_1 = __webpack_require__(39), CommonStrings_1 = __webpack_require__(40), FileProcessor = function() {
         function FileProcessor(opts) {
             this.opts = opts, this.opts = __assign({
                 title: CommonStrings_1.default.processFiles,
@@ -776,12 +825,14 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     exports.FileProcessor = FileProcessor;
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
@@ -795,7 +846,9 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     var Dialog = function(_super) {
         function Dialog(title) {
             var _this = _super.call(this, "dialog") || this;
-            return _this.title = title, _this.inner = new Window(_this.type, title), _this;
+            return _this.title = title, _this.inner = new Window(_this.type, title), _this.inner.onShow = function() {
+                return _this.send("show");
+            }, _this.inner.maximumSize.height = 600, _this;
         }
         return __extends(Dialog, _super), Dialog.prototype.mountChild = function(component) {
             return (component = _super.prototype.mountChild.call(this, component)).type && (component.inner = this.inner.add(component.type, void 0, "")), 
@@ -811,26 +864,30 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     exports.Dialog = Dialog;
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
         }
         extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
         new __());
-    }), __assign = this && this.__assign || Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-        return t;
+    }), __assign = this && this.__assign || function() {
+        return (__assign = Object.assign || function(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+            return t;
+        }).apply(this, arguments);
     };
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var settings_1 = __webpack_require__(30), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(35), DirectorySelectInOut = function(_super) {
+    var settings_1 = __webpack_require__(31), Component_1 = __webpack_require__(0), DirectorySelect_1 = __webpack_require__(36), DirectorySelectInOut = function(_super) {
         function DirectorySelectInOut(opts) {
             var _this = _super.call(this, "") || this;
             return _this.opts = opts, _this.opts = __assign({
@@ -860,18 +917,20 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     exports.DirectorySelectInOut = DirectorySelectInOut;
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var __assign = this && this.__assign || Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
-        return t;
+    var __assign = this && this.__assign || function() {
+        return (__assign = Object.assign || function(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+            return t;
+        }).apply(this, arguments);
     };
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var getCurrentFile_1 = __webpack_require__(31), path_1 = __webpack_require__(8), readFileJson_1 = __webpack_require__(32), writeFileJson_1 = __webpack_require__(34);
+    var getCurrentFile_1 = __webpack_require__(32), path_1 = __webpack_require__(8), readFileJson_1 = __webpack_require__(33), writeFileJson_1 = __webpack_require__(35);
     exports.setSettings = function(key, value) {
-        var _b, _a = path_1.parse(getCurrentFile_1.default()), dir = _a.dir, name = _a.name, settingsFile = path_1.join(dir, name + ".json"), currentSettings = readFileJson_1.default(settingsFile, !1);
-        writeFileJson_1.default(settingsFile, __assign({}, currentSettings, ((_b = {})[key] = value, 
-        _b)));
+        var _a, _b = path_1.parse(getCurrentFile_1.default()), dir = _b.dir, name = _b.name, settingsFile = path_1.join(dir, name + ".json"), currentSettings = readFileJson_1.default(settingsFile, !1);
+        writeFileJson_1.default(settingsFile, __assign({}, currentSettings, ((_a = {})[key] = value, 
+        _a)));
     }, exports.getSettings = function(key) {
         var _a = path_1.parse(getCurrentFile_1.default()), dir = _a.dir, name = _a.name, settingsFile = path_1.join(dir, name + ".json");
         return readFileJson_1.default(settingsFile, !1)[key];
@@ -890,7 +949,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var readFile_1 = __webpack_require__(33);
+    var readFile_1 = __webpack_require__(34);
     exports.default = function(filePath, required) {
         void 0 === required && (required = !0);
         var content = readFile_1.default(filePath, required);
@@ -918,12 +977,14 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
@@ -942,16 +1003,18 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
             var newPath = Folder.selectDialog(this.label);
             return newPath ? newPath.fsName : "";
         }, DirectorySelect;
-    }(__webpack_require__(36).SelectDialog);
+    }(__webpack_require__(37).SelectDialog);
     exports.DirectorySelect = DirectorySelect;
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
@@ -962,7 +1025,7 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
-    var translation_1 = __webpack_require__(7), Button_1 = __webpack_require__(10), EditText_1 = __webpack_require__(37), Group_1 = __webpack_require__(5), StaticText_1 = __webpack_require__(6), strings = translation_1.tranEnRu({
+    var translation_1 = __webpack_require__(7), Button_1 = __webpack_require__(11), EditText_1 = __webpack_require__(38), Group_1 = __webpack_require__(5), StaticText_1 = __webpack_require__(6), strings = translation_1.tranEnRu({
         choose: [ "Choose...", "Выбрать..." ]
     }), SelectDialog = function(_super) {
         function SelectDialog(label, basePath) {
@@ -987,31 +1050,39 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     exports.SelectDialog = SelectDialog;
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
         }
         extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
         new __());
-    });
+    }), __assign = this && this.__assign || function() {
+        return (__assign = Object.assign || function(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+            return t;
+        }).apply(this, arguments);
+    };
     Object.defineProperty(exports, "__esModule", {
         value: !0
     });
     var EditText = function(_super) {
-        function EditText(defaultValue) {
-            var _this = _super.call(this, "edittext") || this;
+        function EditText(defaultValue, params) {
+            var _this = _super.call(this, "edittext", __assign({
+                size: [ 300, 20 ]
+            }, params || {})) || this;
             return _this.defaultValue = defaultValue, _this;
         }
         return __extends(EditText, _super), EditText.prototype.init = function() {
             var _this = this;
-            _super.prototype.init.call(this), this.setValue(this.defaultValue), this.inner.size = [ 300, 20 ], 
-            this.inner.onChanging = function() {
+            _super.prototype.init.call(this), this.setValue(this.defaultValue), this.inner.onChanging = function() {
                 _this.onChanging && _this.onChanging();
             };
         }, EditText.prototype.getValue = function() {
@@ -1023,12 +1094,14 @@ Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==thi
     exports.EditText = EditText;
 }, function(module, exports, __webpack_require__) {
     "use strict";
-    var extendStatics, __extends = this && this.__extends || (extendStatics = Object.setPrototypeOf || {
-        __proto__: []
-    } instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+    var extendStatics, __extends = this && this.__extends || (extendStatics = function(d, b) {
+        return (extendStatics = Object.setPrototypeOf || {
+            __proto__: []
+        } instanceof Array && function(d, b) {
+            d.__proto__ = b;
+        } || function(d, b) {
+            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+        })(d, b);
     }, function(d, b) {
         function __() {
             this.constructor = d;
