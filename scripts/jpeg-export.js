@@ -15,7 +15,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         module.l = !0, module.exports;
     }
     __webpack_require__.m = modules, __webpack_require__.c = installedModules, __webpack_require__.d = function(exports, name, getter) {
-        __webpack_require__.o(exports, name) || Object.defineProperty(exports, name, {
+        if (!__webpack_require__.o(exports, name)) Object.defineProperty(exports, name, {
             configurable: !1,
             enumerable: !0,
             get: getter
@@ -38,7 +38,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
@@ -75,7 +75,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
             this.debug("sending " + eventName + " event. " + this.listeners.length + " listeners");
             for (var _i = 0, _a = this.listeners; _i < _a.length; _i++) {
                 var handler = _a[_i];
-                handler.name === eventName && handler.fn();
+                if (handler.name === eventName) handler.fn();
             }
         }, Component.prototype.on = function(eventName, fn) {
             var listener = new eventHandler_1.EventHandler();
@@ -124,15 +124,15 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     Object.defineProperty(exports, "__esModule", {
         value: !0
     }), exports.write = function(text) {
-        $.writeln(text);
+        if (0) $.writeln(text);
     };
 }, function(module, exports, __webpack_require__) {
     (function(process) {
         function normalizeArray(parts, allowAboveRoot) {
             for (var up = 0, i = parts.length - 1; 0 <= i; i--) {
                 var last = parts[i];
-                "." === last ? parts.splice(i, 1) : ".." === last ? (parts.splice(i, 1), up++) : up && (parts.splice(i, 1), 
-                up--);
+                if ("." === last) parts.splice(i, 1); else if (".." === last) parts.splice(i, 1), 
+                up++; else if (up) parts.splice(i, 1), up--;
             }
             if (allowAboveRoot) for (;up--; up) parts.unshift("..");
             return parts;
@@ -142,24 +142,25 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         };
         function filter(xs, f) {
             if (xs.filter) return xs.filter(f);
-            for (var res = [], i = 0; i < xs.length; i++) f(xs[i], i, xs) && res.push(xs[i]);
+            for (var res = [], i = 0; i < xs.length; i++) if (f(xs[i], i, xs)) res.push(xs[i]);
             return res;
         }
         exports.resolve = function() {
             for (var resolvedPath = "", resolvedAbsolute = !1, i = arguments.length - 1; -1 <= i && !resolvedAbsolute; i--) {
                 var path = 0 <= i ? arguments[i] : process.cwd();
-                if ("string" != typeof path) throw new TypeError("Arguments to path.resolve must be strings");
-                path && (resolvedPath = path + "/" + resolvedPath, resolvedAbsolute = "/" === path.charAt(0));
+                if ("string" != typeof path) throw new TypeError("Arguments to path.resolve must be strings"); else if (!path) continue;
+                resolvedPath = path + "/" + resolvedPath, resolvedAbsolute = "/" === path.charAt(0);
             }
             return (resolvedAbsolute ? "/" : "") + (resolvedPath = normalizeArray(filter(resolvedPath.split("/"), function(p) {
                 return !!p;
             }), !resolvedAbsolute).join("/")) || ".";
         }, exports.normalize = function(path) {
             var isAbsolute = exports.isAbsolute(path), trailingSlash = "/" === substr(path, -1);
-            return (path = normalizeArray(filter(path.split("/"), function(p) {
+            if (!(path = normalizeArray(filter(path.split("/"), function(p) {
                 return !!p;
-            }), !isAbsolute).join("/")) || isAbsolute || (path = "."), path && trailingSlash && (path += "/"), 
-            (isAbsolute ? "/" : "") + path;
+            }), !isAbsolute).join("/")) && !isAbsolute) path = ".";
+            if (path && trailingSlash) path += "/";
+            return (isAbsolute ? "/" : "") + path;
         }, exports.isAbsolute = function(path) {
             return "/" === path.charAt(0);
         }, exports.join = function() {
@@ -172,7 +173,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
             function trim(arr) {
                 for (var start = 0; start < arr.length && "" === arr[start]; start++) ;
                 for (var end = arr.length - 1; 0 <= end && "" === arr[end]; end--) ;
-                return end < start ? [] : arr.slice(start, end - start + 1);
+                if (end < start) return []; else return arr.slice(start, end - start + 1);
             }
             from = exports.resolve(from).substr(1), to = exports.resolve(to).substr(1);
             for (var fromParts = trim(from.split("/")), toParts = trim(to.split("/")), length = Math.min(fromParts.length, toParts.length), samePartsLength = length, i = 0; i < length; i++) if (fromParts[i] !== toParts[i]) {
@@ -184,18 +185,21 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
             return (outputParts = outputParts.concat(toParts.slice(samePartsLength))).join("/");
         }, exports.sep = "/", exports.delimiter = ":", exports.dirname = function(path) {
             var result = splitPath(path), root = result[0], dir = result[1];
-            return root || dir ? (dir && (dir = dir.substr(0, dir.length - 1)), root + dir) : ".";
+            if (!root && !dir) return ".";
+            if (dir) dir = dir.substr(0, dir.length - 1);
+            return root + dir;
         }, exports.basename = function(path, ext) {
             var f = splitPath(path)[2];
-            return ext && f.substr(-1 * ext.length) === ext && (f = f.substr(0, f.length - ext.length)), 
-            f;
+            if (ext && f.substr(-1 * ext.length) === ext) f = f.substr(0, f.length - ext.length);
+            return f;
         }, exports.extname = function(path) {
             return splitPath(path)[3];
         };
         var substr = "b" === "ab".substr(-1) ? function(str, start, len) {
             return str.substr(start, len);
         } : function(str, start, len) {
-            return start < 0 && (start = str.length + start), str.substr(start, len);
+            if (start < 0) start = str.length + start;
+            return str.substr(start, len);
         };
     }).call(exports, __webpack_require__(16));
 }, function(module, exports, __webpack_require__) {
@@ -205,18 +209,18 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     });
     var toFile_1 = __webpack_require__(1);
     function withFile(filePath, fn, openFlag, required) {
-        void 0 === openFlag && (openFlag = "w"), void 0 === required && (required = !0);
+        if (void 0 === openFlag) openFlag = "w";
+        if (void 0 === required) required = !0;
         var file = toFile_1.default(filePath);
-        if (!file.open(openFlag, void 0, void 0)) {
-            if (required) throw new Error("can't open file " + filePath);
-            return fn(void 0);
-        }
-        try {
+        if (file.open(openFlag, void 0, void 0)) try {
             return file.encoding = "UTF-8", file.lineFeed = "Unix", fn(file);
         } catch (e) {
             throw e;
         } finally {
             file.close();
+        } else {
+            if (required) throw new Error("can't open file " + filePath);
+            return fn(void 0);
         }
     }
     exports.withFile = withFile, exports.default = function(filePath, content) {
@@ -232,7 +236,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
@@ -261,7 +265,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
@@ -348,7 +352,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     "use strict";
     var __assign = this && this.__assign || function() {
         return (__assign = Object.assign || function(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
             return t;
         }).apply(this, arguments);
     };
@@ -371,7 +375,8 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         }
     }
     exports.withActions = withActions, exports.default = function(actionDef, params, fn) {
-        isFunction_1.default(params) && (fn = params, params = {}), withActions([ __assign({}, actionDef, {
+        if (isFunction_1.default(params)) fn = params, params = {};
+        withActions([ __assign({}, actionDef, {
             content: function(content, params) {
                 return params = params || {}, content.replace(/<%=\s*([^} ]*)\s*%>/gi, function(substr, key) {
                     if (!params[key]) throw new Error("Param " + key + " does not exists");
@@ -390,7 +395,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
@@ -410,7 +415,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         return __extends(Button, _super), Button.prototype.init = function() {
             var _this = this;
             _super.prototype.init.call(this), this.inner.text = this.label, this.inner.onClick = function() {
-                _this.debug("clicked"), _this.onClick && _this.onClick();
+                if (_this.debug("clicked"), _this.onClick) _this.onClick();
             };
         }, Button.prototype.getValue = function() {
             return this.inner.text;
@@ -429,7 +434,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
@@ -465,12 +470,14 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
             };
         }, ExportJpegProcessor.prototype.onProcess = function(file, index) {
             var destDir = this.srcSelect.getValue().destDir, name = path_1.parse(file).name, finalFile = path_1.join(destDir, name + ".jpg");
-            if (!(0 <= this.existingFiles.indexOf(finalFile.toLowerCase())) && !toFile_1.default(finalFile).exists) {
-                this.setStatus(JpegExportStrings_1.default.opening);
-                var doc = openFile_1.default(file);
-                this.setStatus(JpegExportStrings_1.default.resizing), resizeToResolution_1.default(this.slider.getValue()), 
-                this.setStatus(JpegExportStrings_1.default.saving), jpeg_1.default(finalFile), this.setStatus(JpegExportStrings_1.default.closing), 
-                doc.close(SaveOptions.DONOTSAVECHANGES);
+            if (!(0 <= this.existingFiles.indexOf(finalFile.toLowerCase()))) {
+                if (!toFile_1.default(finalFile).exists) {
+                    this.setStatus(JpegExportStrings_1.default.opening);
+                    var doc = openFile_1.default(file);
+                    this.setStatus(JpegExportStrings_1.default.resizing), resizeToResolution_1.default(this.slider.getValue()), 
+                    this.setStatus(JpegExportStrings_1.default.saving), jpeg_1.default(finalFile), this.setStatus(JpegExportStrings_1.default.closing), 
+                    doc.close(SaveOptions.DONOTSAVECHANGES);
+                }
             }
         }, ExportJpegProcessor.prototype.processFiles = function(files) {
             var destDir = this.srcSelect.getValue().destDir;
@@ -536,27 +543,29 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     }
     !function() {
         try {
-            cachedSetTimeout = "function" == typeof setTimeout ? setTimeout : defaultSetTimout;
+            if ("function" == typeof setTimeout) cachedSetTimeout = setTimeout; else cachedSetTimeout = defaultSetTimout;
         } catch (e) {
             cachedSetTimeout = defaultSetTimout;
         }
         try {
-            cachedClearTimeout = "function" == typeof clearTimeout ? clearTimeout : defaultClearTimeout;
+            if ("function" == typeof clearTimeout) cachedClearTimeout = clearTimeout; else cachedClearTimeout = defaultClearTimeout;
         } catch (e) {
             cachedClearTimeout = defaultClearTimeout;
         }
     }();
     var currentQueue, queue = [], draining = !1, queueIndex = -1;
     function cleanUpNextTick() {
-        draining && currentQueue && (draining = !1, currentQueue.length ? queue = currentQueue.concat(queue) : queueIndex = -1, 
-        queue.length && drainQueue());
+        if (draining && currentQueue) {
+            if (draining = !1, currentQueue.length) queue = currentQueue.concat(queue); else queueIndex = -1;
+            if (queue.length) drainQueue();
+        }
     }
     function drainQueue() {
         if (!draining) {
             var timeout = runTimeout(cleanUpNextTick);
             draining = !0;
             for (var len = queue.length; len; ) {
-                for (currentQueue = queue, queue = []; ++queueIndex < len; ) currentQueue && currentQueue[queueIndex].run();
+                for (currentQueue = queue, queue = []; ++queueIndex < len; ) if (currentQueue) currentQueue[queueIndex].run();
                 queueIndex = -1, len = queue.length;
             }
             currentQueue = null, draining = !1, function(marker) {
@@ -582,7 +591,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     process.nextTick = function(fun) {
         var args = new Array(arguments.length - 1);
         if (1 < arguments.length) for (var i = 1; i < arguments.length; i++) args[i - 1] = arguments[i];
-        queue.push(new Item(fun, args)), 1 !== queue.length || draining || runTimeout(drainQueue);
+        if (queue.push(new Item(fun, args)), 1 === queue.length && !draining) runTimeout(drainQueue);
     }, Item.prototype.run = function() {
         this.fun.apply(null, this.array);
     }, process.title = "browser", process.browser = !0, process.env = {}, process.argv = [], 
@@ -608,8 +617,8 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     var write_1 = __webpack_require__(2), getArtboardSize_1 = __webpack_require__(9), resizeScale_1 = __webpack_require__(18);
     exports.default = function(resolution, fast) {
         var artboardSize = getArtboardSize_1.default(), oldResolution = artboardSize.width * artboardSize.height, newResolution = 1e6 * resolution, scale = Math.ceil(100 * Math.sqrt(newResolution / oldResolution));
-        write_1.write("Resizing from resolution " + oldResolution / 1e6 + " to resolution " + newResolution / 1e6 + ". Scale factor: " + scale), 
-        fast ? resizeScale_1.resizeScaleFast(scale) : resizeScale_1.default(scale);
+        if (write_1.write("Resizing from resolution " + oldResolution / 1e6 + " to resolution " + newResolution / 1e6 + ". Scale factor: " + scale), 
+        fast) resizeScale_1.resizeScaleFast(scale); else resizeScale_1.default(scale);
     };
 }, function(module, exports, __webpack_require__) {
     "use strict";
@@ -710,7 +719,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
@@ -731,8 +740,8 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
             var _this = this;
             _super.prototype.init.call(this), this.inner.minvalue = this.opts.min, this.inner.maxvalue = this.opts.max, 
             this.inner.value = this.opts.value, this.inner.onChanging = function() {
-                _this.inner.value = Math.round(_this.inner.value / _this.opts.step) * _this.opts.step, 
-                _this.onChanging && _this.onChanging();
+                if (_this.inner.value = Math.round(_this.inner.value / _this.opts.step) * _this.opts.step, 
+                _this.onChanging) _this.onChanging();
             };
         }, Slider.prototype.getValue = function() {
             return this.inner.value;
@@ -759,7 +768,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     "use strict";
     var __assign = this && this.__assign || function() {
         return (__assign = Object.assign || function(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
             return t;
         }).apply(this, arguments);
     };
@@ -798,9 +807,9 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
             this.btnCancel = btnGroup.add(new Button_1.Button(CommonStrings_1.default.cancel)), 
             this.btnStart = btnGroup.add(new Button_1.Button(CommonStrings_1.default.start)), 
             this.btnCancel.onClick = function() {
-                _this.isRunning ? (_this.btnCancel.setValue(CommonStrings_1.default.canceling + "..."), 
-                _this.stopSignal = new Error(CommonStrings_1.default.operationCanceled)) : (_this.onCanceled(), 
-                _this.dlg.close());
+                if (_this.isRunning) _this.btnCancel.setValue(CommonStrings_1.default.canceling + "..."), 
+                _this.stopSignal = new Error(CommonStrings_1.default.operationCanceled); else _this.onCanceled(), 
+                _this.dlg.close();
             }, this.btnStart.onClick = function() {
                 if (!_this.isRunning) try {
                     _this.isRunning = !0;
@@ -831,7 +840,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
@@ -851,8 +860,8 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
             }, _this.inner.maximumSize.height = 600, _this;
         }
         return __extends(Dialog, _super), Dialog.prototype.mountChild = function(component) {
-            return (component = _super.prototype.mountChild.call(this, component)).type && (component.inner = this.inner.add(component.type, void 0, "")), 
-            component;
+            if ((component = _super.prototype.mountChild.call(this, component)).type) component.inner = this.inner.add(component.type, void 0, "");
+            return component;
         }, Dialog.prototype.show = function() {
             this.inner.show();
         }, Dialog.prototype.close = function() {
@@ -870,7 +879,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
@@ -880,7 +889,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         new __());
     }), __assign = this && this.__assign || function() {
         return (__assign = Object.assign || function(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
             return t;
         }).apply(this, arguments);
     };
@@ -900,8 +909,8 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
             _super.prototype.init.call(this), this.srcSelect = this.parent.add(new DirectorySelect_1.DirectorySelect(this.opts.srcDirLabel, settings_1.getSettings("lastSrcDir"))), 
             this.destSelect = this.parent.add(new DirectorySelect_1.DirectorySelect(this.opts.destDirLabel, settings_1.getSettings("lastDestDir"))), 
             this.srcSelect.onChange = function(newPath) {
-                settings_1.setSettings("lastSrcDir", newPath), _this.destSelect.setValue(newPath), 
-                _this.debug("changed"), _this.onChange && _this.onChange();
+                if (settings_1.setSettings("lastSrcDir", newPath), _this.destSelect.setValue(newPath), 
+                _this.debug("changed"), _this.onChange) _this.onChange();
             }, this.destSelect.onChange = function(newPath) {
                 settings_1.setSettings("lastDestDir", newPath);
             };
@@ -919,7 +928,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     "use strict";
     var __assign = this && this.__assign || function() {
         return (__assign = Object.assign || function(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
             return t;
         }).apply(this, arguments);
     };
@@ -951,7 +960,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     });
     var readFile_1 = __webpack_require__(34);
     exports.default = function(filePath, required) {
-        void 0 === required && (required = !0);
+        if (void 0 === required) required = !0;
         var content = readFile_1.default(filePath, required);
         return content ? JSON.parse(content) : {};
     };
@@ -962,7 +971,8 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     });
     var toFile_1 = __webpack_require__(1), writeFile_1 = __webpack_require__(4);
     exports.default = function(filePath, required) {
-        return void 0 === required && (required = !0), toFile_1.default(filePath), writeFile_1.withFile(filePath, function(file) {
+        if (void 0 === required) required = !0;
+        return toFile_1.default(filePath), writeFile_1.withFile(filePath, function(file) {
             return file ? file.read() : "";
         }, "r", required);
     };
@@ -983,7 +993,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
@@ -997,11 +1007,12 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
     });
     var DirectorySelect = function(_super) {
         function DirectorySelect(label, basePath) {
-            return void 0 === basePath && (basePath = Folder.desktop.fsName), _super.call(this, label, basePath) || this;
+            if (void 0 === basePath) basePath = Folder.desktop.fsName;
+            return _super.call(this, label, basePath) || this;
         }
         return __extends(DirectorySelect, _super), DirectorySelect.prototype.select = function() {
             var newPath = Folder.selectDialog(this.label);
-            return newPath ? newPath.fsName : "";
+            if (newPath) return newPath.fsName; else return "";
         }, DirectorySelect;
     }(__webpack_require__(37).SelectDialog);
     exports.DirectorySelect = DirectorySelect;
@@ -1013,7 +1024,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
@@ -1029,7 +1040,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         choose: [ "Choose...", "Выбрать..." ]
     }), SelectDialog = function(_super) {
         function SelectDialog(label, basePath) {
-            void 0 === basePath && (basePath = "~/Desktop");
+            if (void 0 === basePath) basePath = "~/Desktop";
             var _this = _super.call(this) || this;
             return _this.label = label, _this.basePath = basePath, _this;
         }
@@ -1039,7 +1050,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
             this.text.setSize(130, 20), this.input = this.add(new EditText_1.EditText(this.basePath)), 
             this.btn = this.add(new Button_1.Button(strings.choose)), this.btn.onClick = function() {
                 var selected = _this.select();
-                selected && (_this.setValue(selected), _this.debug("changed"), _this.onChange && _this.onChange(selected));
+                if (selected) if (_this.setValue(selected), _this.debug("changed"), _this.onChange) _this.onChange(selected);
             };
         }, SelectDialog.prototype.getValue = function() {
             return this.input.getValue();
@@ -1056,7 +1067,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
@@ -1066,7 +1077,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         new __());
     }), __assign = this && this.__assign || function() {
         return (__assign = Object.assign || function(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) Object.prototype.hasOwnProperty.call(s, p) && (t[p] = s[p]);
+            for (var s, i = 1, n = arguments.length; i < n; i++) for (var p in s = arguments[i]) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
             return t;
         }).apply(this, arguments);
     };
@@ -1083,7 +1094,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         return __extends(EditText, _super), EditText.prototype.init = function() {
             var _this = this;
             _super.prototype.init.call(this), this.setValue(this.defaultValue), this.inner.onChanging = function() {
-                _this.onChanging && _this.onChanging();
+                if (_this.onChanging) _this.onChanging();
             };
         }, EditText.prototype.getValue = function() {
             return this.inner.text;
@@ -1100,7 +1111,7 @@ Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==th
         } instanceof Array && function(d, b) {
             d.__proto__ = b;
         } || function(d, b) {
-            for (var p in b) b.hasOwnProperty(p) && (d[p] = b[p]);
+            for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         })(d, b);
     }, function(d, b) {
         function __() {
