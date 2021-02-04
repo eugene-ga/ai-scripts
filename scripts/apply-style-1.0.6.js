@@ -2165,83 +2165,6 @@ var DEBUG = false;
         },
 
         /***/
-        245:
-        /***/
-        function _(__unused_webpack_module, exports, __webpack_require__) {
-          "use strict";
-
-          var __assign = this && this.__assign || function () {
-            __assign = Object.assign || function (t) {
-              for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-
-                for (var p in s) {
-                  if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-                }
-              }
-
-              return t;
-            };
-
-            return __assign.apply(this, arguments);
-          };
-
-          Object.defineProperty(exports, "__esModule", {
-            value: true
-          });
-
-          var toFile_1 = __webpack_require__(585);
-
-          function shutterEps(file, opts) {
-            // validateShutter();
-            opts = __assign({
-              compatibility: Compatibility.ILLUSTRATOR10,
-              saveMultipleArtboards: false
-            }, opts); // clean();
-
-            var saveOpts = new EPSSaveOptions();
-            saveOpts.preview = EPSPreview.None;
-            saveOpts.cmykPostScript = false;
-            saveOpts.compatibility = opts.compatibility;
-            saveOpts.embedAllFonts = false;
-            saveOpts.embedLinkedFiles = false;
-            saveOpts.includeDocumentThumbnails = false;
-            saveOpts.postScript = EPSPostScriptLevelEnum.LEVEL3;
-            saveOpts.saveMultipleArtboards = opts.saveMultipleArtboards; // write(`saving eps file [${file}] with options <${JSON.stringify(saveOpts)}>`)
-
-            app.activeDocument.saveAs(toFile_1["default"](file), saveOpts);
-          }
-
-          exports["default"] = shutterEps;
-          /***/
-        },
-
-        /***/
-        471:
-        /***/
-        function _(__unused_webpack_module, exports, __webpack_require__) {
-          "use strict";
-
-          Object.defineProperty(exports, "__esModule", {
-            value: true
-          });
-
-          var shutterEps_1 = __webpack_require__(245);
-
-          function shutterEps10(file, opts) {
-            if (opts === void 0) {
-              opts = {};
-            }
-
-            opts.compatibility = Compatibility.ILLUSTRATOR10;
-            shutterEps_1["default"](file, opts);
-          }
-
-          exports["default"] = shutterEps10;
-          /***/
-        },
-
-        /***/
         137:
         /***/
         function _(__unused_webpack_module, exports, __webpack_require__) {
@@ -4449,8 +4372,7 @@ var DEBUG = false;
             actions: ["Options", "Опции"],
             expandAppearance: ["Expand Appearance", "Expand Appearance"],
             expandObjects: ["Expand Objects", "Expand Objects"],
-            clipToArtboard: ["Clip to Artboard", "Clip to Artboard"],
-            saveEps: ["Save as EPS", "Соранять EPS"]
+            clipToArtboard: ["Clip to Artboard", "Clip to Artboard"]
           });
           /***/
         },
@@ -4712,8 +4634,6 @@ var DEBUG = false;
 
           var toFile_1 = __webpack_require__(585);
 
-          var shutterEps10_1 = __webpack_require__(471);
-
           var CheckBoxPanel_1 = __webpack_require__(149);
 
           var FieldComponent_1 = __webpack_require__(279);
@@ -4724,7 +4644,7 @@ var DEBUG = false;
 
           var expandObjectAction = __webpack_require__(219);
 
-          var version = "1.0.7"; // 1-expand appearance
+          var version = "1.0.6"; // 1-expand appearance
           // 2-expand objects
           // 3-clipping mask - artboard size
 
@@ -4747,10 +4667,6 @@ var DEBUG = false;
               fn: function fn() {
                 clipToArtboardSize_1["default"]();
               },
-              order: 3
-            },
-            saveEps: {
-              fn: function fn() {},
               order: 3
             }
           };
@@ -4808,7 +4724,6 @@ var DEBUG = false;
 
             ApplyStyleProcessor.prototype.onProcess = function (file) {
               var doActions = this.fieldActions.ctrl.getValue();
-              var isEps = doActions.indexOf("saveEps") >= 0;
               copyFile_1.copyFile(file);
               var styles = this.fieldStyles.ctrl.getValue();
               var destDir = this.srcSelect.getValue().destDir;
@@ -4818,7 +4733,7 @@ var DEBUG = false;
                 var styleName = styles_1[_i];
                 index++;
                 this.setStatus(ApplyStyleStrings_1["default"].style + ": " + styleName + " (" + index + "/" + styles.length + ")");
-                var finalFilePath = this.getFinalPath(file, destDir, styleName, isEps);
+                var finalFilePath = this.getFinalPath(file, destDir, styleName);
                 var finalFile = toFile_1["default"](finalFilePath);
 
                 if (finalFile.exists) {
@@ -4866,21 +4781,16 @@ var DEBUG = false;
                   }
                 }
 
-                if (isEps) {
-                  shutterEps10_1["default"](finalFilePath);
-                } else {
-                  ai_1["default"](finalFilePath);
-                }
-
+                ai_1["default"](finalFilePath);
                 doc.close(SaveOptions.DONOTSAVECHANGES);
                 openFile_1["default"](this.templateFile);
               }
             };
 
-            ApplyStyleProcessor.prototype.getFinalPath = function (aiEpsPath, outputFolder, styleName, isEps) {
+            ApplyStyleProcessor.prototype.getFinalPath = function (aiEpsPath, outputFolder, styleName) {
               var fileName = aiEpsPath.match(/[^\/]*$/g)[0];
               var fileBaseName = fileName.match(/^[^\.]*/g);
-              return outputFolder + "/" + fileBaseName + "__" + styleName + (isEps ? ".eps" : ".ai");
+              return outputFolder + "/" + fileBaseName + "__" + styleName + ".ai";
             };
 
             return ApplyStyleProcessor;
