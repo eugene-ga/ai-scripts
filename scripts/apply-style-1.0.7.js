@@ -2110,18 +2110,6 @@ var DEBUG = false;
         },
 
         /***/
-        629:
-        /***/
-        function _(module) {
-          module.exports = {
-            setName: "sa-align",
-            actions: ["center"],
-            content: "/version 3\r/name [ 8\r\t73612d616c69676e\r]\r/isOpen 1\r/actionCount 1\r/action-1 {\r\t/name [ 6\r\t\t63656e746572\r\t]\r\t/keyIndex 0\r\t/colorIndex 0\r\t/isOpen 1\r\t/eventCount 2\r\t/event-1 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (ai_plugin_alignPalette)\r\t\t/localizedName [ 9\r\t\t\t416c69676e6d656e74\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1954115685\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (enumerated)\r\t\t\t/name [ 23\r\t\t\t\t486f72697a6f6e74616c20416c69676e2043656e746572\r\t\t\t]\r\t\t\t/value 2\r\t\t}\r\t}\r\t/event-2 {\r\t\t/useRulersIn1stQuadrant 0\r\t\t/internalName (ai_plugin_alignPalette)\r\t\t/localizedName [ 9\r\t\t\t416c69676e6d656e74\r\t\t]\r\t\t/isOpen 0\r\t\t/isOn 1\r\t\t/hasDialog 0\r\t\t/parameterCount 1\r\t\t/parameter-1 {\r\t\t\t/key 1954115685\r\t\t\t/showInPalette 4294967295\r\t\t\t/type (enumerated)\r\t\t\t/name [ 21\r\t\t\t\t566572746963616c20416c69676e2043656e746572\r\t\t\t]\r\t\t\t/value 5\r\t\t}\r\t}\r}\r"
-          };
-          /***/
-        },
-
-        /***/
         219:
         /***/
         function _(module) {
@@ -2263,19 +2251,11 @@ var DEBUG = false;
             value: true
           });
 
-          var doAction_1 = __webpack_require__(768);
-
           var getArtboardSize_1 = __webpack_require__(596);
 
           var menu_1 = __webpack_require__(97);
 
-          var withAction_1 = __webpack_require__(501);
-
-          var createMask = function createMask(props) {
-            var _a = props || {},
-                forceAlign = _a.forceAlign,
-                alignAct = _a.alignAct;
-
+          var createMask = function createMask() {
             menu_1.callMenu("selectall");
             menu_1.callMenu("group");
             menu_1.callMenu("deselectall");
@@ -2285,22 +2265,11 @@ var DEBUG = false;
             var clipRect = app.activeDocument.pathItems.rectangle(0, size.left, size.width, size.height);
             clipRect.selected = true;
             menu_1.callMenu("sendToFront");
-
-            if (forceAlign) {
-              if (alignAct) {
-                doAction_1["default"](alignAct);
-              } else {
-                withAction_1["default"](__webpack_require__(629), function (act) {
-                  doAction_1["default"](act);
-                });
-              }
-            }
-
             menu_1.callMenu("selectall");
           };
 
-          function clipToArtboardSize(props) {
-            createMask(props);
+          function clipToArtboardSize() {
+            createMask();
             menu_1.callMenu("makeMask");
           }
 
@@ -2898,48 +2867,13 @@ var DEBUG = false;
           Object.defineProperty(exports, "__esModule", {
             value: true
           });
-          exports.withActions = exports.ActionManager = void 0;
+          exports.withActions = void 0;
 
           var isFunction_1 = __webpack_require__(353);
 
           var disposeAction_1 = __webpack_require__(901);
 
           var ensureAction_1 = __webpack_require__(967);
-
-          var ActionManager =
-          /** @class */
-          function () {
-            function ActionManager() {}
-
-            ActionManager.ensure = function (action) {
-              return this.cache.find(function (a) {
-                return a.content === action.content;
-              }) || this.add(action);
-            };
-
-            ActionManager.dispose = function (action) {// do nothing, use clean
-            };
-
-            ActionManager.add = function (action) {
-              ensureAction_1["default"](action.content);
-              return action;
-            };
-
-            ActionManager.remove = function (action) {
-              disposeAction_1["default"](action.setName);
-            };
-
-            ActionManager.clean = function () {
-              for (var _i = 0, _a = this.cache; _i < _a.length; _i++) {
-                var action = _a[_i];
-                this.remove(action);
-              }
-            };
-
-            return ActionManager;
-          }();
-
-          exports.ActionManager = ActionManager;
 
           function withActions(sets, fn, opts) {
             try {
@@ -4595,10 +4529,7 @@ var DEBUG = false;
               this.opts = opts;
               this.opts = __assign({
                 title: CommonStrings_1["default"].processFiles,
-                filesFilter: /\.(eps|ai|svg)$/i,
-                processHandler: function processHandler(fn) {
-                  return fn();
-                }
+                filesFilter: /\.(eps|ai|svg)$/i
               }, opts || {});
               var _a = this.opts,
                   title = _a.title,
@@ -4676,36 +4607,32 @@ var DEBUG = false;
                   return;
                 }
 
-                var fn = function fn() {
-                  try {
-                    _this.isRunning = true;
+                try {
+                  _this.isRunning = true;
 
-                    var _a = _this.srcSelect.getValue(),
-                        srcDir = _a.srcDir,
-                        destDir = _a.destDir;
+                  var _a = _this.srcSelect.getValue(),
+                      srcDir = _a.srcDir,
+                      destDir = _a.destDir;
 
-                    var inputFiles_1 = new Folder(srcDir).getFiles(_this.opts.filesFilter);
-                    var total = inputFiles_1.length;
+                  var inputFiles_1 = new Folder(srcDir).getFiles(_this.opts.filesFilter);
+                  var total = inputFiles_1.length;
 
-                    if (total === 0) {
-                      throw new Error("No eps or ai files in dir: [" + srcDir + "]");
-                    }
-
-                    _this.processFiles(inputFiles_1.map(function (f) {
-                      return f.absoluteURI;
-                    }));
-
-                    _this.progBar.setLabel(CommonStrings_1["default"].done);
-                  } catch (e) {
-                    alert(e);
-                  } finally {
-                    _this.complete();
-
-                    _this.dlg.close();
+                  if (total === 0) {
+                    throw new Error("No eps or ai files in dir: [" + srcDir + "]");
                   }
-                };
 
-                _this.opts.processHandler(fn);
+                  _this.processFiles(inputFiles_1.map(function (f) {
+                    return f.absoluteURI;
+                  }));
+
+                  _this.progBar.setLabel(CommonStrings_1["default"].done);
+                } catch (e) {
+                  alert(e);
+                } finally {
+                  _this.complete();
+
+                  _this.dlg.close();
+                }
               };
             };
 
@@ -4765,7 +4692,7 @@ var DEBUG = false;
           Object.defineProperty(exports, "__esModule", {
             value: true
           });
-          exports.ApplyStyleProcessor = void 0;
+          exports.ApplyStyleProcessor = exports.actions = void 0;
 
           var ai_1 = __webpack_require__(101);
 
@@ -4795,13 +4722,38 @@ var DEBUG = false;
 
           var FileProcessor_1 = __webpack_require__(945);
 
-          var withAction_1 = __webpack_require__(501);
-
           var expandObjectAction = __webpack_require__(219);
 
-          var version = "1.0.8"; // 1-expand appearance
+          var version = "1.0.7"; // 1-expand appearance
           // 2-expand objects
           // 3-clipping mask - artboard size
+
+          exports.actions = {
+            expandAppearance: {
+              fn: function fn() {
+                menu_1.callMenu("selectall");
+                menu_1.callMenu("expandStyle"); // alert("TODO: expandAppearance");
+              },
+              order: 0
+            },
+            expandObjects: {
+              fn: function fn() {
+                menu_1.callMenu("selectall");
+                doAction_1.loadAndDoAction(expandObjectAction);
+              },
+              order: 2
+            },
+            clipToArtboard: {
+              fn: function fn() {
+                clipToArtboardSize_1["default"]();
+              },
+              order: 3
+            },
+            saveEps: {
+              fn: function fn() {},
+              order: 3
+            }
+          };
 
           var ApplyStyleProcessor =
           /** @class */
@@ -4816,38 +4768,6 @@ var DEBUG = false;
               }) || this;
             }
 
-            ApplyStyleProcessor.prototype.getActions = function () {
-              return {
-                expandAppearance: {
-                  fn: function fn() {
-                    menu_1.callMenu("selectall");
-                    menu_1.callMenu("expandStyle"); // alert("TODO: expandAppearance");
-                  },
-                  order: 0
-                },
-                expandObjects: {
-                  fn: function fn() {
-                    menu_1.callMenu("selectall");
-                    doAction_1.loadAndDoAction(ApplyStyleProcessor.expandObjAct);
-                  },
-                  order: 2
-                },
-                clipToArtboard: {
-                  fn: function fn() {
-                    clipToArtboardSize_1["default"]({
-                      forceAlign: true,
-                      alignAct: ApplyStyleProcessor.alignAct
-                    });
-                  },
-                  order: 3
-                },
-                saveEps: {
-                  fn: function fn() {},
-                  order: 3
-                }
-              };
-            };
-
             ApplyStyleProcessor.prototype.onInit = function () {
               var doc = getActiveDocument_1["default"]();
 
@@ -4855,7 +4775,6 @@ var DEBUG = false;
                 throw new Error(ApplyStyleStrings_1["default"].noOpenedDocument);
               }
 
-              var actions = this.getActions();
               var styles = toArray_1["default"](doc.graphicStyles).map(function (s) {
                 return s.name;
               }).filter(function (n) {
@@ -4868,8 +4787,8 @@ var DEBUG = false;
 
               this.templateFile = doc.path + "/" + doc.name; // this.dlg.add(new ScrollablePanel());
 
-              var items = Object.keys(actions).sort(function (k1, k2) {
-                return actions[k1].order - actions[k2].order;
+              var items = Object.keys(exports.actions).sort(function (k1, k2) {
+                return exports.actions[k1].order - exports.actions[k2].order;
               }).map(function (k) {
                 return {
                   key: k,
@@ -4885,17 +4804,6 @@ var DEBUG = false;
               this.fieldStyles = this.dlg.add(new FieldComponent_1.FieldComponent(ApplyStyleStrings_1["default"].styles, new CheckBoxPanel_1.CheckBoxPanel(styles, styles, {
                 orientation: "column"
               })));
-
-              this.opts.processHandler = function (fn) {
-                // const expandObjectAction = require("./../../lib/actions/__expandObject.aia") as ActionDef;
-                withAction_1["default"](__webpack_require__(629), function (alignAct) {
-                  ApplyStyleProcessor.alignAct = alignAct;
-                  withAction_1["default"](__webpack_require__(219), function (expandObjAct) {
-                    ApplyStyleProcessor.expandObjAct = expandObjAct;
-                    fn();
-                  });
-                });
-              };
             };
 
             ApplyStyleProcessor.prototype.onProcess = function (file) {
@@ -4906,14 +4814,15 @@ var DEBUG = false;
               var destDir = this.srcSelect.getValue().destDir;
               var index = 0;
 
-              var _loop_1 = function _loop_1(styleName) {
+              for (var _i = 0, styles_1 = styles; _i < styles_1.length; _i++) {
+                var styleName = styles_1[_i];
                 index++;
-                this_1.setStatus(ApplyStyleStrings_1["default"].style + ": " + styleName + " (" + index + "/" + styles.length + ")");
-                var finalFilePath = this_1.getFinalPath(file, destDir, styleName, isEps);
+                this.setStatus(ApplyStyleStrings_1["default"].style + ": " + styleName + " (" + index + "/" + styles.length + ")");
+                var finalFilePath = this.getFinalPath(file, destDir, styleName, isEps);
                 var finalFile = toFile_1["default"](finalFilePath);
 
                 if (finalFile.exists) {
-                  return "continue";
+                  continue;
                 }
 
                 menu_1.callMenu("pasteInPlace");
@@ -4925,8 +4834,8 @@ var DEBUG = false;
                   var group = doc.activeLayer.groupItems[0];
                   app.selection = group;
 
-                  for (var _i = 0, _a = toArray_1["default"](group.pathItems); _i < _a.length; _i++) {
-                    var clippedPath = _a[_i];
+                  for (var _a = 0, _b = toArray_1["default"](group.pathItems); _a < _b.length; _a++) {
+                    var clippedPath = _b[_a];
 
                     if (clippedPath.clipping) {
                       clippedPath.selected = false;
@@ -4941,17 +4850,15 @@ var DEBUG = false;
                   style.applyTo(selectedItems[i]);
                 }
 
-                var actions = this_1.getActions();
-
-                for (var _b = 0, _c = Object.keys(actions).sort(function (k1, k2) {
-                  return actions[k1].order - actions[k2].order;
-                }); _b < _c.length; _b++) {
-                  var step = _c[_b];
+                for (var _c = 0, _d = Object.keys(exports.actions).sort(function (k1, k2) {
+                  return exports.actions[k1].order - exports.actions[k2].order;
+                }); _c < _d.length; _c++) {
+                  var step = _d[_c];
 
                   if (doActions.indexOf(step) >= 0) {
                     try {
-                      this_1.setStatus(ApplyStyleStrings_1["default"][step]);
-                      actions[step].fn();
+                      this.setStatus(ApplyStyleStrings_1["default"][step]);
+                      exports.actions[step].fn();
                     } catch (e) {
                       alert("[" + ApplyStyleStrings_1["default"][step] + "] failed. " + e.message);
                       throw e;
@@ -4966,15 +4873,7 @@ var DEBUG = false;
                 }
 
                 doc.close(SaveOptions.DONOTSAVECHANGES);
-                openFile_1["default"](this_1.templateFile);
-              };
-
-              var this_1 = this;
-
-              for (var _i = 0, styles_1 = styles; _i < styles_1.length; _i++) {
-                var styleName = styles_1[_i];
-
-                _loop_1(styleName);
+                openFile_1["default"](this.templateFile);
               }
             };
 
