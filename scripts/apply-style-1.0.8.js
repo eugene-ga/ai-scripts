@@ -2560,7 +2560,6 @@ var DEBUG = false;
 
           function callMenu(menuCommand) {
             try {
-              app.redraw();
               app.executeMenuCommand(menuCommand);
             } catch (e) {
               if (e.number !== 1200) {
@@ -4800,7 +4799,7 @@ var DEBUG = false;
 
           var expandObjectAction = __webpack_require__(219);
 
-          var version = "1.0.9"; // 1-expand appearance
+          var version = "1.0.8"; // 1-expand appearance
           // 2-expand objects
           // 3-clipping mask - artboard size
 
@@ -4990,7 +4989,7 @@ var DEBUG = false;
 
           exports.ApplyStyleProcessor = ApplyStyleProcessor;
           var processor = new ApplyStyleProcessor();
-          exports["default"](args);
+          // exports["default"](args);
           /***/
         }
         /******/
