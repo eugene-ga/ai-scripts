@@ -2278,16 +2278,12 @@ var DEBUG = false;
 
             menu_1.callMenu("selectall");
             menu_1.callMenu("group");
-            app.redraw();
-            $.sleep(300);
             menu_1.callMenu("deselectall");
             var size = getArtboardSize_1["default"](); // const clipRect = app.activeDocument.pathItems.rectangle(size.height, 0, size.width, size.height);
             // const clipRect = app.activeDocument.pathItems.rectangle(size.top, size.left, size.width, size.height);
 
             var clipRect = app.activeDocument.pathItems.rectangle(0, size.left, size.width, size.height);
             clipRect.selected = true;
-            app.redraw();
-            $.sleep(300);
             menu_1.callMenu("sendToFront");
 
             if (forceAlign) {
@@ -2564,6 +2560,7 @@ var DEBUG = false;
 
           function callMenu(menuCommand) {
             try {
+              app.redraw();
               app.executeMenuCommand(menuCommand);
             } catch (e) {
               if (e.number !== 1200) {
@@ -4803,7 +4800,7 @@ var DEBUG = false;
 
           var expandObjectAction = __webpack_require__(219);
 
-          var version = "1.0.10"; // 1-expand appearance
+          var version = "1.0.9"; // 1-expand appearance
           // 2-expand objects
           // 3-clipping mask - artboard size
 
